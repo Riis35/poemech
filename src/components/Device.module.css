@@ -16,8 +16,16 @@
 .name{
    margin-left: 30px;
    border: solid grey 1px;
+   border-width: 0px 0px 2px 0px;
+   height: 25px;
+   margin-top: 5px ;
+   width: 400px;
+ 
+  
    
 }
+
+
 
 .tankContainer{
     margin-left: 50px;
