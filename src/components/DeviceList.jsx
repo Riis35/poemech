@@ -47,7 +47,7 @@ console.log(typeof query);
   return (
     <div className={DeviceListCss.container}>
 
-        <input className={DeviceListCss.zt}>  </input>
+       
        
         <input className={DeviceListCss.searchBar} value={query} onChange={handleQuery} placeholder="arama yapın..." ></input>
         <p> search is  {query}    queryMatch is {queryMatch}</p>
