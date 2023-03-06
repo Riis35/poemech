@@ -19,7 +19,7 @@ export default class Device extends React.Component{
         return(
             
             <div className={DeviceCss.container}>
-                <h1 className={DeviceCss.name}> {this.props.name}</h1>
+                <button className={DeviceCss.name}> {this.props.name}</button>
                 <div className={DeviceCss.tankContainer}> <TankContainer isCollapsed="yes"   />  </div>
             </div>
         
