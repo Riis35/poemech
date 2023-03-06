@@ -20,11 +20,12 @@
    height: 25px;
    margin-top: 5px ;
    width: 400px;
-   display: flex;
-   position: inherit;
-   float: left;
+ 
+  
    
 }
+
+
 
 .tankContainer{
     margin-left: 50px;
