@@ -78,7 +78,7 @@ app.post('/api/CabinInfo', (req,res) => {
 
         if (result.length > 0){
         
-            res.json({done: true,f15: result[0].f15, f30: result[0].f30, f50: result[0].f50, nemlendirici: result[0].nemlendirici, bronzlastirici: result[0].bronzlastirici,
+            res.json({done: true, f15: result[0].f15, f30: result[0].f30, f50: result[0].f50, nemlendirici: result[0].nemlendirici, bronzlastirici: result[0].bronzlastirici,
             su: result[0].su, dezenfektan: result[0].dezenfektan, duskopugu: result[0].duskopugu, kopekkrem: result[0].kopekkrem, kopeksampuan: result[0].kopeksampuan})
             
         }
