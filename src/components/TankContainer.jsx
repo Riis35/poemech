@@ -12,34 +12,39 @@ import TankContainerCss from "./TankContainer.module.css";
 export default function TankContainer(props) {
   const {isCollapsed = "no",} = props
 
-  const [isCollapse, setCollapse] = useState(isCollapsed == "no" ? false : true)
+  const [isCollapse, setCollapse] = useState(isCollapsed === "no" ? false : true)
+
+  const {id} = useParams();
    
   const getData = () => {
         
     
-        const {id} = useParams();
+        
 
-        axios.post(`${process.env.REACT_APP_URL}/api/CabinInfo`,
-        {id: id,
-        }).then((response) => {
-          if(!response.data.done){
-            
-          }
-          else{
-            
-          }
-        })
+        
   }
 
    useEffect(() => {
-    getData();
+    axios.post(`${process.env.REACT_APP_URL}/api/CabinInfo`,
+        {id: id,
+        }).then((response) => {
+          if(!response.data.done){
+          }
+          else{
+            const data = [["15 Faktör", `${response.data.f15}`, "154s8a"], ["30 Faktör", `${response.data.f30}`,"154qef1"],
+            ["50 Faktör", `${response.data.f50}`,"1541231"], ["Nemlendirici", `${response.data.nemlendirici}`,"154kgiks1"],
+            ["Bronzlaştırıcı", `${response.data.bronzlastirici}`,"154s51q"], ["Su", `${response.data.su}`,"154s7q5s"],
+            ["Dezenfektan", `${response.data.dezenfektan}`,"154q87eq9s"],["Duş Köpüğü", `${response.data.duskopugu}`,"1jkviaq1"],
+            ["Köpek Kremi", `${response.data.kopekkrem}`,"15i1841a"],["Köpek Şampuanı", `${response.data.kopeksampuan}`,"5618s8a"]];
+
+            setTankProps(data);
+          }
+        })
       }, []);
     
 
     //list of tanks in device
-  const tankProps = [
-    ["Şampuan", "30", "13423"],
-  ];
+  const [tankProps, setTankProps] = useState([]);
 
   const handleClick =({target}) =>{
     console.log('called' + target.id);
