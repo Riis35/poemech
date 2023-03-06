@@ -17,6 +17,8 @@ const handleTyping = ({target}) =>{
 
       <div className={LoginCss.containerbox}>
 
+        <h1> POEMECH </h1>
+
         <label className={LoginCss.inputLabel} > Kullanıcı Adı </label>
         <input type="text" id="username" value={userInput.username} onChange={handleTyping} />
 
