@@ -1,0 +1,15 @@
+.containerBody{
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    white-space: nowrap;
+    
+    gap: 10px;
+    align-items: end;
+    
+    
+}
+
+.scroll{
+    display: inline-block;
+}

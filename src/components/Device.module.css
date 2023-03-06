@@ -1,0 +1,24 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    flex-wrap: wrap;
+    gap:10px;
+    width: 90%;
+    height : auto;
+    
+    justify-content: left;
+    background-color: bisque;
+    margin: 10px;  
+
+}
+
+.name{
+   margin-left: 30px;
+}
+
+.tankContainer{
+    margin-left: 50px;
+    
+    
+}

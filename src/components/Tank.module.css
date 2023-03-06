@@ -1,0 +1,18 @@
+.tank{
+    width:50px;
+    height:150px;
+    border: 3px;
+    border-radius: 5px;
+    border-color: dimgray;
+    background-color: aliceblue;
+    position: relative;
+    margin: 10px 10px 10px 10px;
+}
+
+.liquid{
+    width:45px;
+    background-color: aqua;
+    position: absolute;
+    bottom: 0%;
+    left: 3px;
+}
