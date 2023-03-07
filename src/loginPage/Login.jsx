@@ -66,14 +66,14 @@ const[id, setId] = useState();
                <h1 className={LoginCss.banner}> POEMECH </h1>
        
                <div className={LoginCss.labelArea}>
-               <label className={LoginCss.inputLabel} > Kullanıcı Adı </label>
+               <label className={LoginCss.inputLabel}  id="usernamelabel"> Kullanıcı Adı </label>
                </div>
        
                <div className={LoginCss.inputArea}>
                <input className={LoginCss.inputSpace} type="text" id="username" value={Username} onChange={handleTyping} />
                </div>
                <div className={LoginCss.labelArea} >
-               <label  className={LoginCss.inputLabel} > Şifre </label>
+               <label  className={LoginCss.inputLabel} id="passwordlabel" > Şifre </label>
                </div>
        
                <div className={LoginCss.inputArea}>
