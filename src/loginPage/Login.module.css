@@ -32,6 +32,9 @@
     animation-name: backgroundGlow;
     animation-duration: 8s;
     animation-iteration-count: infinite;
+    animation-direction: alternate;
+
+    border-radius: 5px;
 
 
 
