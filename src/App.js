@@ -20,7 +20,6 @@ function App() {
       <Route path='/login' element={< Login />}></Route>
       <Route path='/main/:id' element={< Main />}></Route>
       <Route path='/cabininfo/:id' element={< DeviceList />}></Route>
-      <Route path='/admin/new/signup' element={< Signup />}></Route>
     </Routes>
   </BrowserRouter>
 

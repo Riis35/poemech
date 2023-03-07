@@ -4,6 +4,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useParams}
     from 'react-router-dom';
   import { useNavigate } from "react-router-dom";
+import Navbar from "../navbar/navbar";
 
 
 
@@ -42,7 +43,9 @@ function Main () {
       navigate("/login");
   } else {
     return (
+      
       <div>
+        <Navbar/>
         <p>Welcome {id}</p>
         <button onClick={CabinInfo}>Info</button>
         <button onClick={logout}>Çıkış</button>
