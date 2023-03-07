@@ -1,14 +1,15 @@
-:root{ 
+:root {
     --login-height: 340px;
     --login-width: 320px;
     --page-heigth: 100vh;
+    --color: black;
 }
 
-.page{
+.page {
     width: 100vw;
     height: 100vh;
-    
-    
+
+
 
     display: flex;
     justify-content: center;
@@ -18,7 +19,7 @@
 
 
 
-.containerbox{
+.containerbox {
     width: var(--login-width);
     height: var(--login-height);
     border: solid grey 1px;
@@ -27,9 +28,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
 
-    
+    animation-name: backgroundGlow;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+
+
+
 
 }
 
@@ -43,57 +48,80 @@
     height: 50px;
 }
 
-.inputArea {display: flex;
+.inputArea {
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
     height: 70px;
-    width:  calc( 60px + var(--login-width)/2);
+    width: calc(60px + var(--login-width)/2);
     border: solid green 2px;
     margin-bottom: 20px;
 }
-
-.inputLabel{
-    color: black;
-   
-    
+.inputArea:first-child{
+    background-color: blueviolet;
 }
- .inputSpace{
-    width: calc( var(--login-width)/2);
+
+.inputLabel {
+    color: var(--color);
+
+
+}
+
+
+.inputSpace {
+    width: calc(var(--login-width)/2);
+    height: 25px;
     transition: all;
-    transition-duration: 100ms;
- }
-.inputSpace:hover{
- width: calc( 20px + var(--login-width)/2);
+    transition-duration: 400ms;
+    box-shadow: 0px 0px 4px 2px lightgray inset;
+    border: 0px;
 }
 
-.logButton{
+.inputSpace:hover {
+    width: calc(20px + var(--login-width)/2);
+    height: 30px;
+    box-shadow: 0px 0px 4px 2px aquamarine;
+    
+
+}
+
+.inputSpace:focus {
+    outline: none;
+    width: calc(20px + var(--login-width)/2);
+    height: 30px;
+    box-shadow: 0px 0px 4px 2px aquamarine;
+}
+
+
+
+.logButton {
     background-color: aquamarine;
     height: 40px;
     width: 100px;
-    border: 0px ;
-    
+    border: 0px;
+
     transition: all;
     transition-duration: 170ms;
     transition-timing-function: ease-in-out;
     font-weight: 600;
-    
-    
+    color: var(--color);
+
+
 }
 
-.logButton:hover{
+.logButton:hover {
     height: 45px;
     width: 110px;
     box-shadow: 0px 0px 10px 5px rgb(136, 249, 211);
     box-shadow: 0px 0px 20px 10px rgb(176, 243, 221);
-    border-radius: 10px; 
+    border-radius: 10px;
     font-weight: 800;
 
 
 }
 
-.buttonArea{
+.buttonArea {
     height: 120px;
     width: 120px;
     display: flex;
@@ -101,11 +129,21 @@
     align-items: center;
     border: solid red 2px;
     margin-bottom: 10px;
-    
 
 }
-
-.banner{
-   border-bottom: solid lightgrey 2px ;
+.buttonArea:hover{
+    --color : green;
 }
 
+.banner {
+    border-bottom: solid lightgrey 2px;
+}
+
+
+@keyframes backgroundGlow{
+    0% {box-shadow: 0px 2px 6px 2px aqua, 2px 0px 6px 2px  green;}
+    25% {box-shadow: 2px 2px 6px 2px aqua, 0px 2px 6px 2px   green ;}
+    50% {box-shadow: 2px 0px 6px 2px aqua, 2px 2px 6px 2px   green ;}
+    75% {box-shadow: 0px 2px 6px 2px aqua, 0px 0px 6px 2px   green ;}
+    100% {box-shadow: 0px 2px 6px 2px aqua, 2px 0px 6px 2px  green ;}
+}
