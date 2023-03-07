@@ -19,13 +19,25 @@ const handleTyping = ({target}) =>{
 
         <h1> POEMECH </h1>
 
+        <div className={LoginCss.labelArea}>
         <label className={LoginCss.inputLabel} > Kullanıcı Adı </label>
-        <input type="text" id="username" value={userInput.username} onChange={handleTyping} />
+        </div>
 
+        <div className={LoginCss.inputArea}>
+        <input className={LoginCss.inputSpace} type="text" id="username" value={userInput.username} onChange={handleTyping} />
+        </div>
+        <div className={LoginCss.labelArea} >
         <label  className={LoginCss.inputLabel} > Şifre </label>
-        <input type="text" id="password"  value={userInput.password}  onChange={handleTyping} />
+        </div>
 
-        <button> Giriş Yap</button>
+        <div className={LoginCss.inputArea}>
+        <input className={LoginCss.inputSpace} type="text" id="password"  value={userInput.password}  onChange={handleTyping} />
+        </div>
+
+        <div className={LoginCss.buttonArea} >
+        <button className={LoginCss.logButton}> Giriş Yap</button>
+        </div>
+        
       </div>
     </div>
     

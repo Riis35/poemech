@@ -33,7 +33,54 @@
 
 }
 
+.labelArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    border: solid red 2px;
+    width: calc(var(--login-width)/2);
+}
+
+.inputArea {display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    height: 30px;
+    width:  calc(var(--login-width)/2);
+    border: solid green 2px;}
+
 .inputLabel{
     color: black;
     
+}
+ .inputSpace{
+    width: 120px;
+ }
+.inputSpace:focus{
+ width: 140px;
+}
+
+.logButton{
+    background-color: aquamarine;
+    height: 40px;
+    width: 100px;
+    border: 0px 0px 0px 0px ;
+    border :2px;
+}
+
+.buttonArea{
+    height: 70px;
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 1s ease-in-out;
+
+}
+
+.logButton:hover{
+    height: 45px;
+    width: 110px;
+
 }
