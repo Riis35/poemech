@@ -63,7 +63,7 @@ const[id, setId] = useState();
        
              <div className={LoginCss.containerbox}>
        
-               <h1> POEMECH </h1>
+               <h1 className={LoginCss.banner}> POEMECH </h1>
        
                <div className={LoginCss.labelArea}>
                <label className={LoginCss.inputLabel} > Kullanıcı Adı </label>
