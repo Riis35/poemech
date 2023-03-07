@@ -40,6 +40,7 @@
     gap: 10px;
     border: solid red 2px;
     width: calc(var(--login-width)/2);
+    height: 50px;
 }
 
 .inputArea {display: flex;
@@ -47,7 +48,7 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
-    height: 30px;
+    height: 50px;
     width:  calc(var(--login-width)/2);
     border: solid green 2px;}
 
@@ -68,20 +69,34 @@
     width: 100px;
     border: 0px 0px 0px 0px ;
     border :2px;
-}
-
-.buttonArea{
-    height: 70px;
-    width: 120px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 1s ease-in-out;
-
+    transition: all;
+    transition-duration: 170ms;
+    transition-timing-function: ease-in-out;
+    font-weight: 600;
+    
+    
 }
 
 .logButton:hover{
     height: 45px;
     width: 110px;
+    box-shadow: 0px 0px 10px 5px rgb(136, 249, 211);
+    box-shadow: 0px 0px 20px 10px rgb(176, 243, 221);
+    border-radius: 10px; 
+    font-weight: 800;
+
 
 }
+
+.buttonArea{
+    height: 100px;
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid red 2px;
+    margin-bottom: 10px;
+    
+
+}
+
