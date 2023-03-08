@@ -13,6 +13,7 @@
 
 .scroll{
     display: inline-block;
+    animation: 500ms ease-in-out 0s 1 slideInFromLeft;
 }
 
 .touch{
@@ -21,4 +22,20 @@
     font-size: 14px;
     color: grey;
     height: 18x;
+    animation: 500ms ease-in-out 0s 1 out;
 }
+
+
+@keyframes slideInFromLeft {
+    0% {
+      height:0px;
+    }
+    100% {
+      height:340px;
+    }
+  }
+
+  @keyframes out {
+    from {height: 340px;}
+    to{height:18px;}
+  }
