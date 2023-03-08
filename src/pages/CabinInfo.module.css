@@ -1,0 +1,10 @@
+.pager{
+    display:flex;
+    flex-direction: column;
+}
+
+.navpos{
+    position: absolute;
+    top:0;
+    left:0;
+}
