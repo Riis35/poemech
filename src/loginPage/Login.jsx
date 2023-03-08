@@ -34,7 +34,7 @@ const[id, setId] = useState();
         password: Password,
         }).then((response) => {
           if(!response.data.auth){
-            setLoginStatus("Başarısız");
+            raiseError();
           }
           else{
             localStorage.setItem("token", response.data.token)
