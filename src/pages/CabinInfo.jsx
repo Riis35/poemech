@@ -36,10 +36,13 @@ function CabinInfo () {
   }, []);
 
     return (
-      <div class={CabinCss.pager}>
-        <Navbar class={CabinCss.navpos}/>
-        <DeviceList/>
-      </div>
+      
+      <div clas={CabinCss.pager} >
+              <Navbar class={CabinCss.navpos}/>
+              <DeviceList/>
+       
+       </div>
+      
     );
   
 };

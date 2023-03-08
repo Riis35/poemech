@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, BrowserRouter}
 import Main from './pages/Main';
 
 
-import CabinInfo from './pages/CabinInfo';
+import CabinInfo from './pages/CabinInfo.jsx';
 import Signup from './pages/Signup';
 import DeviceList from './components/DeviceList';
 import Login from './loginPage/Login';
