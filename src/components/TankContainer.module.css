@@ -7,13 +7,14 @@
     
     gap: 10px;
     align-items: end;
+    overflow-y: hidden;
     
     
 }
 
 .scroll{
     display: inline-block;
-    animation: 500ms ease-in-out 0s 1 slideInFromLeft;
+    animation: 400ms ease-in 0s 1 slideInFromLeft;
 }
 
 .touch{
@@ -22,7 +23,7 @@
     font-size: 14px;
     color: grey;
     height: 18x;
-    animation: 500ms ease-in-out 0s 1 out;
+    animation: 400ms ease-out 0s 1 out;
 }
 
 
