@@ -23,16 +23,6 @@ function Main () {
       }
   
   
-
-  const logout = () =>{
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
-
-  const CabinInfo = () =>{
-    navigate(`/cabininfo/${id}`);
-  };
-
   const [authenticated, setauthenticated] = useState(null);
   useEffect(() => {
     AuthPls();
@@ -47,8 +37,6 @@ function Main () {
       <div>
         <Navbar/>
         <p>Welcome {id}</p>
-        <button onClick={CabinInfo}>Info</button>
-        <button onClick={logout}>Çıkış</button>
       </div>
     );
   }

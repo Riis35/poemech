@@ -4,6 +4,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useParams}
     from 'react-router-dom';
   import { useNavigate } from "react-router-dom";
+import Navbar from "../navbar/navbar";
+import DeviceList from "../components/DeviceList";
 
 
 
@@ -33,9 +35,9 @@ function CabinInfo () {
   }, []);
 
     return (
-      <div>
-        <p>Welcome {id}</p>
-        <button onClick={logout}>Çıkış</button>
+      <div style={{display: "-ms-flexbox"}}>
+        <Navbar/>
+        <DeviceList/>
       </div>
     );
   

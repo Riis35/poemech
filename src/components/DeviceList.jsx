@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import Navbar from '../navbar/navbar.jsx'
 import Device from './Device.jsx'
 import DeviceListCss from './DeviceList.module.css'
 
@@ -45,10 +46,7 @@ console.log(typeof query);
 
 
   return (
-    <div className={DeviceListCss.container}>
-
-       
-       
+    <div className={DeviceListCss.container}>       
         <input className={DeviceListCss.searchBar} value={query} onChange={handleQuery} placeholder="arama yapın..." ></input>
         <p> search is  {query}    queryMatch is {queryMatch}</p>
         {queryMatch.map((device,i)=>(
