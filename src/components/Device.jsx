@@ -3,24 +3,20 @@ import DeviceCss from './Device.module.css';
 import React from 'react';
 import TankContainer from './TankContainer';
 
-export default class Device extends React.Component{
-    constructor(props){
-        super(props);
-}
+export default function Device(props){
 
-    
-    alerting(){
-        alert('tank added')
-    }
 
-    render(){
+
+    const alertme =()=>{alert("bas bas bas")}
+   
+   
         return(
             
             <div className={DeviceCss.container}>
-                <button className={DeviceCss.name} onClick={this.alerting}> Cihaz Adı : {this.props.name}</button>
+                <button className={DeviceCss.name} onClick={alertme}> Cihaz Adı : {props.name}</button>
                 <div className={DeviceCss.tankContainer}> <TankContainer isCollapsed="yes"   />  </div>
             </div>
         
         )
-    }
+    
 }
