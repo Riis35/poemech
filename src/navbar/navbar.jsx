@@ -14,6 +14,7 @@ import { Link, useParams } from "react-router-dom";
 
 // STYLES
 import navbarCss from "./navbar.module.css";
+import "./navbar.css";
 
 export default function Navbar() {
   const [sidebar, setSidebar] = useState(false);
@@ -25,49 +26,49 @@ export default function Navbar() {
       title: "Ana Sayfa",
       path: `/main`,
       icon: <AiIcons.AiFillHome />,
-      cName: navbarCss["nav-text"]
+      cName: "nav-text"
     },
     {
       title: "Şirket Bilgileri",
       path: `/company`,
       icon: <IoIcons.IoIosPaper />,
-      cName: navbarCss["nav-text"]
+      cName: "nav-text"
     },
     {
       title: "Kabin Bilgileri",
       path: `/cabin`,
       icon: <FaIcons.FaCartPlus />,
-      cName: navbarCss["nav-text"]
+      cName: "nav-text"
     },
     {
       title: "Kabin Detayları",
       path: `/cabininfo`,
       icon: <IoIcons.IoMdPeople />,
-      cName: navbarCss["nav-text"]
+      cName: ["nav-text"]
     },
     {
       title: "Kart Bilgileri",
       path: `/card`,
       icon: <FaIcons.FaEnvelopeOpenText />,
-      cName: navbarCss["nav-text"]
+      cName: ["nav-text"]
     },
     {
       title: "Raporlar",
       path: `/reports`,
       icon: <IoIcons.IoMdHelpCircle />,
-      cName: navbarCss["nav-text"]
+      cName: ["nav-text"]
     },
     {
       title: "Kullanıcı Detayları",
       path: `/user`,
       icon: <IoIcons.IoMdHelpCircle />,
-      cName: navbarCss["nav-text"]
+      cName: ["nav-text"]
     },
     {
       title: "Çıkış",
       path: "/login",
       icon: <IoIcons.IoMdExit />,
-      cName: navbarCss["nav-text"]
+      cName: ["nav-text"]
     }
   ];
   
@@ -82,15 +83,15 @@ export default function Navbar() {
     <>
       <IconContext.Provider value={{ color: "#FFF" }}>
         {/* All the icons now are white */}
-        <div className={navbarCss.navbar}>
-          <Link to="#" className={navbarCss["menu-bars"]}>
+        <div className="navbar">
+          <Link to="#" className="menu-bars">
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
         </div>
-        <nav className={sidebar ? navbarCss["nav-menu active"] : navbarCss["nav-menu"]}>
-          <ul className= {navbarCss["nav-menu-items"]} onClick={showSidebar}>
-            <li className={navbarCss["navbar-toggle"]}>
-              <Link to="#" className={navbarCss["menu-bars"]}>
+        <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
+          <ul className= "nav-menu-items" onClick={showSidebar}>
+            <li className="navbar-toggle">
+              <Link to="#" className="menu-bars">
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
