@@ -46,7 +46,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 10px;
-    border: solid red 2px;
+   
     width: calc(var(--login-width)/2);
     height: 50px;
 }
@@ -58,7 +58,7 @@
     align-items: center;
     height: 70px;
     width: calc(60px + var(--login-width)/2);
-    border: solid green 2px;
+  
     margin-bottom: 20px;
 }
 
@@ -131,7 +131,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: solid red 2px;
+   
     margin-bottom: 10px;
 
 }
@@ -145,9 +145,9 @@
 
 
 @keyframes backgroundGlow{
-    0% {box-shadow: 0px 2px 6px 2px aqua, 2px 0px 6px 2px  green;}
-    25% {box-shadow: 2px 2px 6px 2px aqua, 0px 2px 6px 2px   green ;}
-    50% {box-shadow: 2px 0px 6px 2px aqua, 2px 2px 6px 2px   green ;}
-    75% {box-shadow: 0px 2px 6px 2px aqua, 0px 0px 6px 2px   green ;}
-    100% {box-shadow: 0px 2px 6px 2px aqua, 2px 0px 6px 2px  green ;}
+    0% {box-shadow: 0px 2px 6px 2px aqua, 2px 0px 6px 2px  lightgreen;}
+    25% {box-shadow: 2px 2px 6px 2px aqua, 0px 2px 6px 2px   lightgreen ;}
+    50% {box-shadow: 2px 0px 6px 2px aqua, 2px 2px 6px 2px   lightgreen ;}
+    75% {box-shadow: 0px 2px 6px 2px aqua, 0px 0px 6px 2px   lightgreen ;}
+    100% {box-shadow: 0px 2px 6px 2px aqua, 2px 0px 6px 2px  lightgreen ;}
 }
