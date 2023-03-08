@@ -7,6 +7,7 @@ export default function Login() {
 
  const [Username, setUsername] = useState("");
  const [Password, setPassword] = useState("");
+ const [alpha, setAlpha] = useState(0);
 
 
 const handleTyping = ({target}) =>{
@@ -19,6 +20,12 @@ const[id, setId] = useState();
     const [loginstatus, setLoginStatus] = useState("");
   
     const navigate = useNavigate();
+
+     const error = {color : "rgba (255,0,0," +alpha + ")" };
+
+     const raiseError =()=>{
+      setAlpha((prev) =>(prev=0)); // bu big brain satır prev in değerinin 1 0 arası değişmesini sağlar, eğer prev 0 ise prev=0 ifaedesi 1 döner eğer prev 1 ise prev=0 hata olduğundan 0 döner
+     }
 
     const loginfunc = () =>{
 
@@ -79,7 +86,9 @@ const[id, setId] = useState();
                <div className={LoginCss.inputArea}>
                <input className={LoginCss.inputSpace} type="text" id="password"  value={Password}  onChange={handleTyping} />
                </div>
-       
+
+              <div style={error}>  Hatalı Kullanıcı Adı  ya da Şifre!</div>
+
                <div className={LoginCss.buttonArea} >
                <button className={LoginCss.logButton} onClick={loginfunc}> Giriş Yap</button>
                </div>
