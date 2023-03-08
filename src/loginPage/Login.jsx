@@ -87,7 +87,7 @@ const[id, setId] = useState();
                <input className={LoginCss.inputSpace} type="text" id="password"  value={Password}  onChange={handleTyping} />
                </div>
 
-              <div style={error}>  Hatalı Kullanıcı Adı  ya da Şifre!</div>
+              <div style={error} key={alpha}>  Hatalı Kullanıcı Adı  ya da Şifre!</div>
 
                <div className={LoginCss.buttonArea} >
                <button className={LoginCss.logButton} onClick={loginfunc}> Giriş Yap</button>
