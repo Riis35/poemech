@@ -46,7 +46,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 10px;
-    border: solid red 2px;
+   
     width: calc(var(--login-width)/2);
     height: 50px;
 }
@@ -58,7 +58,7 @@
     align-items: center;
     height: 70px;
     width: calc(60px + var(--login-width)/2);
-    border: solid green 2px;
+  
     margin-bottom: 20px;
 }
 
@@ -131,7 +131,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: solid red 2px;
+   
     margin-bottom: 10px;
 
 }
