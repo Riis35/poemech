@@ -13,7 +13,6 @@ import { Link, useParams } from "react-router-dom";
 
 
 // STYLES
-import navbarCss from "./navbar.module.css";
 import "./navbar.css";
 
 export default function Navbar() {
