@@ -7,7 +7,7 @@ export default function Login() {
 
  const [Username, setUsername] = useState("");
  const [Password, setPassword] = useState("");
- const [alpha, setAlpha] = useState(0);
+ const [alpha, setAlpha] = useState('');
 
 
 const handleTyping = ({target}) =>{
@@ -34,7 +34,7 @@ const[id, setId] = useState();
         password: Password,
         }).then((response) => {
           if(!response.data.auth){
-            raiseError();
+           setAlpha('Hatalı Girriş')
           }
           else{
             localStorage.setItem("token", response.data.token)
@@ -87,7 +87,7 @@ const[id, setId] = useState();
                <input className={LoginCss.inputSpace} type="text" id="password"  value={Password}  onChange={handleTyping} />
                </div>
 
-              <div style={error} key={alpha}>  Hatalı Kullanıcı Adı  ya da Şifre!</div>
+              <div className={LoginCss.error} >  {alpha}</div>
 
                <div className={LoginCss.buttonArea} >
                <button className={LoginCss.logButton} onClick={loginfunc}> Giriş Yap</button>

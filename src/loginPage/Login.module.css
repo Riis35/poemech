@@ -151,3 +151,7 @@
     75% {box-shadow: 0px 2px 6px 2px aqua, 0px 0px 6px 2px   lightgreen ;}
     100% {box-shadow: 0px 2px 6px 2px aqua, 2px 0px 6px 2px  lightgreen ;}
 }
+
+.error{
+    height: 16px;
+}
