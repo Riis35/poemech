@@ -34,7 +34,7 @@ const[id, setId] = useState();
         password: Password,
         }).then((response) => {
           if(!response.data.auth){
-           setAlpha('Hatalı Girriş')
+           setAlpha('Hatalı Giriş')
           }
           else{
             localStorage.setItem("token", response.data.token)
