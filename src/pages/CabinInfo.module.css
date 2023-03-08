@@ -1,0 +1,9 @@
+.pager{
+    display: flex;
+align-items: flex-start;
+}
+
+.navpos{
+    display: flex;
+}
+

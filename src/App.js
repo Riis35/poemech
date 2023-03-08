@@ -7,10 +7,11 @@ import { BrowserRouter as Router, Routes, Route, Navigate, BrowserRouter}
 import Main from './pages/Main';
 
 
-import CabinInfo from './pages/CabinInfo';
+import CabinInfo from './pages/CabinInfo.jsx';
 import Signup from './pages/Signup';
 import DeviceList from './components/DeviceList';
 import Login from './loginPage/Login';
+import CompanyInfo from './pages/CompanyInfo';
 
 
 function App() {
@@ -19,8 +20,8 @@ function App() {
     <Routes>
       <Route path='/login' element={< Login />}></Route>
       <Route path='/main/:id' element={< Main />}></Route>
-      <Route path='/cabininfo/:id' element={< DeviceList />}></Route>
-      <Route path='/admin/new/signup' element={< Signup />}></Route>
+      <Route path='/cabininfo/:id' element={< CabinInfo />}></Route>
+      <Route path='/company/:id' element={< CompanyInfo />}></Route>
     </Routes>
   </BrowserRouter>
 
