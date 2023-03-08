@@ -9,16 +9,15 @@ export default class Device extends React.Component{
 }
 
     
-    addTank(){
+    alerting(){
         alert('tank added')
-
     }
 
     render(){
         return(
             
             <div className={DeviceCss.container}>
-                <button className={DeviceCss.name} onClick={console.log("clicked name")}> Cihaz Adı : {this.props.name}</button>
+                <button className={DeviceCss.name} onClick={this.alerting}> Cihaz Adı : {this.props.name}</button>
                 <div className={DeviceCss.tankContainer}> <TankContainer isCollapsed="yes"   />  </div>
             </div>
         
