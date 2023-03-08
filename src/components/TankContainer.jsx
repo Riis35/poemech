@@ -68,7 +68,10 @@ export default function TankContainer(props) {
 
 const collapsableTank = (isCollapse, tankProps, handleClick) => {
 
-  if(isCollapse){return( <button onClick={handleClick} id={Math.random()}> click to unfold </button> )}
+  if(isCollapse){return(
+     //<button onClick={handleClick} id={Math.random()}> click to unfold </button> 
+     <div className={TankContainerCss.touch}> Detayları Görmek İçin Cihaz Adına Tıklayın</div>
+     )}
   else{return( 
     
    

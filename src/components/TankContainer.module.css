@@ -13,3 +13,11 @@
 .scroll{
     display: inline-block;
 }
+
+.touch{
+    font-weight: 300;
+    font-style: italic;
+    font-size: 14px;
+    color: grey;
+    height: 18x;
+}
