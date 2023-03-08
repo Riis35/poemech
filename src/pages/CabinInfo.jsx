@@ -35,8 +35,8 @@ function CabinInfo() {
   }, []);
 
   return (
-    <div clas={CabinCss.pager}>
-      <Navbar class={CabinCss.navpos} />
+    <div clasName={CabinCss.pager}>
+      <Navbar className={CabinCss.navpos} />
       <DeviceList />
     </div>
   );
