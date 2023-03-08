@@ -1,5 +1,5 @@
 :root {
-    --navBg: #060b26;
+    --navBg: #262833;
   }
   
   .navbar {
@@ -8,12 +8,14 @@
     display: flex;
     justify-content: start;
     align-items: center;
+    z-index: 10;
   }
   
   .menu-bars {
     margin-left: 2rem;
     font-size: 2rem;
     background: none;
+    z-index: 10;
   }
   
   .nav-menu {
@@ -26,11 +28,13 @@
     top: 0;
     left: -100%;
     transition: 850ms;
+    z-index: 10;
   }
   
   .nav-menu.active {
     left: 0;
     transition: 350ms;
+    z-index: 10;
   }
   
   .nav-text {
@@ -40,6 +44,7 @@
     padding: 8px 0 8px 16px;
     list-style: none;
     height: 60px;
+    z-index: 10;
   }
   
   .nav-text a {
@@ -52,15 +57,18 @@
     align-items: center;
     padding: 0 16px;
     border-radius: 4px;
+    z-index: 10;
   }
   
   .nav-text a:hover {
     background-color: #1a83ff;
+    z-index: 10;
   }
   
   .nav-menu-items {
     width: 100%;
     padding: 0;
+    z-index: 10;
   }
   
   .navbar-toggle {
@@ -70,9 +78,11 @@
     display: flex;
     justify-content: start;
     align-items: center;
+    z-index: 10;
   }
   
   span {
     margin-left: 16px;
+    z-index: 10;
   }
   

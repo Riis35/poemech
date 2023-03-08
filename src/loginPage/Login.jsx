@@ -7,6 +7,7 @@ export default function Login() {
 
  const [Username, setUsername] = useState("");
  const [Password, setPassword] = useState("");
+ const [alpha, setAlpha] = useState('');
 
 
 const handleTyping = ({target}) =>{
@@ -20,6 +21,12 @@ const[id, setId] = useState();
   
     const navigate = useNavigate();
 
+     const error = {color : "rgba (255,0,0," +alpha + ")" };
+
+     const raiseError =()=>{
+      setAlpha((prev) =>(prev=0)); // bu big brain satır prev in değerinin 1 0 arası değişmesini sağlar, eğer prev 0 ise prev=0 ifaedesi 1 döner eğer prev 1 ise prev=0 hata olduğundan 0 döner
+     }
+
     const loginfunc = () =>{
 
         axios.post(`${process.env.REACT_APP_URL}/api/login`,
@@ -27,7 +34,7 @@ const[id, setId] = useState();
         password: Password,
         }).then((response) => {
           if(!response.data.auth){
-            setLoginStatus("Başarısız");
+           setAlpha('Hatalı Giriş')
           }
           else{
             localStorage.setItem("token", response.data.token)
@@ -79,7 +86,9 @@ const[id, setId] = useState();
                <div className={LoginCss.inputArea}>
                <input className={LoginCss.inputSpace} type="text" id="password"  value={Password}  onChange={handleTyping} />
                </div>
-       
+
+              <div className={LoginCss.error} >  {alpha}</div>
+
                <div className={LoginCss.buttonArea} >
                <button className={LoginCss.logButton} onClick={loginfunc}> Giriş Yap</button>
                </div>
