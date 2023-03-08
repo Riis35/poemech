@@ -43,4 +43,4 @@ function CabinInfo() {
 }
 
 export default CabinInfo;
-// hi
+
