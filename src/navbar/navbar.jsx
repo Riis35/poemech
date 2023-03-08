@@ -22,7 +22,7 @@ export default function Navbar() {
 
   const SidebarData = [
     {
-      title: "Ana Sayfa",
+      title: "Poemech",
       path: `/main`,
       icon: <AiIcons.AiFillHome />,
       cName: "nav-text"
@@ -30,37 +30,37 @@ export default function Navbar() {
     {
       title: "Şirket Bilgileri",
       path: `/company`,
-      icon: <IoIcons.IoIosPaper />,
+      icon: <IoIcons.IoIosBusiness />,
       cName: "nav-text"
     },
     {
       title: "Kabin Bilgileri",
       path: `/cabin`,
-      icon: <FaIcons.FaCartPlus />,
+      icon: <FaIcons.FaBoxes />,
       cName: "nav-text"
     },
     {
       title: "Kabin Detayları",
       path: `/cabininfo`,
-      icon: <IoIcons.IoMdPeople />,
+      icon: <FaIcons.FaBox />,
       cName: ["nav-text"]
     },
     {
       title: "Kart Bilgileri",
       path: `/card`,
-      icon: <FaIcons.FaEnvelopeOpenText />,
+      icon: <FaIcons.FaIdCard />,
       cName: ["nav-text"]
     },
     {
       title: "Raporlar",
       path: `/reports`,
-      icon: <IoIcons.IoMdHelpCircle />,
+      icon: <IoIcons.IoMdStats />,
       cName: ["nav-text"]
     },
     {
       title: "Kullanıcı Detayları",
       path: `/user`,
-      icon: <IoIcons.IoMdHelpCircle />,
+      icon: <FaIcons.FaUser />,
       cName: ["nav-text"]
     },
     {
@@ -94,7 +94,6 @@ export default function Navbar() {
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
-
             {SidebarData.map((item, index) => {
               return (
                 <li key={index} className={item.cName} onClick = {item.title === "Çıkış" ? logout : null}>
