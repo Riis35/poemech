@@ -21,7 +21,7 @@ const[id, setId] = useState();
   
     const navigate = useNavigate();
 
-     const error = {'color' : 'rgba(255, 0, 0,' +alpha+')',  };
+     const error = {color : "rgba (255,0,0," +alpha + ")" };
 
      const raiseError =()=>{
       setAlpha((prev) =>(prev=0)); // bu big brain satır prev in değerinin 1 0 arası değişmesini sağlar, eğer prev 0 ise prev=0 ifaedesi 1 döner eğer prev 1 ise prev=0 hata olduğundan 0 döner
