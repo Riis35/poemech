@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useParams}
   import { useNavigate } from "react-router-dom";
 import Navbar from "../navbar/navbar";
 import DeviceList from "../components/DeviceList";
+import CabinCss from './CabinInfo.module.css'
 
 
 
@@ -35,8 +36,8 @@ function CabinInfo () {
   }, []);
 
     return (
-      <div style={{display: "-ms-flexbox"}}>
-        <Navbar/>
+      <div class={CabinCss.pager}>
+        <Navbar class={CabinCss.navpos}/>
         <DeviceList/>
       </div>
     );
