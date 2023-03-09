@@ -1,8 +1,31 @@
-.tables{
-    border : solid red 2px;
+.tables {
+    /*border: solid red 2px;*/
+    width: auto;
 }
 
-table{ border: solid green 2px;}
+table {
+   /* border: solid green 2px; */
+    width: 80%
+}
 
-tr {box-shadow: 0px 0px 2px 1px red inset;}
-td {box-shadow: 0px 0px 2px 1px blue inset;}
+tr {
+    /*box-shadow: 0px 0px 2px 1px red inset; */
+    display: flex;
+    align-items: baseline;
+    height: 25px;
+
+
+}
+
+td {
+    /*box-shadow: 0px 0px 2px 1px blue inset;*/
+    text-align: center;
+    border-bottom: 1px gray solid;
+    height: 18px;
+    padding: 0%;
+    width: 40%;
+}
+
+.tableHeader{
+    width: 80%;
+}

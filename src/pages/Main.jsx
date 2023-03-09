@@ -113,7 +113,7 @@ const tableMaker=(DeviceName,info,num)=> {
   return(
 <table>
   <tr>
-    <td> {DeviceName} </td>
+    <td colSpan={2} className={maincss.tableHeader}> {DeviceName} </td>
    </tr>
   <tr>
     <td>İşlem</td>
