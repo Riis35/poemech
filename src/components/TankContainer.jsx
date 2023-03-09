@@ -23,11 +23,11 @@ export default function TankContainer(props) {
           if(!response.data.done){
           }
           else{
-            const data = [["15 Faktör", `${response.data.f15}`, "154s8a"], ["30 Faktör", `${response.data.f30}`,"154qef1"],
-            ["50 Faktör", `${response.data.f50}`,"1541231"], ["Nemlendirici", `${response.data.nemlendirici}`,"154kgiks1"],
-            ["Bronzlaştırıcı", `${response.data.bronzlastirici}`,"154s51q"], ["Su", `${response.data.su}`,"154s7q5s"],
-            ["Dezenfektan", `${response.data.dezenfektan}`,"154q87eq9s"],["Duş Köpüğü", `${response.data.duskopugu}`,"1jkviaq1"],
-            ["Köpek Kremi", `${response.data.kopekkrem}`,"15i1841a"],["Köpek Şampuanı", `${response.data.kopeksampuan}`,"5618s8a"]];
+            const data = [["15 Faktör", `${response.data.result[props.index].f15}`, "154s8a"], ["30 Faktör", `${response.data.result[props.index].f30}`,"154qef1"],
+            ["50 Faktör", `${response.data.result[props.index].f50}`,"1541231"], ["Nemlendirici", `${response.data.result[props.index].nemlendirici}`,"154kgiks1"],
+            ["Bronzlaştırıcı", `${response.data.result[props.index].bronzlastirici}`,"154s51q"], ["Su", `${response.data.result[props.index].su}`,"154s7q5s"],
+            ["Dezenfektan", `${response.data.result[props.index].dezenfektan}`,"154q87eq9s"],["Duş Köpüğü", `${response.data.result[props.index].duskopugu}`,"1jkviaq1"],
+            ["Köpek Kremi", `${response.data.result[props.index].kopekkrem}`,"15i1841a"],["Köpek Şampuanı", `${response.data.result[props.index].kopeksampuan}`,"5618s8a"]];
             console.log(response);
             setTankProps(data);
           }

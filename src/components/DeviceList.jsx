@@ -76,7 +76,7 @@ export default function DeviceList(id) {
         <input className={DeviceListCss.searchBar} value={query} onChange={handleQuery} placeholder="arama yapın..." ></input>
         <p> search is  {query}    queryMatch is {queryMatch}</p>
         {queryMatch.map((device,i)=>(
-            <div key={i}> <Device name={device}  key={i} /></div> 
+            <div key={i}> <Device name={device}  key={i} index={i}/></div> 
         ))}
 
     </div>

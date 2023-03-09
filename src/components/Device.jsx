@@ -24,7 +24,7 @@ export default function Device(props){
                 <div className={DeviceCss.arrow}></div>
                 <button className={DeviceCss.name} onClick={handleCollapse}> Cihaz Adı : {props.name}</button>
                 </div>
-                <div className={DeviceCss.tankContainer}> <TankContainer key={collapse} isCollapsed= {`${collapse}`}  />  </div>
+                <div className={DeviceCss.tankContainer}> <TankContainer key={collapse} isCollapsed= {`${collapse}`} index= {props.index} />  </div>
                 
             </div>
         
