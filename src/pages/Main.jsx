@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useParams}
 import Navbar from "../navbar/navbar";
 import DataTable from 'react-data-table-component';
 import MainComp from "../MainCompanies/MainComp"
+import maincss from "./Main.module.css"
 
 
 
@@ -74,11 +75,25 @@ function Main () {
              // push the component to elements!
             elements.push(<MainComp name = {cabinNames[i].Cab_name} id = {cabinNames[i].Cab_id} User = {id}/>);
         }
+
+        console.log(elements)
+
+
+// arrays for test  of table maker code
+const name = ["faktor10","faktor45","nem"];
+const reps = [1,2,3]
+
+
+
+
     return (
             <div>
               <Navbar/>
               <p>Welcome {id}</p>  
-              {elements}
+              <div className={maincss.tables}>
+              {elements} 
+              </div>
+              {tableMaker('Asya şube',name,reps)}
             </div>
           );
   }
@@ -87,3 +102,27 @@ function Main () {
 };
 
 export default Main;
+
+
+
+
+
+ // table maker can create dynmaci tables needed to  styleized 
+const tableMaker=(DeviceName,info,num)=> {
+
+  return(
+<table>
+  <tr>
+    <td> {DeviceName} </td>
+   </tr>
+  <tr>
+    <td>İşlem</td>
+    <td>miktar</td>
+  </tr>
+  {     info.map((element,i) => (<tr>  <td> {element}</td>  <td> {num[i]}</td> </tr>))    }
+
+</table>
+
+  )
+
+}

@@ -4,9 +4,10 @@ import './App.css';
 import axios from 'axios';
 import { BrowserRouter as Router, Routes, Route, Navigate, BrowserRouter}
     from 'react-router-dom';
-import Main from './pages/Main';
 
 
+
+import Main from './pages/Main.jsx';
 import CabinInfo from './pages/CabinInfo.jsx';
 import Signup from './pages/Signup';
 import DeviceList from './components/DeviceList';
