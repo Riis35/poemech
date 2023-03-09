@@ -14,8 +14,22 @@ function Main () {
     const navigate = useNavigate();
     
     const {id} = useParams();
-    const [cabinNames, setnames] = useState([]); //Kabin isimlerini tutan array
-    var cabinNumber = 0;
+    const [cabinNames, setnames] = useState(); //Kabin isimlerini tutan array
+
+
+    const Cabins = () => {
+      Axios.post(`${process.env.REACT_APP_URL}/api/GetNumbers`,   //Kullanıcının sahip olduğu kabinlerin ID'leri
+      {id: id
+      }).then((response) => {
+      if(!response.data.done){
+
+      }
+      else{
+      setnames(response.data.result);
+      console.log(response.data.result)
+  }
+})
+    }
 
     const AuthPls = () =>{
         Axios.get(`${process.env.REACT_APP_URL}/api/isAuth`, {
@@ -27,57 +41,50 @@ function Main () {
         })
       }
   
-      const [datas, setdata] = useState([]); //Operasyon sayılarını tutan array
+      //Operasyon sayılarını tutan array
 
   
   const [authenticated, setauthenticated] = useState(null);
 
   
 
-  useEffect(() => {
-    AuthPls();
-
+ useEffect(() => {
+    Cabins();
   }, []);
 
-useEffect(() => {
-      Axios.post(`${process.env.REACT_APP_URL}/api/GetNumbers`,   //Kullanıcının sahip olduğu kabinlerin ID'leri
-        {id: id
-        }).then((response) => {
-          if(!response.data.done){
 
-          }
-          else{
-                    cabinNumber = response.data.result.length;
-                    for (let i = 0; i < cabinNumber; i++)   //Her kabin için ayrı bir data set
-                              {
-                                setnames(() => [...cabinNames,response.data.result[i].Cab_name])  
-                                Axios.post(`${process.env.REACT_APP_URL}/api/getCabins`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
-                              {id: id,
-                                cabin: response.data.result[i].Cab_id
-                              }).then((response2) => {
-                                setdata(() => [...datas,response2.data.result] );
-                                
-                              })
-                                }}
-        })
+  useEffect(() => {
 
-    }, [datas]);
-  
+  }, [cabinNames])
 
-  if (!authenticated) {
-      navigate("/login");
-  } else {
-    return (
+
+  if(cabinNames === undefined){
+    console.log("undefined")
+    return(
       
-      <div>
-        <Navbar/>
-        <p>Welcome {id}</p>  
-          {datas.map((i)=>(
-                      <div key={i}> <Company OneData = {datas[i]}  key={i} name = {cabinNames[i]}/></div>  //Her bir kabin datası için ayrı tablo oluşturabilmek için
-                  ))}
-      </div>
-    );
-  }
+      <div>
+        <p>Yükleniyor...</p>
+      </div>
+    )
+  }
+  else{
+    console.log("defined")
+    //console.log(cabinNames.length)
+    var elements=[];
+        for(var i=0;i<cabinNames.length;i++){
+             // push the component to elements!
+            elements.push(<Company name = {cabinNames[i].Cab_name} id = {cabinNames[i].Cab_id} User = {id}/>);
+        }
+    return (
+            <div>
+              <Navbar/>
+              <p>Welcome {id}</p>  
+              {elements}
+            </div>
+          );
+  }
+    
+  
 };
 
 export default Main;
