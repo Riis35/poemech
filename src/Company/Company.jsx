@@ -1,9 +1,10 @@
 import React from 'react'
 import DataTable from 'react-data-table-component';
 
-export default function company() {
 
-   
+export default function company(id) {
+
+
 
 const columns = [
     {
@@ -13,6 +14,7 @@ const columns = [
     {
         name: 'Year',
         selector: row => row.year,
+        sortable: true,
     },
 ];
 

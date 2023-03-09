@@ -15,14 +15,6 @@ export default function TankContainer(props) {
   const [isCollapse, setCollapse] = useState(isCollapsed === "no" ? false : true)
 
   const {id} = useParams();
-   
-  const getData = () => {
-        
-    
-        
-
-        
-  }
 
    useEffect(() => {
     axios.post(`${process.env.REACT_APP_URL}/api/CabinInfo`,
@@ -36,7 +28,7 @@ export default function TankContainer(props) {
             ["Bronzlaştırıcı", `${response.data.bronzlastirici}`,"154s51q"], ["Su", `${response.data.su}`,"154s7q5s"],
             ["Dezenfektan", `${response.data.dezenfektan}`,"154q87eq9s"],["Duş Köpüğü", `${response.data.duskopugu}`,"1jkviaq1"],
             ["Köpek Kremi", `${response.data.kopekkrem}`,"15i1841a"],["Köpek Şampuanı", `${response.data.kopeksampuan}`,"5618s8a"]];
-
+            console.log(response);
             setTankProps(data);
           }
         })
