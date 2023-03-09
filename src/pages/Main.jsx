@@ -90,7 +90,7 @@ const reps = [1,2,3]
             <div>
               <Navbar/>
               <p>Welcome {id}</p>  
-              <div className={maincss.tables}>
+              <div className={maincss.container}>
               {elements} 
               </div>
               {tableMaker('merkez şube',name,reps)}
