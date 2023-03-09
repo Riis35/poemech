@@ -52,16 +52,18 @@ export default function DeviceList(id) {
       getDevice();
   }, []);
 
+  
   useEffect(()=>{
     setQueryMatch(searchFunc(" ",devArr));
     setQuery(" ")
 }, [devArr]);
+
     
     //handle events
     const handleQuery =({target})=>{
-        
-        setQueryMatch(searchFunc(target.value,devArr));
         setQuery(target.value)
+        setQueryMatch(searchFunc(query.trim(),devArr));
+        
         
       
     }
