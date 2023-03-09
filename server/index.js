@@ -119,6 +119,13 @@ app.post('/api/CompanyInfo', (req,res) => {
     
 })
 
+/*SELECT Operations.Operation, Cabin.Cab_name, COUNT(*) FROM Users
+CROSS JOIN companies ON companies.U_id = Users.U_id
+CROSS JOIN Cabin ON Cabin.Com_id = companies.Com_id
+CROSS JOIN Operations ON Operations.Cabin_id = Cabin.Cab_id
+Where Users.U_id = 4 AND Cabin.Cab_id = 1
+GROUP BY Operations.Operation */
+
 app.post('/api/login', (req,res) => {
 
     const username = req.body.username
@@ -144,6 +151,56 @@ app.post('/api/login', (req,res) => {
         }
         else{
             res.json({auth: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+/*
+Select Cabin.Cab_id from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id Where Users.U_id = 4
+
+*/
+
+app.post('/api/getCabins', (req,res) => {
+
+    const id = req.body.id
+    const cabin = req.body.cabin
+
+    db.query("SELECT Operations.Operation, COUNT(*) as count FROM Users CROSS JOIN companies ON companies.U_id = Users.U_id CROSS JOIN Cabin ON Cabin.Com_id = companies.Com_id CROSS JOIN Operations ON Operations.Cabin_id = Cabin.Cab_id Where Users.U_id = ? AND Cabin.Cab_id = ? GROUP BY Operations.Operation ",
+    [id, cabin],
+    async (err, result) => {
+        if(err){
+            res.json({done: false})
+        }
+
+        if (result.length > 0){
+            res.json({done: true, result})
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+app.post('/api/GetNumbers', (req,res) => {
+
+    const id = req.body.id
+
+    db.query("Select Cabin.Cab_id, Cabin.Cab_name from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id Where Users.U_id = ?",
+    [id],
+    async (err, result) => {
+        if(err){
+            res.json({done: false})
+        }
+
+        if (result.length > 0){
+            res.json({done: true, result})
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
         }
         
     })
