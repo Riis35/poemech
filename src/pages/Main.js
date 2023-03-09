@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useParams}
   import { useNavigate } from "react-router-dom";
 import Navbar from "../navbar/navbar";
 import DataTable from 'react-data-table-component';
-import Company from "../Company/Company"
+import MainComp from "../MainCompanies/MainComp"
 
 
 
@@ -26,7 +26,6 @@ function Main () {
       }
       else{
       setnames(response.data.result);
-      console.log(response.data.result)
   }
 })
     }
@@ -73,7 +72,7 @@ function Main () {
     var elements=[];
         for(var i=0;i<cabinNames.length;i++){
              // push the component to elements!
-            elements.push(<Company name = {cabinNames[i].Cab_name} id = {cabinNames[i].Cab_id} User = {id}/>);
+            elements.push(<MainComp name = {cabinNames[i].Cab_name} id = {cabinNames[i].Cab_id} User = {id}/>);
         }
     return (
             <div>
