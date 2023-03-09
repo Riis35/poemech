@@ -11,28 +11,32 @@ table {
 
 tr {
     /*box-shadow: 0px 0px 2px 1px red inset; */
+
     display: flex;
     align-items: flex-end;
     height: 40px;
+    width: 80%;
 
 
 }
 
 td {
     /*box-shadow: 0px 0px 2px 1px blue inset;*/
+
     text-align: center;
     border-bottom: 1px gray solid;
     height: 18;
     padding: 0%;
-    width: 40%;
+    width: 50%;
 }
 
 .tableHeader{
-    width: 80%;
+    width: 100%;
     color: beige;
     background-color: indigo;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     height: 40px;
     font-weight: 600;
+
 }

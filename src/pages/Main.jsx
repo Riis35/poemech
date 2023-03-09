@@ -110,6 +110,9 @@ export default Main;
  // table maker can create dynmaci tables needed to  styleized 
 const tableMaker=(DeviceName,info,num)=> {
 
+  const grayBack = {backgroundColor : 'gray'};
+  const lightGrayBack = {backgroundColor : 'lightgray'};
+
   return(
 <table>
   <tr>
@@ -119,7 +122,7 @@ const tableMaker=(DeviceName,info,num)=> {
     <td>İşlem</td>
     <td>miktar</td>
   </tr>
-  {     info.map((element,i) => (<tr>  <td> {element}</td>  <td> {num[i]}</td> </tr>))    }
+  {     info.map((element,i) => (<tr style={ i % 2 == 0 ? grayBack : lightGrayBack}>  <td> {element}</td>  <td> {num[i]}</td> </tr>))    }
 
 </table>
 
