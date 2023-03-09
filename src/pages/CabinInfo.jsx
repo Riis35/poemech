@@ -14,30 +14,12 @@ import DeviceList from "../components/DeviceList";
 import CabinCss from "./CabinInfo.module.css";
 
 function CabinInfo() {
-  const navigate = useNavigate();
-
-  const { id } = useParams();
-  const data = () => {
-    axios
-      .post(`${process.env.REACT_APP_URL}/api/CabinInfo`, { id: id })
-      .then((response) => {
-        console.log(response);
-      });
-  };
-
-  const logout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
-
-  useEffect(() => {
-    data();
-  }, []);
+  const {id} = useParams();
 
   return (
     <div clasName={CabinCss.pager}>
       <Navbar className={CabinCss.navpos} />
-      <DeviceList />
+      <DeviceList id={id}/>
     </div>
   );
 }
