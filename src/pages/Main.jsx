@@ -93,7 +93,7 @@ const reps = [1,2,3]
               <div className={maincss.tables}>
               {elements} 
               </div>
-              {tableMaker('Asya şube',name,reps)}
+              {tableMaker('merkez şube',name,reps)}
             </div>
           );
   }
