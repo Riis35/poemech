@@ -9,7 +9,7 @@ import axios from 'axios';
 
   const searchFunc = (query,arr) => {
         // eğer input boşsa array
-        if(query === ' '){return arr}
+        if(query === ''){return arr}
         else{return arr.filter(arrElement  =>arrElement.toLocaleLowerCase().includes(query.toLocaleLowerCase()))}
     }
 
@@ -54,16 +54,16 @@ export default function DeviceList(id) {
 
   
   useEffect(()=>{
-    setQueryMatch(searchFunc(" ",devArr));
-    setQuery(" ")
+    setQueryMatch(searchFunc('',devArr));
+    setQuery('')
 }, [devArr]);
 
     
     //handle events
-    const handleQuery =({target})=>{
-        setQuery(target.value)
-        setQueryMatch(searchFunc(query.trim(),devArr));
-        
+    const handleQuery =({target})=>{  
+      setQueryMatch(searchFunc(target.value.trim(),devArr))
+      setQuery(target.value);
+      
         
       
     }

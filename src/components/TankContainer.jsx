@@ -28,7 +28,6 @@ export default function TankContainer(props) {
             ["Bronzlaştırıcı", `${response.data.result[props.index].bronzlastirici}`,"154s51q"], ["Su", `${response.data.result[props.index].su}`,"154s7q5s"],
             ["Dezenfektan", `${response.data.result[props.index].dezenfektan}`,"154q87eq9s"],["Duş Köpüğü", `${response.data.result[props.index].duskopugu}`,"1jkviaq1"],
             ["Köpek Kremi", `${response.data.result[props.index].kopekkrem}`,"15i1841a"],["Köpek Şampuanı", `${response.data.result[props.index].kopeksampuan}`,"5618s8a"]];
-            console.log(response);
             setTankProps(data);
           }
         })
@@ -39,9 +38,7 @@ export default function TankContainer(props) {
   const [tankProps, setTankProps] = useState([]);
 
   const handleClick =({target}) =>{
-    console.log('called' + target.id);
     setCollapse(()=> {if(isCollapse){return false} else{return true}});
-    console.log(isCollapse);
   }
 
   return (
