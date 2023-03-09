@@ -11,6 +11,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import Navbar from "../navbar/navbar";
 import DeviceList from "../components/DeviceList";
+import cabinInfoCss from "./CabinInfo.module.css"
 
 
 function CabinInfo() {

@@ -7,12 +7,13 @@ import TankContainer from './TankContainer';
 export default function Device(props){
     const [collapse, setCollapse] = useState('yes');
 
+// arrow Rotating code
 
 
 
     const handleCollapse =()=>{
         setCollapse((prev)=>  { const faruk = prev === "yes" ? "no":"yes"; return faruk} );
-        console.log(collapse)
+        
     }
    
    
