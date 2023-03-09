@@ -11,14 +11,14 @@ import {
 import { useNavigate } from "react-router-dom";
 import Navbar from "../navbar/navbar";
 import DeviceList from "../components/DeviceList";
-import CabinCss from "./CabinInfo.module.css";
+
 
 function CabinInfo() {
   const {id} = useParams();
 
   return (
-    <div clasName={CabinCss.pager}>
-      <Navbar className={CabinCss.navpos} />
+    <div >
+      <Navbar />
       <DeviceList id={id}/>
     </div>
   );
