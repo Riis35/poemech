@@ -59,6 +59,7 @@ export default function Company(props) {
     return (
         <div className={maincss.partialcontainer}>
             <p>{props.name}</p>
+            <div className={maincss["line-1"]}></div>
             <div className={maincss.containerinside}><DataTable
         columns={columns}
         data={data}

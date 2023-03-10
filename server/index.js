@@ -98,7 +98,7 @@ app.post('/api/CompanyInfo', (req,res) => {
 
     const id = req.body.id
 
-    db.query("SELECT companies.Com_name,Com_address,Com_phone,Users.U_mail FROM Users INNER JOIN companies ON Users.U_id= companies.U_id Where Users.U_id = ?;",
+    db.query("SELECT companies.Com_name,Com_address,Com_phone,companies.Com_mail FROM Users INNER JOIN companies ON Users.U_id= companies.U_id Where Users.U_id = ?;",
     [id],
     async (err, result) => {
         if(err){
@@ -107,8 +107,7 @@ app.post('/api/CompanyInfo', (req,res) => {
 
         if (result.length > 0){
         
-            res.json({done: true, f15: result[0].f15, f30: result[0].f30, f50: result[0].f50, nemlendirici: result[0].nemlendirici, bronzlastirici: result[0].bronzlastirici,
-            su: result[0].su, dezenfektan: result[0].dezenfektan, duskopugu: result[0].duskopugu, kopekkrem: result[0].kopekkrem, kopeksampuan: result[0].kopeksampuan})
+            res.json({done: true, result})
             
         }
         else{
