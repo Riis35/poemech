@@ -1,61 +1,59 @@
-.container{
+.container {
     display: flex;
     flex-direction: column;
     position: relative;
     flex-wrap: wrap;
-    gap:10px;
+    gap: 10px;
     width: 90%;
-    height : auto;
-min-height:55px ;
-    
+    height: auto;
+    min-height: 55px;
     justify-content: left;
     background-color: bisque;
-    margin: 10px;  
+    margin: 10px;
     border-radius: 15px;
 
 }
 
-.name{
-   
-   border: solid grey 1px;
-   border-width: 0px 0px 2px 0px;
-   height: 30px;
-   margin-top: 5px ;
-   width: 400px;
-   background-color: rgba(240, 248, 255, 0);
-   font-size: 16px;
-   font-weight: 500;
-   
- 
-  
-   
+.name {
+
+    border: solid grey 1px;
+    border-width: 0px 0px 2px 0px;
+    height: 30px;
+    margin-top: 5px;
+    width: 400px;
+    background-color: rgba(240, 248, 255, 0);
+    font-size: 16px;
+    font-weight: 500;
+
+
+
+
 }
 
 
 
-.tankContainer{
+.tankContainer {
     margin-left: 50px;
-    
-   
-    
-    
+
+
+
+
 }
 
 
-.buttonAndArrow{
+.buttonAndArrow {
     display: flex;
     flex-direction: row;
     justify-content: left;
 }
 
-.arrow{
+.arrow {
     margin-left: 30px;
     margin-top: 10px;
     width: 10px;
     height: 10px;
     border: solid gray;
-    border-width:  0px 2px 2px 0px;
-   
+    border-width: 0px 2px 2px 0px;
+
 
 }
-
