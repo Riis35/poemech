@@ -26,10 +26,12 @@ export default function Device(props) {
     });
   };
 
+
   const colorPalette = ["#e8dff5", "#fce1e4", "#cf4dd", "#ddedea", "#daeaf6"];
+  
 
   return (
-    <div className={DeviceCss.container}>
+    <div className={DeviceCss.container}  style={{ backgroundColor: colorPalette[parseInt(props.color)]}}>
       <div className={DeviceCss.buttonAndArrow}>
         <div className={DeviceCss.arrow} style={arrow} key={collapse}></div>
         <button className={DeviceCss.name} onClick={handleCollapse}>
