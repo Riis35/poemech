@@ -108,8 +108,8 @@ export default Main;
  // table maker can create dynmaci tables needed to  styleized 
 const tableMaker=(DeviceName,info,num)=> {
 
-  const grayBack = {backgroundColor : 'gray'};
-  const lightGrayBack = {backgroundColor : 'lightgray'};
+  const grayBack = {backgroundColor : '#9692924d'};
+  const lightGrayBack = {backgroundColor : "#b4b3b31a" };
 
   return(
 <table>

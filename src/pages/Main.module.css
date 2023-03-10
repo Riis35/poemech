@@ -32,6 +32,7 @@ td {
 }
 
 .tableHeader{
+   
     width: 100%;
     color: beige;
     background-color: indigo;
@@ -39,6 +40,11 @@ td {
     border-top-right-radius: 30px;
     height: 40px;
     font-weight: 600;
+    font-size: large;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 3px;
 
 }
 p{

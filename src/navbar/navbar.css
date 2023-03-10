@@ -86,3 +86,10 @@
     z-index: 10;
   }
   
+
+  .navbarBanner {
+    color: white; 
+    font-weight: 600;
+    padding-left: 40%;
+    
+  }
