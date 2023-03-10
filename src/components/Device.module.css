@@ -6,11 +6,12 @@
     gap:10px;
     width: 90%;
     height : auto;
-
+min-height:55px ;
     
     justify-content: left;
     background-color: bisque;
     margin: 10px;  
+    border-radius: 15px;
 
 }
 
@@ -18,7 +19,7 @@
    
    border: solid grey 1px;
    border-width: 0px 0px 2px 0px;
-   height: 25px;
+   height: 30px;
    margin-top: 5px ;
    width: 400px;
    background-color: rgba(240, 248, 255, 0);
@@ -32,6 +33,7 @@
 
 .tankContainer{
     margin-left: 50px;
+    
    
     
     
