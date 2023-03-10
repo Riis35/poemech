@@ -88,8 +88,11 @@
   
 
   .navbarBanner {
+    position: absolute;
+    width: 100%;
+    text-align: center;
     color: white; 
     font-weight: 600;
-    padding-left: 20px;
+    
     
   }
