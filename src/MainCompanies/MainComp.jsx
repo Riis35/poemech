@@ -2,6 +2,7 @@ import React from 'react'
 import DataTable from 'react-data-table-component';
 import Axios from 'axios';
 import { useEffect, useState } from "react";
+import maincss from "../pages/Main.module.css"
 
 
 export default function Company(props) {  
@@ -37,24 +38,35 @@ export default function Company(props) {
     const columns = [{
         name: 'İşlem',
         selector: row => row.Operation,
+        compact: false,
+        style: {
+            
+        },
     },
     {
-      name: 'Sayı',
+      name: 'Kullanım Sayısı',
       selector: row => row.Number,
       sortable: true,
+      style: {
+        			
+        		},
     },
     
     ]
 
-    
+    //<div className={maincss["line-1"]}></div>
 
     return (
-        <div>
+        <div className={maincss.partialcontainer}>
             <p>{props.name}</p>
-            <DataTable
+            <div className={maincss.containerinside}><DataTable
         columns={columns}
         data={data}
+        highlightOnHover= {true}
+        striped = {true}
+        backgroundcolor= 'rgba(187, 204, 221, 1)'
     /></div>
+            </div>
         
     );
 }

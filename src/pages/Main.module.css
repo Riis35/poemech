@@ -1,6 +1,7 @@
 .container {
     /*border: solid red 2px;*/
-    width: auto;
+    width: 40%;
+    margin: auto;
 }
 
 table {
@@ -46,3 +47,21 @@ td {
     padding-bottom: 3px;
 
 }
+p{
+    text-transform: uppercase;
+    text-align: center;
+}
+.partialcontainer{
+    margin-top: 5%;
+    background-color:whitesmoke;
+    padding-bottom: 3%;
+}
+.containerinside{
+    width: 90%;
+    margin: auto;
+}
+
+.line-1 {
+    height: 1px;
+    background: black;
+  }

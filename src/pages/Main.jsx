@@ -89,11 +89,9 @@ const reps = [1,2,3]
     return (
             <div>
               <Navbar/>
-              <p>Welcome {id}</p>  
               <div className={maincss.container}>
               {elements} 
               </div>
-              {tableMaker('merkez şube',name,reps)}
             </div>
           );
   }
