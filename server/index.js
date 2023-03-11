@@ -65,6 +65,8 @@ app.get('/api/isAuth', verifyJWToken,(req,res) => {
     res.json({auth: true, id: req.userId})
 })
 
+
+//CabinInfo for user
 app.post('/api/CabinInfo', (req,res) => {
 
     const id = req.body.id
@@ -88,6 +90,33 @@ app.post('/api/CabinInfo', (req,res) => {
     })
     
 })
+
+
+//Cabin info for admin
+app.post('/api/CabinAdminInfo', (req,res) => {
+
+    const id = req.body.id
+
+    db.query("SELECT Users.U_name, companies.Com_name, Cabin.Cab_name, CabinInfo.f15, CabinInfo.f30, CabinInfo.f50, CabinInfo.nemlendirici, CabinInfo.bronzlastirici, CabinInfo.su, CabinInfo.dezenfektan, CabinInfo.duskopugu, CabinInfo.kopekkrem, CabinInfo.kopeksampuan  FROM Users CROSS JOIN (companies, Cabin, CabinInfo) ON (Users.U_id=companies.U_id AND companies.Com_id=Cabin.Com_id AND Cabin.Cab_id=CabinInfo.Cab_id)",
+    async (err, result) => {
+        if(err){
+            res.send({err});
+        }
+
+        if (result.length > 0){
+        
+            res.json({done: true, result})
+            
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+
 /*
 SELECT companies.Com_name,Com_address,Com_phone,Users.U_mail
 FROM Users

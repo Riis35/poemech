@@ -39,10 +39,8 @@ export default function Company(props) {
 
     useEffect(() => {
         if(datas === undefined){
-            console.log("hop undefined")
         }
         else{
-            console.log("hop defined")
             setRows(datas.map(el => {  //alınan verileri mapleme
                 return {
                     Name: el.Com_name,
@@ -51,7 +49,6 @@ export default function Company(props) {
                     Mail: el.Com_mail,
                 }  
             })) 
-            console.log(datas)
         }
         
     }, [datas])
@@ -146,18 +143,20 @@ export default function Company(props) {
             </div>
             {id === "9" ? <div className={maincss.newCompany}>
                 <p className={maincss.newP}>Yenİ Şİrket Formu</p>
+                <div className={maincss.grid}>
                 <label for="name">Şirket Adı: </label>
-                <input type="text" id="name" onChange={(e) => setnewCompanyName(e.target.value)}/><br/><br/>
+                <input type="text" id="name" onChange={(e) => setnewCompanyName(e.target.value)}/>
                 <label for="address">Adres: </label>
-                <input type="text" id="address" onChange={(e) => setnewCompanyAddress(e.target.value)}/><br/><br/>
+                <input type="text" id="address" onChange={(e) => setnewCompanyAddress(e.target.value)}/>
                 <label for="phone">Telefon: </label>
-                <input type="phone" id="phone" onChange={(e) => setnewCompanyPhone(e.target.value)}/><br/><br/>
+                <input type="phone" id="phone" onChange={(e) => setnewCompanyPhone(e.target.value)}/>
                 <label for="username">Kullanıcı Adı: </label>
-                <input type="text" id="username" onChange={(e) => setnewCompanyUser(e.target.value)}/><br/><br/>
+                <input type="text" id="username" onChange={(e) => setnewCompanyUser(e.target.value)}/>
                 <label for="mail">Mail: </label>
-                <input type="email" id="mail" onChange={(e) => setnewCompanyMail(e.target.value)}/><br/><br/>
+                <input type="email" id="mail" onChange={(e) => setnewCompanyMail(e.target.value)}/>
                 <p>{status}</p>
-                <button onClick={register}>Kaydet</button>
+                <button className={maincss.newButton} onClick={register}>Kaydet</button>
+                </div>
             </div> : null}
         </div>
         
