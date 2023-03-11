@@ -75,3 +75,13 @@ p{
     height: 1px;
     background-color:silver;
   }
+
+.newCompany{
+    background-color: whitesmoke;
+    margin: auto;
+    padding-left: 3%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+

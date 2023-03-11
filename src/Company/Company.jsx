@@ -5,11 +5,18 @@ import { useEffect, useState } from "react";
 import maincss from "./Company.module.css"
 import { BrowserRouter as Router, Routes, Route, Navigate, useParams}
     from 'react-router-dom';
+import axios from 'axios';
 
 
 export default function Company(props) {  
     const [datas, setdata] = useState([]);
     const [data, setRows] = useState([]);
+    const [newCompanyName, setnewCompanyName] = useState();
+    const [newCompanyAddress, setnewCompanyAddress] = useState();
+    const [newCompanyPhone, setnewCompanyPhone] = useState();
+    const [newCompanyUser, setnewCompanyUser] = useState();
+    const [newCompanyMail, setnewCompanyMail] = useState();
+    const [status, setstatus] = useState();
     const {id} = useParams();
     useEffect(() => {
         if(id === "9"){
@@ -48,6 +55,44 @@ export default function Company(props) {
         }
         
     }, [datas])
+
+    const register = () => {
+
+            const user = newCompanyName;
+            const address = newCompanyAddress;
+            const phone = newCompanyPhone;
+            const mail = newCompanyMail;
+
+            const username = newCompanyUser;
+    
+    
+            axios.post(`${process.env.REACT_APP_URL}/api/GetId`,
+            {username: username,}).then((response) => {
+              if(response.data.done){
+                axios.post(`${process.env.REACT_APP_URL}/api/RegisterUser`,
+                {name: user,
+                address:address,
+                phone:phone,
+                id:response.data.result[0].U_id, 
+                mail:mail}).then((response) => {
+                if(response.data.done){
+                setstatus("Başarılı")
+              }
+              else{
+                setstatus("Kaydedilemedi.");
+              }
+              
+            })
+              }
+              else{
+                setstatus("Böyle bir kullanıcı yok.");
+              }
+              
+            })
+            .catch(function (error) {
+              
+            });
+    }
     
     const columns = [{
         name: 'Şirket Adı',
@@ -89,7 +134,7 @@ export default function Company(props) {
     return (
         <div className= {maincss.container}>
             <div className={maincss.partialcontainer}>
-            <p>Şİrket Bİlgİlerİ</p>
+            <p >Şİrket Bİlgİlerİ</p>
             <div className={maincss["line-1"]}></div>
             <div className={maincss.containerinside}><DataTable
         columns={columns}
@@ -99,9 +144,20 @@ export default function Company(props) {
         backgroundcolor= 'rgba(187, 204, 221, 1)'
     /></div>
             </div>
-            {id === "9" ? <div>
-                <p>Yeni Şirket Formu</p>
-                <input></input>
+            {id === "9" ? <div className={maincss.newCompany}>
+                <p className={maincss.newP}>Yenİ Şİrket Formu</p>
+                <label for="name">Şirket Adı: </label>
+                <input type="text" id="name" onChange={(e) => setnewCompanyName(e.target.value)}/><br/><br/>
+                <label for="address">Adres: </label>
+                <input type="text" id="address" onChange={(e) => setnewCompanyAddress(e.target.value)}/><br/><br/>
+                <label for="phone">Telefon: </label>
+                <input type="phone" id="phone" onChange={(e) => setnewCompanyPhone(e.target.value)}/><br/><br/>
+                <label for="username">Kullanıcı Adı: </label>
+                <input type="text" id="username" onChange={(e) => setnewCompanyUser(e.target.value)}/><br/><br/>
+                <label for="mail">Mail: </label>
+                <input type="email" id="mail" onChange={(e) => setnewCompanyMail(e.target.value)}/><br/><br/>
+                <p>{status}</p>
+                <button onClick={register}>Kaydet</button>
             </div> : null}
         </div>
         

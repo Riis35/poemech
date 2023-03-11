@@ -143,6 +143,53 @@ app.post('/api/CompanyAdminInfo', (req,res) => {
     
 })
 
+//Get id for specific username
+app.post('/api/GetId', (req,res) => {
+
+    const Uname = req.body.username;
+    db.query("SELECT U_id FROM Users Where U_name = '" + Uname + "';",
+    async (err, result) => {
+        if(err){
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+
+        if (result.length > 0){
+        
+            res.json({done: true, result})
+            
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+
+//Register a user
+app.post('/api/RegisterUser', (req,res) => {
+
+    const comname = req.body.name;
+    const address = req.body.address;
+    const phone = req.body.phone;
+    const id = req.body.id;
+    const mail = req.body.mail;
+
+    db.query("INSERT INTO companies (Com_name, Com_address, Com_phone,U_id,Com_mail) values (?,?,?,?,?);",
+    [comname, address, phone, id, mail],
+    async (err, result) => {
+        if(err){
+            res.send({err});
+        }
+        else{
+            res.json({done: true})
+        }
+        
+    })
+    
+})
+
 /*SELECT Operations.Operation, Cabin.Cab_name, COUNT(*) FROM Users
 CROSS JOIN companies ON companies.U_id = Users.U_id
 CROSS JOIN Cabin ON Cabin.Com_id = companies.Com_id
