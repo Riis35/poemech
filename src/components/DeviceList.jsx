@@ -20,7 +20,8 @@ export default function DeviceList(id) {
   const realid = id.id;
 
   const getDevice = () =>{
-    axios.post(`${process.env.REACT_APP_URL}/api/CabinInfo`,
+    if(realid === "9"){
+      axios.post(`${process.env.REACT_APP_URL}/api/CabinAdminInfo`,
       {id: realid,
       }).then((response) => {
       if(!response.data.done){
@@ -35,6 +36,25 @@ export default function DeviceList(id) {
         setDevArr(dummy);
       }
     })
+    }
+    else{
+      axios.post(`${process.env.REACT_APP_URL}/api/CabinInfo`,
+      {id: realid,
+      }).then((response) => {
+      if(!response.data.done){
+        //console.log(response)
+        //console.log("başaramadık")
+      }
+      else{
+        var dummy = [];
+        for (let i = 0; i < response.data.result.length; i++) {
+          dummy[i] = response.data.result[i].Cab_name;
+        }
+        setDevArr(dummy);
+      }
+    })
+    }
+    
   };
      //list of devices names
      /*

@@ -17,7 +17,8 @@ export default function TankContainer(props) {
   const {id} = useParams();
 
    useEffect(() => {
-    axios.post(`${process.env.REACT_APP_URL}/api/CabinInfo`,
+    if(id === "9"){
+      axios.post(`${process.env.REACT_APP_URL}/api/CabinAdminInfo`,
         {id: id,
         }).then((response) => {
           if(!response.data.done){
@@ -31,6 +32,24 @@ export default function TankContainer(props) {
             setTankProps(data);
           }
         })
+    }
+    else{
+      axios.post(`${process.env.REACT_APP_URL}/api/CabinInfo`,
+        {id: id,
+        }).then((response) => {
+          if(!response.data.done){
+          }
+          else{
+            const data = [["15 Faktör", `${response.data.result[props.index].f15}`, "154s8a"], ["30 Faktör", `${response.data.result[props.index].f30}`,"154qef1"],
+            ["50 Faktör", `${response.data.result[props.index].f50}`,"1541231"], ["Nemlendirici", `${response.data.result[props.index].nemlendirici}`,"154kgiks1"],
+            ["Bronzlaştırıcı", `${response.data.result[props.index].bronzlastirici}`,"154s51q"], ["Su", `${response.data.result[props.index].su}`,"154s7q5s"],
+            ["Dezenfektan", `${response.data.result[props.index].dezenfektan}`,"154q87eq9s"],["Duş Köpüğü", `${response.data.result[props.index].duskopugu}`,"1jkviaq1"],
+            ["Köpek Kremi", `${response.data.result[props.index].kopekkrem}`,"15i1841a"],["Köpek Şampuanı", `${response.data.result[props.index].kopeksampuan}`,"5618s8a"]];
+            setTankProps(data);
+          }
+        })
+    }
+    
       }, []);
     
 

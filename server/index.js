@@ -65,6 +65,8 @@ app.get('/api/isAuth', verifyJWToken,(req,res) => {
     res.json({auth: true, id: req.userId})
 })
 
+
+//CabinInfo for user
 app.post('/api/CabinInfo', (req,res) => {
 
     const id = req.body.id
@@ -88,17 +90,44 @@ app.post('/api/CabinInfo', (req,res) => {
     })
     
 })
+
+
+//Cabin info for admin
+app.post('/api/CabinAdminInfo', (req,res) => {
+
+    const id = req.body.id
+
+    db.query("SELECT Users.U_name, companies.Com_name, Cabin.Cab_name, CabinInfo.f15, CabinInfo.f30, CabinInfo.f50, CabinInfo.nemlendirici, CabinInfo.bronzlastirici, CabinInfo.su, CabinInfo.dezenfektan, CabinInfo.duskopugu, CabinInfo.kopekkrem, CabinInfo.kopeksampuan  FROM Users CROSS JOIN (companies, Cabin, CabinInfo) ON (Users.U_id=companies.U_id AND companies.Com_id=Cabin.Com_id AND Cabin.Cab_id=CabinInfo.Cab_id)",
+    async (err, result) => {
+        if(err){
+            res.send({err});
+        }
+
+        if (result.length > 0){
+        
+            res.json({done: true, result})
+            
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+
 /*
 SELECT companies.Com_name,Com_address,Com_phone,Users.U_mail
 FROM Users
 INNER JOIN companies ON Users.U_id= companies.U_id;
 */
-
+//Detailed Company Info
 app.post('/api/CompanyInfo', (req,res) => {
 
     const id = req.body.id
 
-    db.query("SELECT companies.Com_name,Com_address,Com_phone,Users.U_mail FROM Users INNER JOIN companies ON Users.U_id= companies.U_id Where Users.U_id = ?;",
+    db.query("SELECT companies.Com_name,Com_address,Com_phone,companies.Com_mail FROM Users INNER JOIN companies ON Users.U_id= companies.U_id Where Users.U_id = ?;",
     [id],
     async (err, result) => {
         if(err){
@@ -107,12 +136,83 @@ app.post('/api/CompanyInfo', (req,res) => {
 
         if (result.length > 0){
         
-            res.json({done: true, f15: result[0].f15, f30: result[0].f30, f50: result[0].f50, nemlendirici: result[0].nemlendirici, bronzlastirici: result[0].bronzlastirici,
-            su: result[0].su, dezenfektan: result[0].dezenfektan, duskopugu: result[0].duskopugu, kopekkrem: result[0].kopekkrem, kopeksampuan: result[0].kopeksampuan})
+            res.json({done: true, result})
             
         }
         else{
             res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+
+//Company Info for admin
+
+app.post('/api/CompanyAdminInfo', (req,res) => {
+
+
+    db.query("SELECT companies.Com_name,Com_address,Com_phone,companies.Com_mail FROM Users INNER JOIN companies ON Users.U_id= companies.U_id;",
+    async (err, result) => {
+        if(err){
+            res.send({err});
+        }
+
+        if (result.length > 0){
+        
+            res.json({done: true, result})
+            
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+//Get id for specific username
+app.post('/api/GetId', (req,res) => {
+
+    const Uname = req.body.username;
+    db.query("SELECT U_id FROM Users Where U_name = '" + Uname + "';",
+    async (err, result) => {
+        if(err){
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+
+        if (result.length > 0){
+        
+            res.json({done: true, result})
+            
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+
+//Register a user
+app.post('/api/RegisterUser', (req,res) => {
+
+    const comname = req.body.name;
+    const address = req.body.address;
+    const phone = req.body.phone;
+    const id = req.body.id;
+    const mail = req.body.mail;
+
+    db.query("INSERT INTO companies (Com_name, Com_address, Com_phone,U_id,Com_mail) values (?,?,?,?,?);",
+    [comname, address, phone, id, mail],
+    async (err, result) => {
+        if(err){
+            res.send({err});
+        }
+        else{
+            res.json({done: true})
         }
         
     })
@@ -162,6 +262,7 @@ Select Cabin.Cab_id from Users CROSS JOIN companies ON Users.U_id = companies.U_
 
 */
 
+//To get information about that cabin usage
 app.post('/api/getCabins', (req,res) => {
 
     const id = req.body.id
@@ -185,12 +286,59 @@ app.post('/api/getCabins', (req,res) => {
     
 })
 
+//To get information about all cabins
+app.post('/api/getAdminCabins', (req,res) => {
+
+    const id = req.body.id
+    const cabin = req.body.cabin
+
+    db.query("SELECT Operations.Operation, COUNT(*) as count FROM Users CROSS JOIN companies ON companies.U_id = Users.U_id CROSS JOIN Cabin ON Cabin.Com_id = companies.Com_id CROSS JOIN Operations ON Operations.Cabin_id = Cabin.Cab_id Where Cabin.Cab_id = ? GROUP BY Operations.Operation ",
+    [cabin],
+    async (err, result) => {
+        if(err){
+            res.json({done: false})
+        }
+
+        if (result.length > 0){
+            res.json({done: true, result})
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+
+//To get cabin names and id that user owns
 app.post('/api/GetNumbers', (req,res) => {
 
     const id = req.body.id
 
     db.query("Select Cabin.Cab_id, Cabin.Cab_name from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id Where Users.U_id = ?",
     [id],
+    async (err, result) => {
+        if(err){
+            res.json({done: false})
+        }
+
+        if (result.length > 0){
+            res.json({done: true, result})
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+//To get all the cabins for the admin
+app.post('/api/GetAdminNumbers', (req,res) => {
+
+
+    db.query("Select Cabin.Cab_id, Cabin.Cab_name from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id",
     async (err, result) => {
         if(err){
             res.json({done: false})

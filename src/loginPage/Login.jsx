@@ -80,11 +80,11 @@ const[id, setId] = useState();
                <input className={LoginCss.inputSpace} type="text" id="username" value={Username} onChange={handleTyping} />
                </div>
                <div className={LoginCss.labelArea} >
-               <label  className={LoginCss.inputLabel} id="passwordlabel" > Şifre </label>
+               <label  className={LoginCss.inputLabel} id="passwordlabel"> Şifre </label>
                </div>
        
                <div className={LoginCss.inputArea}>
-               <input className={LoginCss.inputSpace} type="text" id="password"  value={Password}  onChange={handleTyping} />
+               <input className={LoginCss.inputSpace} type="password" id="password"  value={Password}  onChange={handleTyping} />
                </div>
 
               <div className={LoginCss.error} >  {alpha}</div>

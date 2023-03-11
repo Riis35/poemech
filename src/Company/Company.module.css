@@ -54,6 +54,11 @@ p{
     text-align: left;
     padding-left: 20px;
 }
+.newP{
+    text-transform: uppercase;
+    text-align: center;
+    padding-left: 20px;
+}
 
 
 .partialcontainer{
@@ -63,7 +68,7 @@ p{
     margin-top: 5%;
     background-color:whitesmoke;
     
-    margin-bottom: 10%;
+    margin-bottom: 5%;
 }
 .containerinside{
     width: 100%;
@@ -76,7 +81,45 @@ p{
     background-color:silver;
   }
 
-h2{
-    text-align: center;
+.newCompany{
+    background-color: whitesmoke;
+    margin: auto;
+    padding-left: 3%;
+    padding-top: 1%;
+    padding-bottom: 20%;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 20% 40%;
+    grid-gap: 10%;
+  }
+  @font-face {
+    font-family: Gilroy; /*a name to be used later*/
+    src: url('https://poemech.com.tr/fonts/Gilroy-Bold.ttf'); /*URL to font*/
 }
 
+* {
+    font-family: Gilroy sans-serif;
+    font-size: 14px;
+  }
+  .newButton{
+    
+    display: inline-block;
+    outline: 0;
+    border: none;
+    cursor: pointer;
+    line-height: 1.2rem;
+    font-weight: 500;
+    background: #007a5a;
+    padding: 8px 14px 9px;
+    font-size: 15px;
+    border-radius: 4px;
+    color: #fff;
+    height: 36px;
+    transition: all 75ms ease-in-out;
+    
+}
+
+.newButton :hover{
+    box-shadow: 0 1px 4px rgb(0 0 0 / 30%);
+}
