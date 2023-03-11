@@ -77,7 +77,7 @@ export default function Company(props) {
     return (
         <div className= {maincss.container}>
             <div className={maincss.partialcontainer}>
-            <p>Şirketler</p>
+            <p>Şirket Bilgileri</p>
             <div className={maincss["line-1"]}></div>
             <div className={maincss.containerinside}><DataTable
         columns={columns}

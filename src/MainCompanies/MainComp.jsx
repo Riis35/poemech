@@ -10,13 +10,24 @@ export default function Company(props) {
     const [data, setRows] = useState([]);
 
     useEffect(() => {
-        
-        Axios.post(`${process.env.REACT_APP_URL}/api/getCabins`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
+        console.log(props.User)
+        if(props.User === "9"){
+            Axios.post(`${process.env.REACT_APP_URL}/api/getAdminCabins`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
                                   {id: props.User,
                                     cabin: props.id
                                   }).then((response2) => {
                                     setdata(response2.data.result)
                                   })
+        }
+        else{
+            Axios.post(`${process.env.REACT_APP_URL}/api/getCabins`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
+                                  {id: props.User,
+                                    cabin: props.id
+                                  }).then((response2) => {
+                                    setdata(response2.data.result)
+                                  })
+        }
+        
       }, []);
 
 

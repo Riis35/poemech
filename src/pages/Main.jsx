@@ -31,6 +31,18 @@ function Main () {
 })
     }
 
+    const AdminCabins = () => {
+      Axios.post(`${process.env.REACT_APP_URL}/api/GetAdminNumbers`,   //Kullanıcının sahip olduğu kabinlerin ID'leri
+      {id: id
+      }).then((response) => {
+      if(!response.data.done){
+      }
+      else{
+      setnames(response.data.result);
+  }
+})
+    }
+
     const AuthPls = () =>{
         Axios.get(`${process.env.REACT_APP_URL}/api/isAuth`, {
           headers: {
@@ -49,7 +61,13 @@ function Main () {
   
 
  useEffect(() => {
-    Cabins();
+    if(id === "9"){
+      AdminCabins();
+    }
+    else{
+      Cabins();
+    }
+    
   }, []);
 
 
@@ -90,6 +108,7 @@ const reps = [1,2,3]
             <div>
               <Navbar/>
               <div className={maincss.container}>
+              <h2>Uygulanan işlem sayıları</h2>
               {elements} 
               </div>
             </div>
