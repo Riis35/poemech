@@ -12,12 +12,21 @@ export default function Company(props) {
     const [data, setRows] = useState([]);
     const {id} = useParams();
     useEffect(() => {
-        
-        Axios.post(`${process.env.REACT_APP_URL}/api/CompanyInfo`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
+        if(id === "9"){
+            Axios.post(`${process.env.REACT_APP_URL}/api/CompanyAdminInfo`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
                                   {id: id,
                                   }).then((response2) => {
                                     setdata(response2.data.result)
                                   })
+        }
+        else{
+            Axios.post(`${process.env.REACT_APP_URL}/api/CompanyInfo`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
+                                  {id: id,
+                                  }).then((response2) => {
+                                    setdata(response2.data.result)
+                                  })
+        }
+        
       }, []);
 
 
@@ -69,6 +78,9 @@ export default function Company(props) {
                       
                   },
       },
+      {
+
+      }
     
     ]
 
@@ -77,7 +89,7 @@ export default function Company(props) {
     return (
         <div className= {maincss.container}>
             <div className={maincss.partialcontainer}>
-            <p>Şirket Bilgileri</p>
+            <p>Şİrket Bİlgİlerİ</p>
             <div className={maincss["line-1"]}></div>
             <div className={maincss.containerinside}><DataTable
         columns={columns}
@@ -87,6 +99,10 @@ export default function Company(props) {
         backgroundcolor= 'rgba(187, 204, 221, 1)'
     /></div>
             </div>
+            {id === "9" ? <div>
+                <p>Yeni Şirket Formu</p>
+                <input></input>
+            </div> : null}
         </div>
         
         

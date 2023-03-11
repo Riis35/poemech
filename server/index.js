@@ -93,13 +93,38 @@ SELECT companies.Com_name,Com_address,Com_phone,Users.U_mail
 FROM Users
 INNER JOIN companies ON Users.U_id= companies.U_id;
 */
-
+//Detailed Company Info
 app.post('/api/CompanyInfo', (req,res) => {
 
     const id = req.body.id
 
     db.query("SELECT companies.Com_name,Com_address,Com_phone,companies.Com_mail FROM Users INNER JOIN companies ON Users.U_id= companies.U_id Where Users.U_id = ?;",
     [id],
+    async (err, result) => {
+        if(err){
+            res.send({err});
+        }
+
+        if (result.length > 0){
+        
+            res.json({done: true, result})
+            
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+
+//Company Info for admin
+
+app.post('/api/CompanyAdminInfo', (req,res) => {
+
+
+    db.query("SELECT companies.Com_name,Com_address,Com_phone,companies.Com_mail FROM Users INNER JOIN companies ON Users.U_id= companies.U_id;",
     async (err, result) => {
         if(err){
             res.send({err});
