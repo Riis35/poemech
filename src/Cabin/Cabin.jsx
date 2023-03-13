@@ -58,8 +58,8 @@ export default function Company(props) {
                 id:response.data.result[0].Com_id, 
                 }).then((response) => {
                 if(response.data.done){
-                setstatus("Başarılı")
-                getCabins();
+                  setstatus("Başarılı")
+                  getCabins();
               }
               else{
                 setstatus("Kaydedilemedi.");
