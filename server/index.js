@@ -338,7 +338,7 @@ app.post('/api/GetNumbers', (req,res) => {
 app.post('/api/GetAdminNumbers', (req,res) => {
 
 
-    db.query("Select Cabin.Cab_id, Cabin.Cab_name from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id",
+    db.query("Select Cabin.Cab_id, Cabin.Cab_name, companies.Com_name from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id",
     async (err, result) => {
         if(err){
             res.json({done: false})
@@ -354,6 +354,102 @@ app.post('/api/GetAdminNumbers', (req,res) => {
     })
     
 })
+
+//To get information about that cabin information (name, address etc.)
+app.post('/api/getCabinDefault', (req,res) => {
+
+    const id = req.body.id
+
+    db.query("Select Cabin.Cab_id, Cabin.Cab_name, Cabin.Cab_address, companies.Com_name, companies.Com_phone from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id Where Users.U_id = ? ",
+    [id],
+    async (err, result) => {
+        if(err){
+            res.json({done: false})
+        }
+
+        if (result.length > 0){
+            res.json({done: true, result})
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+//To get information about all cabins information (name, address etc.)
+app.post('/api/getAdminCabinDefault', (req,res) => {
+
+    const id = req.body.id
+    const cabin = req.body.cabin
+
+    db.query("Select Cabin.Cab_id, Cabin.Cab_name, Cabin.Cab_address, companies.Com_name, companies.Com_phone from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id",
+    [cabin],
+    async (err, result) => {
+        if(err){
+            res.json({done: false})
+        }
+
+        if (result.length > 0){
+            res.json({done: true, result})
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+
+
+//Get id for specific Companyname
+app.post('/api/GetCompanyId', (req,res) => {
+
+    const Uname = req.body.username;
+    db.query("SELECT Com_id FROM companies Where Com_name = '" + Uname + "';",
+    async (err, result) => {
+        if(err){
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+
+        if (result.length > 0){
+        
+            res.json({done: true, result})
+            
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+
+//Register a cabin
+app.post('/api/RegisterCabin', (req,res) => {
+
+    const name = req.body.name;
+    const address = req.body.address;
+    const id = req.body.id;
+
+
+    db.query("INSERT INTO Cabin (Com_id, Cab_name, Cab_address) values (?,?,?);",
+    [id, name, address],
+    async (err, result) => {
+        if(err){
+            res.send({err});
+        }
+        else{
+            res.json({done: true})
+        }
+        
+    })
+    
+})
+
 
 var options = {
     key: fs.readFileSync(`${process.env.REACT_APP_HTTPS_KEY}`),

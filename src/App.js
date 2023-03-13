@@ -13,6 +13,7 @@ import Signup from './pages/Signup';
 import DeviceList from './components/DeviceList';
 import Login from './loginPage/Login';
 import CompanyInfo from './pages/CompanyInfo';
+import Cabin from './pages/Cabin';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
       <Route path='/main/:id' element={< Main />}></Route>
       <Route path='/cabininfo/:id' element={< CabinInfo />}></Route>
       <Route path='/company/:id' element={< CompanyInfo />}></Route>
+      <Route path='/cabin/:id' element={< Cabin />}></Route>
     </Routes>
   </BrowserRouter>
 

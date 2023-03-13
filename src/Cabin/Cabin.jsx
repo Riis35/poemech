@@ -2,7 +2,7 @@ import React from 'react'
 import DataTable from 'react-data-table-component';
 import Axios from 'axios';
 import { useEffect, useState } from "react";
-import maincss from "./Company.module.css"
+import maincss from "./Cabin.module.css"
 import { BrowserRouter as Router, Routes, Route, Navigate, useParams}
     from 'react-router-dom';
 import axios from 'axios';
@@ -19,7 +19,7 @@ export default function Company(props) {
     const [status, setstatus] = useState();
     const {id} = useParams();
     useEffect(() => {
-        getData();
+        getCabins();
         
       }, []);
 
@@ -31,54 +31,35 @@ export default function Company(props) {
             setRows(datas.map(el => {  //alınan verileri mapleme
                 return {
                     Name: el.Com_name,
-                    Address: el.Com_address,
+                    Cab_name: el.Cab_name,
+                    Address: el.Cab_address,
                     Phone: el.Com_phone,
-                    Mail: el.Com_mail,
                 }  
             })) 
         }
         
     }, [datas])
 
-    const getData = () =>{
-      if(id === "9"){
-        Axios.post(`${process.env.REACT_APP_URL}/api/CompanyAdminInfo`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
-                              {id: id,
-                              }).then((response2) => {
-                                setdata(response2.data.result)
-                              })
-    }
-    else{
-        Axios.post(`${process.env.REACT_APP_URL}/api/CompanyInfo`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
-                              {id: id,
-                              }).then((response2) => {
-                                setdata(response2.data.result)
-                              })
-    }
-    }
-
     const register = () => {
 
-            const user = newCompanyName;
-            const address = newCompanyAddress;
-            const phone = newCompanyPhone;
-            const mail = newCompanyMail;
+            const Cabname = newCompanyAddress;
+            const address = newCompanyPhone;
 
-            const username = newCompanyUser;
+            const username = newCompanyName;
     
     
-            axios.post(`${process.env.REACT_APP_URL}/api/GetId`,
+            axios.post(`${process.env.REACT_APP_URL}/api/GetCompanyId`,
             {username: username,}).then((response) => {
               if(response.data.done){
-                axios.post(`${process.env.REACT_APP_URL}/api/RegisterUser`,
-                {name: user,
+                axios.post(`${process.env.REACT_APP_URL}/api/RegisterCabin`,
+                {
+                name:Cabname,
                 address:address,
-                phone:phone,
-                id:response.data.result[0].U_id, 
-                mail:mail}).then((response) => {
+                id:response.data.result[0].Com_id, 
+                }).then((response) => {
                 if(response.data.done){
                 setstatus("Başarılı")
-                getData();
+                getCabins();
               }
               else{
                 setstatus("Kaydedilemedi.");
@@ -87,7 +68,7 @@ export default function Company(props) {
             })
               }
               else{
-                setstatus("Böyle bir kullanıcı yok.");
+                setstatus("Böyle bir şirket yok.");
               }
               
             })
@@ -95,32 +76,50 @@ export default function Company(props) {
               
             });
     }
+
+    const getCabins = () => {
+        if(id === "9"){
+            Axios.post(`${process.env.REACT_APP_URL}/api/getAdminCabinDefault`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
+                                  {id: id,
+                                  }).then((response2) => {
+                                    setdata(response2.data.result)
+                                  })
+        }
+        else{
+            Axios.post(`${process.env.REACT_APP_URL}/api/getCabinDefault`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
+                                  {id: id,
+                                  }).then((response2) => {
+                                    setdata(response2.data.result)
+                                  })
+        }
+    }
     
     const columns = [{
         name: 'Şirket Adı',
         selector: row => row.Name,
         compact: false,
+        sortable: true,
         style: {
             
         },
     },
     {
-      name: 'Adres',
-      selector: row => row.Address,
+      name: 'Kabin Adı',
+      selector: row => row.Cab_name,
       style: {
         			
         		},
     },
     {
-        name: 'Telefon',
-        selector: row => row.Phone,
+        name: 'Kabin Adresi',
+        selector: row => row.Address,
         style: {
                       
                   },
       },
       {
-        name: 'Mail Adresi',
-        selector: row => row.Mail,
+        name: 'Şirket Telefonu',
+        selector: row => row.Phone,
         style: {
                       
                   },
@@ -147,18 +146,14 @@ export default function Company(props) {
     /></div>
             </div>
             {id === "9" ? <div className={maincss.newCompany}>
-                <p className={maincss.newP}>Yenİ Şİrket Formu</p>
+                <p className={maincss.newP}>Yenİ Kabİn Formu</p>
                 <div className={maincss.grid}>
                 <label for="name">Şirket Adı: </label>
                 <input type="text" id="name" onChange={(e) => setnewCompanyName(e.target.value)}/>
-                <label for="address">Adres: </label>
-                <input type="text" id="address" onChange={(e) => setnewCompanyAddress(e.target.value)}/>
-                <label for="phone">Telefon: </label>
-                <input type="phone" id="phone" onChange={(e) => setnewCompanyPhone(e.target.value)}/>
-                <label for="username">Kullanıcı Adı: </label>
-                <input type="text" id="username" onChange={(e) => setnewCompanyUser(e.target.value)}/>
-                <label for="mail">Mail: </label>
-                <input type="email" id="mail" onChange={(e) => setnewCompanyMail(e.target.value)}/>
+                <label for="Cabname">Kabin Adı: </label>
+                <input type="text" id="Cabname" onChange={(e) => setnewCompanyAddress(e.target.value)}/>
+                <label for="Address">Kabin Adresi: </label>
+                <input type="text" id="Address" onChange={(e) => setnewCompanyPhone(e.target.value)}/>
                 <p>{status}</p>
                 <button className={maincss.newButton} onClick={register}>Kaydet</button>
                 </div>
