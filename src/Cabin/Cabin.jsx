@@ -6,6 +6,7 @@ import maincss from "./Cabin.module.css"
 import { BrowserRouter as Router, Routes, Route, Navigate, useParams}
     from 'react-router-dom';
 import axios from 'axios';
+import differenceBy from 'lodash/differenceBy';
 
 
 export default function Company(props) {  
@@ -18,6 +19,7 @@ export default function Company(props) {
     const [newCompanyMail, setnewCompanyMail] = useState();
     const [status, setstatus] = useState();
     const {id} = useParams();
+    const [selectedRows, setSelectedRows] = React.useState([]);
     useEffect(() => {
         getCabins();
         
@@ -39,6 +41,10 @@ export default function Company(props) {
         }
         
     }, [datas])
+
+    const handleRowSelected = React.useCallback(state => {
+      setSelectedRows(state.selectedRows);
+    }, []);
 
     const register = () => {
 
@@ -93,6 +99,23 @@ export default function Company(props) {
                                   })
         }
     }
+
+    const deleteCabin = () =>{
+
+      const name = selectedRows[0].Cab_name;
+
+      Axios.post(`${process.env.REACT_APP_URL}/api/DeleteCabin`,   //Şirketi sil
+                              {name: name,
+                              }).then((response2) => {
+                                if(response2.data.done){
+                                  setdata(differenceBy(datas, selectedRows, 'Cab_name'));
+                                }
+                                else{
+                                  console.log("olduramadık")
+                                }
+                              })
+      
+    }
     
     const columns = [{
         name: 'Şirket Adı',
@@ -135,7 +158,7 @@ export default function Company(props) {
     return (
         <div className= {maincss.container}>
             <div className={maincss.partialcontainer}>
-            <p >Şİrket Bİlgİlerİ</p>
+            <p >Kabİn Bİlgİlerİ</p>
             <div className={maincss["line-1"]}></div>
             <div className={maincss.containerinside}><DataTable
         columns={columns}
@@ -143,7 +166,13 @@ export default function Company(props) {
         highlightOnHover= {true}
         striped = {true}
         backgroundcolor= 'rgba(187, 204, 221, 1)'
-    /></div>
+        selectableRows = {id === "9"}
+        selectableRowsHighlight = {id === "9"}
+        onSelectedRowsChange={handleRowSelected}
+        selectableRowsSingle = {true}
+    />
+     {id === "9" ? <button className={maincss.newButton} onClick={deleteCabin}>Sil</button> : null}
+    </div>
             </div>
             {id === "9" ? <div className={maincss.newCompany}>
                 <p className={maincss.newP}>Yenİ Kabİn Formu</p>

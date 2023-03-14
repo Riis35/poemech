@@ -451,6 +451,47 @@ app.post('/api/RegisterCabin', (req,res) => {
 })
 
 
+//Delete Company
+app.post('/api/DeleteCompany', (req,res) => {
+
+    const name = req.body.name;
+
+
+    db.query("DELETE CabinInfo.*, Cabin.* ,companies.* FROM companies LEFT JOIN Cabin ON Cabin.Com_id = companies.Com_id LEFT JOIN CabinInfo ON CabinInfo.Cab_id = Cabin.Cab_id WHERE companies.Com_name = '" + name + "';",
+    [name],
+    async (err, result) => {
+        if(err){
+            res.json({done: false})
+        }
+        else{
+            res.json({done: true})
+        }
+        
+    })
+    
+})
+
+
+//Delete Cabin
+app.post('/api/DeleteCabin', (req,res) => {
+
+    const name = req.body.name;
+
+
+    db.query("DELETE CabinInfo.*, Cabin.* FROM Cabin LEFT JOIN CabinInfo ON Cabin.Cab_id = CabinInfo.Cab_id WHERE Cabin.Cab_name = '" + name + "';",
+    [name],
+    async (err, result) => {
+        if(err){
+            res.json({done: false})
+        }
+        else{
+            res.json({done: true})
+        }
+        
+    })
+    
+})
+
 
 var options = {
     key: fs.readFileSync(`${process.env.REACT_APP_HTTPS_KEY}`),
@@ -459,3 +500,4 @@ var options = {
 
 http.createServer(app).listen(process.env.REACT_APP_HTTP_PORT)
 https.createServer(options, app).listen(process.env.REACT_APP_HTTPS_PORT)
+

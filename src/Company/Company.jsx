@@ -6,6 +6,7 @@ import maincss from "./Company.module.css"
 import { BrowserRouter as Router, Routes, Route, Navigate, useParams}
     from 'react-router-dom';
 import axios from 'axios';
+import differenceBy from 'lodash/differenceBy';
 
 
 export default function Company(props) {  
@@ -18,11 +19,16 @@ export default function Company(props) {
     const [newCompanyMail, setnewCompanyMail] = useState();
     const [status, setstatus] = useState();
     const {id} = useParams();
+    const [selectedRows, setSelectedRows] = React.useState([]);
     useEffect(() => {
         getData();
         
       }, []);
 
+
+    const handleRowSelected = React.useCallback(state => {
+        		setSelectedRows(state.selectedRows);
+        	}, []);
 
     useEffect(() => {
         if(datas === undefined){
@@ -30,7 +36,7 @@ export default function Company(props) {
         else{
             setRows(datas.map(el => {  //alınan verileri mapleme
                 return {
-                    Name: el.Com_name,
+                    Com_name: el.Com_name,
                     Address: el.Com_address,
                     Phone: el.Com_phone,
                     Mail: el.Com_mail,
@@ -55,6 +61,23 @@ export default function Company(props) {
                                 setdata(response2.data.result)
                               })
     }
+    }
+
+    const deleteCompany = () =>{
+
+      const name = selectedRows[0].Com_name;
+
+      Axios.post(`${process.env.REACT_APP_URL}/api/DeleteCompany`,   //Şirketi sil
+                              {name: name,
+                              }).then((response2) => {
+                                if(response2.data.done){
+                                  setdata(differenceBy(datas, selectedRows, 'Com_name'));
+                                }
+                                else{
+                                  console.log("olduramadık")
+                                }
+                              })
+      
     }
 
     const register = () => {
@@ -98,7 +121,7 @@ export default function Company(props) {
     
     const columns = [{
         name: 'Şirket Adı',
-        selector: row => row.Name,
+        selector: row => row.Com_name,
         compact: false,
         style: {
             
@@ -143,8 +166,14 @@ export default function Company(props) {
         data={data}
         highlightOnHover= {true}
         striped = {true}
-        backgroundcolor= 'rgba(187, 204, 221, 1)'
-    /></div>
+        selectableRows = {id === "9"}
+        selectableRowsHighlight = {id === "9"}
+        onSelectedRowsChange={handleRowSelected}
+        selectableRowsSingle = {true}
+    />
+    {id === "9" ? <button className={maincss.newButton} onClick={deleteCompany}>Sil</button> : null}
+    
+    </div>
             </div>
             {id === "9" ? <div className={maincss.newCompany}>
                 <p className={maincss.newP}>Yenİ Şİrket Formu</p>
