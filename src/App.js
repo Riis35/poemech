@@ -14,6 +14,7 @@ import DeviceList from './components/DeviceList';
 import Login from './loginPage/Login';
 import CompanyInfo from './pages/CompanyInfo';
 import Cabin from './pages/Cabin';
+import Operations from './pages/Operations';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
       <Route path='/cabininfo/:id' element={< CabinInfo />}></Route>
       <Route path='/company/:id' element={< CompanyInfo />}></Route>
       <Route path='/cabin/:id' element={< Cabin />}></Route>
+      <Route path='/card/:id' element={< Operations />}></Route>
     </Routes>
   </BrowserRouter>
 

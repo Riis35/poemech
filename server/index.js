@@ -20,7 +20,9 @@ const db = mysql.createPool({
     host: "localhost",
     port: process.env.REACT_APP_DB_PORT,
     password: `${process.env.REACT_APP_DB_PASS}`,
-    database: "Abyssos"
+    database: "Abyssos",
+    timezone : "+00:00",
+    dateStrings: true,
 });
 
 app.post('/api/register', (req,res) => {
@@ -486,6 +488,50 @@ app.post('/api/DeleteCabin', (req,res) => {
         }
         else{
             res.json({done: true})
+        }
+        
+    })
+    
+})
+
+
+//To get Operations
+app.post('/api/getOperations', (req,res) => {
+
+    const id = req.body.id
+
+    db.query("Select Cabin.Cab_name, companies.Com_name, Operations.Date, Operations.Card_id, Operations.Operation from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id CROSS JOIN Operations ON Cabin.Cab_id = Operations.Cabin_id Where Users.U_id = ? ",
+    [id],
+    async (err, result) => {
+        if(err){
+            res.json({done: false})
+        }
+
+        if (result.length > 0){
+            res.json({done: true, result})
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+//To get operations Admin
+app.post('/api/getAdminOperations', (req,res) => {
+
+    db.query("Select Cabin.Cab_name, companies.Com_name, Operations.Date, Operations.Card_id, Operations.Operation from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id CROSS JOIN Operations ON Cabin.Cab_id = Operations.Cabin_id",
+    async (err, result) => {
+        if(err){
+            res.json({done: false})
+        }
+
+        if (result.length > 0){
+            res.json({done: true, result})
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
         }
         
     })
