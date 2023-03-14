@@ -539,6 +539,29 @@ app.post('/api/getAdminOperations', (req,res) => {
 })
 
 
+//To get Statistics 
+
+app.post('/api/getForDoughnut', (req,res) => {
+    const id = req.body.id;
+
+    db.query("SELECT Operations.Operation, COUNT(*) as count FROM Users CROSS JOIN companies ON companies.U_id = Users.U_id CROSS JOIN Cabin ON Cabin.Com_id = companies.Com_id CROSS JOIN Operations ON Operations.Cabin_id = Cabin.Cab_id Where Users.U_id = ? GROUP BY Operations.Operation",
+    [id],
+    async (err, result) => {
+        if(err){
+            res.json({done: false})
+        }
+
+        if (result.length > 0){
+            res.json({done: true, result})
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
 var options = {
     key: fs.readFileSync(`${process.env.REACT_APP_HTTPS_KEY}`),
     cert: fs.readFileSync(`${process.env.REACT_APP_HTTPS_CERT}`)

@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useParams}
     from 'react-router-dom';
 import axios from 'axios';
 import differenceBy from 'lodash/differenceBy';
+import Donut from "./DonutChart.tsx"
 
 
 export default function Company(props) {  
@@ -57,7 +58,6 @@ export default function Company(props) {
                               {id: id,
                               }).then((response2) => {
                                 setdata(response2.data.result)
-                                console.log(response2.data.result)
                               })
     }
     else{
@@ -118,6 +118,10 @@ export default function Company(props) {
 
     return (
         <div className= {maincss.container}>
+            <div className={maincss.donut}>
+           {id === "9" ? null : <Donut data = {data} id = {id}></Donut> }
+            </div>
+            
             <div className={maincss.partialcontainer}>
             <p >İşlemler</p>
             <div className={maincss["line-1"]}></div>
