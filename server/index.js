@@ -20,7 +20,9 @@ const db = mysql.createPool({
     host: "localhost",
     port: process.env.REACT_APP_DB_PORT,
     password: `${process.env.REACT_APP_DB_PASS}`,
-    database: "Abyssos"
+    database: "Abyssos",
+    timezone : "+00:00",
+    dateStrings: true,
 });
 
 app.post('/api/register', (req,res) => {
@@ -338,7 +340,212 @@ app.post('/api/GetNumbers', (req,res) => {
 app.post('/api/GetAdminNumbers', (req,res) => {
 
 
-    db.query("Select Cabin.Cab_id, Cabin.Cab_name from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id",
+    db.query("Select Cabin.Cab_id, Cabin.Cab_name, companies.Com_name from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id",
+    async (err, result) => {
+        if(err){
+            res.json({done: false})
+        }
+
+        if (result.length > 0){
+            res.json({done: true, result})
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+//To get information about that cabin information (name, address etc.)
+app.post('/api/getCabinDefault', (req,res) => {
+
+    const id = req.body.id
+
+    db.query("Select Cabin.Cab_id, Cabin.Cab_name, Cabin.Cab_address, companies.Com_name, companies.Com_phone from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id Where Users.U_id = ? ",
+    [id],
+    async (err, result) => {
+        if(err){
+            res.json({done: false})
+        }
+
+        if (result.length > 0){
+            res.json({done: true, result})
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+//To get information about all cabins information (name, address etc.)
+app.post('/api/getAdminCabinDefault', (req,res) => {
+
+    const id = req.body.id
+    const cabin = req.body.cabin
+
+    db.query("Select Cabin.Cab_id, Cabin.Cab_name, Cabin.Cab_address, companies.Com_name, companies.Com_phone from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id",
+    [cabin],
+    async (err, result) => {
+        if(err){
+            res.json({done: false})
+        }
+
+        if (result.length > 0){
+            res.json({done: true, result})
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+
+
+//Get id for specific Companyname
+app.post('/api/GetCompanyId', (req,res) => {
+
+    const Uname = req.body.username;
+    db.query("SELECT Com_id FROM companies Where Com_name = '" + Uname + "';",
+    async (err, result) => {
+        if(err){
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+
+        if (result.length > 0){
+        
+            res.json({done: true, result})
+            
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+
+//Register a cabin
+app.post('/api/RegisterCabin', (req,res) => {
+
+    const name = req.body.name;
+    const address = req.body.address;
+    const id = req.body.id;
+
+
+    db.query("INSERT INTO Cabin (Com_id, Cab_name, Cab_address) values (?,?,?);",
+    [id, name, address],
+    async (err, result) => {
+        if(err){
+            res.send({err});
+        }
+        else{
+            res.json({done: true})
+        }
+        
+    })
+    
+})
+
+
+//Delete Company
+app.post('/api/DeleteCompany', (req,res) => {
+
+    const name = req.body.name;
+
+
+    db.query("DELETE CabinInfo.*, Cabin.* ,companies.* FROM companies LEFT JOIN Cabin ON Cabin.Com_id = companies.Com_id LEFT JOIN CabinInfo ON CabinInfo.Cab_id = Cabin.Cab_id WHERE companies.Com_name = '" + name + "';",
+    [name],
+    async (err, result) => {
+        if(err){
+            res.json({done: false})
+        }
+        else{
+            res.json({done: true})
+        }
+        
+    })
+    
+})
+
+
+//Delete Cabin
+app.post('/api/DeleteCabin', (req,res) => {
+
+    const name = req.body.name;
+
+
+    db.query("DELETE CabinInfo.*, Cabin.* FROM Cabin LEFT JOIN CabinInfo ON Cabin.Cab_id = CabinInfo.Cab_id WHERE Cabin.Cab_name = '" + name + "';",
+    [name],
+    async (err, result) => {
+        if(err){
+            res.json({done: false})
+        }
+        else{
+            res.json({done: true})
+        }
+        
+    })
+    
+})
+
+
+//To get Operations
+app.post('/api/getOperations', (req,res) => {
+
+    const id = req.body.id
+
+    db.query("Select Cabin.Cab_name, companies.Com_name, Operations.Date, Operations.Card_id, Operations.Operation from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id CROSS JOIN Operations ON Cabin.Cab_id = Operations.Cabin_id Where Users.U_id = ? ",
+    [id],
+    async (err, result) => {
+        if(err){
+            res.json({done: false})
+        }
+
+        if (result.length > 0){
+            res.json({done: true, result})
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+//To get operations Admin
+app.post('/api/getAdminOperations', (req,res) => {
+
+    db.query("Select Cabin.Cab_name, companies.Com_name, Operations.Date, Operations.Card_id, Operations.Operation from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id CROSS JOIN Operations ON Cabin.Cab_id = Operations.Cabin_id",
+    async (err, result) => {
+        if(err){
+            res.json({done: false})
+        }
+
+        if (result.length > 0){
+            res.json({done: true, result})
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+
+//To get Statistics 
+
+app.post('/api/getForDoughnut', (req,res) => {
+    const id = req.body.id;
+
+    db.query("SELECT Operations.Operation, COUNT(*) as count FROM Users CROSS JOIN companies ON companies.U_id = Users.U_id CROSS JOIN Cabin ON Cabin.Com_id = companies.Com_id CROSS JOIN Operations ON Operations.Cabin_id = Cabin.Cab_id Where Users.U_id = ? GROUP BY Operations.Operation",
+    [id],
     async (err, result) => {
         if(err){
             res.json({done: false})
@@ -362,3 +569,4 @@ var options = {
 
 http.createServer(app).listen(process.env.REACT_APP_HTTP_PORT)
 https.createServer(options, app).listen(process.env.REACT_APP_HTTPS_PORT)
+

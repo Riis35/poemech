@@ -46,15 +46,9 @@ export default function Navbar() {
       cName: ["nav-text"]
     },
     {
-      title: "Kart Bilgileri",
+      title: "Kullanım",
       path: `/card`,
       icon: <FaIcons.FaIdCard />,
-      cName: ["nav-text"]
-    },
-    {
-      title: "Raporlar",
-      path: `/reports`,
-      icon: <IoIcons.IoMdStats />,
       cName: ["nav-text"]
     },
     {
