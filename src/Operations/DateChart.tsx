@@ -1,0 +1,131 @@
+import React from 'react';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
+import { useEffect, useState } from "react";
+import Axios from 'axios';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+export const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'top' as const,
+    },
+    title: {
+      display: true,
+      text: 'Günlere Göre Kullanım',
+    },
+  },
+};
+
+//var utc = new Date().toJSON().slice(0,10).replace(/-/g,'-');
+
+export default function Chart(props) {
+    var today = new Date();
+    const[DbData, setDbData] = useState<any[]>([]);
+    var Dates : string[] = []
+    var count : number[] = []
+
+    const[data, setData] = useState({
+        Dates,
+        datasets: [
+          {
+            label: 'Kullanım Sayıları',
+            data: count,
+            borderColor: 'rgb(255, 99, 132, 1)',
+            backgroundColor: 'rgba(255, 99, 132, 1)',
+          },
+        ],
+      })
+
+    
+
+    const minusTenDays = () => {
+        
+    }
+
+    const getData = () => {
+        const today = Dates[9];
+        Axios.post(`${process.env.REACT_APP_URL}/api/getForBar`,   //Alınan ID'lere göre gün bazında toplam işlem sayıları
+                              {id: props.id,
+                                date: today,
+                              }).then((response2) => {
+                                if(response2.data.done){
+                                    setDbData(response2.data.result)
+                                    console.log(response2.data.result)
+                                }
+                                
+                              })
+    }
+
+    useEffect(() => {
+        if(DbData.length >0){
+
+        console.log("buralardayım")
+        for (let index = 0; index < DbData.length; index++) {
+            for (let index1 = 0; index1 < 9; index1++) {
+                if(DbData[index].OpDate === Dates[index1]){
+                    count[index1] = DbData[index].OpDate;
+                    
+                }
+                
+            }
+            
+        }
+
+        for (let index = 1; index < 10; index++) {
+            var dummyDate = new Date();
+            dummyDate.setDate(today.getDate() - index);
+            Dates.push(dummyDate.toJSON().slice(0,10).replace(/-/g,'-'))
+            count.push(0);
+        }
+        
+        console.log(Dates)
+        console.log(count)
+        setData(
+            {
+                Dates,
+                datasets: [
+                  {
+                    label: 'Kullanım Sayısı',
+                    data: count,
+                    borderColor: 'rgb(255, 99, 132)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                  },
+                ],
+              }
+        )
+        }
+        
+      }, [DbData])
+
+
+    useEffect(() => {
+        console.log("buralardayım boş")
+        minusTenDays();
+        getData();
+    }, [])
+    
+
+
+
+  return <Line options={options} data={data} />;
+}

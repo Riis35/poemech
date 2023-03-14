@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useParams}
 import axios from 'axios';
 import differenceBy from 'lodash/differenceBy';
 import Donut from "./DonutChart.tsx"
+import Chart from './DateChart.tsx';
 
 
 export default function Company(props) {  
@@ -69,7 +70,7 @@ export default function Company(props) {
     }
     }
 
-    
+
     const columns = [{
         name: 'Şirket Adı',
         selector: row => row.Com_name,
@@ -119,7 +120,10 @@ export default function Company(props) {
     return (
         <div className= {maincss.container}>
             <div className={maincss.donut}>
-           {id === "9" ? null : <Donut data = {data} id = {id}></Donut> }
+           {id === "9" ? null : <Donut id = {id}></Donut> }
+            </div>
+            <div>
+            {id === "9" ? null : <Chart id = {id}></Chart> }
             </div>
             
             <div className={maincss.partialcontainer}>
