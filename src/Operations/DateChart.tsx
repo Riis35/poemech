@@ -25,6 +25,7 @@ ChartJS.register(
 
 export const options = {
   responsive: true,
+    maintainAspectRatio: false,
   plugins: {
     legend: {
       position: 'top' as const,
@@ -41,11 +42,11 @@ export const options = {
 export default function Chart(props) {
     var today = new Date();
     const[DbData, setDbData] = useState<any[]>([]);
-    var Dates : string[] = []
+    var labels : string[] = []
     var count : number[] = []
 
     const[data, setData] = useState({
-        Dates,
+      labels,
         datasets: [
           {
             label: 'Kullanım Sayıları',
@@ -63,14 +64,13 @@ export default function Chart(props) {
     }
 
     const getData = () => {
-        const today = Dates[9];
+        const today = labels[9];
         Axios.post(`${process.env.REACT_APP_URL}/api/getForBar`,   //Alınan ID'lere göre gün bazında toplam işlem sayıları
                               {id: props.id,
                                 date: today,
                               }).then((response2) => {
                                 if(response2.data.done){
                                     setDbData(response2.data.result)
-                                    console.log(response2.data.result)
                                 }
                                 
                               })
@@ -79,11 +79,17 @@ export default function Chart(props) {
     useEffect(() => {
         if(DbData.length >0){
 
-        console.log("buralardayım")
+        for (let index = 1; index < 10; index++) {
+          var dummyDate = new Date();
+          dummyDate.setDate(today.getDate() - index);
+          labels.push(dummyDate.toJSON().slice(0,10).replace(/-/g,'-'))
+          count.push(0);
+      }
+
         for (let index = 0; index < DbData.length; index++) {
             for (let index1 = 0; index1 < 9; index1++) {
-                if(DbData[index].OpDate === Dates[index1]){
-                    count[index1] = DbData[index].OpDate;
+                if(DbData[index].OpDate === labels[index1]){
+                    count[index1] = DbData[index].count;
                     
                 }
                 
@@ -91,18 +97,10 @@ export default function Chart(props) {
             
         }
 
-        for (let index = 1; index < 10; index++) {
-            var dummyDate = new Date();
-            dummyDate.setDate(today.getDate() - index);
-            Dates.push(dummyDate.toJSON().slice(0,10).replace(/-/g,'-'))
-            count.push(0);
-        }
-        
-        console.log(Dates)
-        console.log(count)
+      
         setData(
             {
-                Dates,
+              labels,
                 datasets: [
                   {
                     label: 'Kullanım Sayısı',
@@ -119,7 +117,6 @@ export default function Chart(props) {
 
 
     useEffect(() => {
-        console.log("buralardayım boş")
         minusTenDays();
         getData();
     }, [])
