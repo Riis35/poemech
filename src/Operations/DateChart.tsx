@@ -79,7 +79,7 @@ export default function Chart(props) {
     useEffect(() => {
         if(DbData.length >0){
 
-        for (let index = 1; index < 10; index++) {
+        for (let index = 8; index >= 0; index--) {
           var dummyDate = new Date();
           dummyDate.setDate(today.getDate() - index);
           labels.push(dummyDate.toJSON().slice(0,10).replace(/-/g,'-'))

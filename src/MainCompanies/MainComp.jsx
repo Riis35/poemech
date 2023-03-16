@@ -67,7 +67,7 @@ export default function Company(props) {
     //<div className={maincss["line-1"]}></div>
     return (
         <div className={maincss.partialcontainer}>
-            {props.User === "9" ? <p>{props.company} - {props.name}</p> : <p>{props.name}</p>}
+            {props.User === "9" ? <p>{props.company} - {props.name} : Cihaz Numarası: {props.id}</p> : <p>{props.name}: Cihaz Numarası: {props.id}</p>}
             <div className={maincss["line-1"]}></div>
             <div className={maincss.containerinside}><DataTable
         columns={columns}
