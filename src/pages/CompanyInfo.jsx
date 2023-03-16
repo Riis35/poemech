@@ -7,11 +7,12 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useParams}
 export default function CompanyInfo() {
 
   const {id} = useParams();
+  const role = localStorage.getItem("top")
 
   return (
     <div>
         <Navbar />
-        <Company id = {id}/>
+        <Company id = {id} role = {role}/>
     </div>
   )
 }

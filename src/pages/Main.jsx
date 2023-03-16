@@ -16,6 +16,7 @@ function Main () {
     
     const {id} = useParams();
     const [cabinNames, setnames] = useState(); //Kabin isimlerini tutan array
+    const role = localStorage.getItem("top");
 
 
     const Cabins = () => {
@@ -61,7 +62,7 @@ function Main () {
   
 
  useEffect(() => {
-    if(id === "15"){
+    if(role === "0"){
       AdminCabins();
     }
     else{
@@ -89,7 +90,7 @@ function Main () {
     var elements=[];
         for(var i=0;i<cabinNames.length;i++){
              // push the component to elements!
-            elements.push(<MainComp name = {cabinNames[i].Cab_name} id = {cabinNames[i].Cab_id} User = {id} company = {id === "15" ? cabinNames[i].Com_name : null}/>);
+            elements.push(<MainComp name = {cabinNames[i].Cab_name} id = {cabinNames[i].Cab_id} User = {id} company = {role === "0" ? cabinNames[i].Com_name : null}/>);
         }
 
 

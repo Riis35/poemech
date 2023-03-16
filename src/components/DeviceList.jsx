@@ -18,9 +18,10 @@ import axios from 'axios';
 export default function DeviceList(id) {
 
   const realid = id.id;
+  const role = localStorage.getItem("top")
 
   const getDevice = () =>{
-    if(realid === "15"){
+    if(role === "0"){
       axios.post(`${process.env.REACT_APP_URL}/api/CabinAdminInfo`,
       {id: realid,
       }).then((response) => {
@@ -32,7 +33,7 @@ export default function DeviceList(id) {
         var dummy = [];
         var dummyId = [];
         for (let i = 0; i < response.data.result.length; i++) {
-          dummy[i] = response.data.result[i].Cab_name;
+          dummy[i] = response.data.result[i].Cab_name + " - Cihaz No: " + response.data.result[i].Cab_id;
           dummyId[i] = response.data.result[i].Cab_id;
         }
         setDevArr(dummy);
@@ -52,7 +53,7 @@ export default function DeviceList(id) {
         var dummy = [];
         var dummyId = [];
         for (let i = 0; i < response.data.result.length; i++) {
-          dummy[i] = response.data.result[i].Cab_name;
+          dummy[i] = response.data.result[i].Cab_name + " - Cihaz No: " + response.data.result[i].Cab_id;
           dummyId[i] = response.data.result[i].Cab_id;
         }
         setDevArr(dummy);

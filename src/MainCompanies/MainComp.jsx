@@ -8,9 +8,10 @@ import maincss from "../pages/Main.module.css"
 export default function Company(props) {  
     const [datas, setdata] = useState([]);
     const [data, setRows] = useState([]);
+    const role = localStorage.getItem("top");
 
     useEffect(() => {
-        if(props.User === "15"){
+        if(role === "0"){
             Axios.post(`${process.env.REACT_APP_URL}/api/getAdminCabins`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
                                   {id: props.User,
                                     cabin: props.id
@@ -66,7 +67,7 @@ export default function Company(props) {
     //<div className={maincss["line-1"]}></div>
     return (
         <div className={maincss.partialcontainer}>
-            {props.User === "15" ? <p>{props.company} - {props.name} : Cİhaz Numarası: {props.id}</p> : <p>{props.name}: Cİhaz Numarası: {props.id}</p>}
+            {role === "0" ? <p>{props.company} - {props.name} : Cİhaz Numarası: {props.id}</p> : <p>{props.name}: Cİhaz Numarası: {props.id}</p>}
             <div className={maincss["line-1"]}></div>
             <div className={maincss.containerinside}><DataTable
         columns={columns}

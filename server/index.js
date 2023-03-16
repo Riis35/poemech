@@ -263,7 +263,7 @@ app.post('/api/login', (req,res) => {
                 
                 const id = result[0].U_id;
                 const token = jwt.sign({id}, sec, {expiresIn: "2 days",});
-                res.json({auth: true, token: token, id: result[0].U_id, uname: result[0].U_name})
+                res.json({auth: true, token: token, id: result[0].U_id, uname: result[0].U_name, role: result[0].U_role})
             }
             else{
                 res.json({auth: false, message: "Hatalı Şifre"})

@@ -18,6 +18,7 @@ import "./navbar.css";
 export default function Navbar() {
   const [sidebar, setSidebar] = useState(false);
   const {id} =  useParams();
+  const role = localStorage.getItem("top");
   
   const SidebarData = [
     {
@@ -66,6 +67,7 @@ export default function Navbar() {
   
   const logout = () =>{
     localStorage.removeItem("token");
+    localStorage.removeItem("top");
   };
 
 
@@ -105,7 +107,7 @@ export default function Navbar() {
                 );
               }
               else{
-                if(id === "15"){
+                if(role === "0"){
                   return (
                     <li key={index} className={item.cName} onClick = {item.title === "Çıkış" ? logout : null}>
                       <Link to={item.title === "Çıkış" ? item.path : item.path+"/"+id }>

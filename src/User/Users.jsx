@@ -19,6 +19,8 @@ export default function Company(props) {
     const [selectedRows, setSelectedRows] = useState([]);
     const [status, setstatus] = useState();
     const {id} = useParams();
+    const role = localStorage.getItem("top");
+
     useEffect(() => {
         getData();
         
@@ -67,7 +69,7 @@ export default function Company(props) {
       };
 
     const getData = () =>{
-      if(id === "15"){
+      if(role === "0"){
         Axios.post(`${process.env.REACT_APP_URL}/api/getAdminUsers`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
                               {
                               }).then((response2) => {
@@ -133,8 +135,8 @@ export default function Company(props) {
         highlightOnHover= {true}
         striped = {true}
         defaultSortFieldId={1}
-        selectableRows = {id === "15"}
-        selectableRowsHighlight = {id === "15"}
+        selectableRows = {role === "0"}
+        selectableRowsHighlight = {role === "0"}
         onSelectedRowsChange={handleRowSelected}
         selectableRowsSingle = {true}
     />

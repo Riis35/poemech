@@ -20,6 +20,8 @@ export default function Company(props) {
     const [status, setstatus] = useState();
     const {id} = useParams();
     const [selectedRows, setSelectedRows] = React.useState([]);
+    const role = localStorage.getItem("top")
+
     useEffect(() => {
         getData();
         
@@ -47,7 +49,7 @@ export default function Company(props) {
     }, [datas])
 
     const getData = () =>{
-      if(id === "15"){
+      if(role === "0"){
         Axios.post(`${process.env.REACT_APP_URL}/api/CompanyAdminInfo`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
                               {id: id,
                               }).then((response2) => {
@@ -170,16 +172,16 @@ export default function Company(props) {
         data={data}
         highlightOnHover= {true}
         striped = {true}
-        selectableRows = {id === "15"}
-        selectableRowsHighlight = {id === "15"}
+        selectableRows = {role === "0"}
+        selectableRowsHighlight = {role === "0"}
         onSelectedRowsChange={handleRowSelected}
         selectableRowsSingle = {true}
     />
-    {id === "15" ? <button className={maincss.newButton} onClick={deleteCompany}>Sil</button> : null}
+    {role === "0" ? <button className={maincss.newButton} onClick={deleteCompany}>Sil</button> : null}
     
     </div>
             </div>
-            {id === "15" ? <div className={maincss.newCompany}>
+            {role === "0" ? <div className={maincss.newCompany}>
                 <p className={maincss.newP}>Yenİ Şİrket Formu</p>
                 <div className={maincss.grid}>
                 <label for="name">Şirket Adı: </label>

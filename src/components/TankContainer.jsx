@@ -15,9 +15,10 @@ export default function TankContainer(props) {
   const [isCollapse, setCollapse] = useState(isCollapsed === "no" ? false : true)
 
   const {id} = useParams();
+  const role = localStorage.getItem("top")
 
    useEffect(() => {
-    if(id === "15"){
+    if(role === "0"){
       axios.post(`${process.env.REACT_APP_URL}/api/CabinAdminInfo`,
         {id: id,
         }).then((response) => {

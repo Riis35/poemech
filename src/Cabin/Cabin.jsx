@@ -20,6 +20,8 @@ export default function Company(props) {
     const [status, setstatus] = useState();
     const {id} = useParams();
     const [selectedRows, setSelectedRows] = React.useState([]);
+    const role = localStorage.getItem("top");
+
     useEffect(() => {
         getCabins();
         
@@ -84,7 +86,7 @@ export default function Company(props) {
     }
 
     const getCabins = () => {
-        if(id === "15"){
+        if(role === "0"){
             Axios.post(`${process.env.REACT_APP_URL}/api/getAdminCabinDefault`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
                                   {id: id,
                                   }).then((response2) => {
@@ -169,15 +171,15 @@ export default function Company(props) {
         highlightOnHover= {true}
         striped = {true}
         backgroundcolor= 'rgba(187, 204, 221, 1)'
-        selectableRows = {id === "15"}
-        selectableRowsHighlight = {id === "15"}
+        selectableRows = {role === "0"}
+        selectableRowsHighlight = {role === "0"}
         onSelectedRowsChange={handleRowSelected}
         selectableRowsSingle = {true}
     />
-     {id === "15" ? <button className={maincss.newButton} onClick={deleteCabin}>Sil</button> : null}
+     {role === "0" ? <button className={maincss.newButton} onClick={deleteCabin}>Sil</button> : null}
     </div>
             </div>
-            {id === "15" ? <div className={maincss.newCompany}>
+            {role === "0" ? <div className={maincss.newCompany}>
                 <p className={maincss.newP}>Yenİ Kabİn Formu</p>
                 <div className={maincss.grid}>
                 <label for="name">Şirket Adı: </label>
