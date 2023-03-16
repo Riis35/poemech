@@ -67,7 +67,7 @@ export default function Company(props) {
       };
 
     const getData = () =>{
-      if(id === "9"){
+      if(id === "15"){
         Axios.post(`${process.env.REACT_APP_URL}/api/getAdminUsers`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
                               {
                               }).then((response2) => {
@@ -133,8 +133,8 @@ export default function Company(props) {
         highlightOnHover= {true}
         striped = {true}
         defaultSortFieldId={1}
-        selectableRows = {id === "9"}
-        selectableRowsHighlight = {id === "9"}
+        selectableRows = {id === "15"}
+        selectableRowsHighlight = {id === "15"}
         onSelectedRowsChange={handleRowSelected}
         selectableRowsSingle = {true}
     />
