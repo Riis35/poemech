@@ -10,7 +10,7 @@ export default function Company(props) {
     const [data, setRows] = useState([]);
 
     useEffect(() => {
-        if(props.User === "9"){
+        if(props.User === "15"){
             Axios.post(`${process.env.REACT_APP_URL}/api/getAdminCabins`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
                                   {id: props.User,
                                     cabin: props.id
@@ -40,7 +40,6 @@ export default function Company(props) {
                     Number: el.count
                 }  
             })) 
-            console.log(data)
         }
         
     }, [datas])
@@ -67,7 +66,7 @@ export default function Company(props) {
     //<div className={maincss["line-1"]}></div>
     return (
         <div className={maincss.partialcontainer}>
-            {props.User === "9" ? <p>{props.company} - {props.name} : Cihaz Numarası: {props.id}</p> : <p>{props.name}: Cihaz Numarası: {props.id}</p>}
+            {props.User === "15" ? <p>{props.company} - {props.name} : Cİhaz Numarası: {props.id}</p> : <p>{props.name}: Cİhaz Numarası: {props.id}</p>}
             <div className={maincss["line-1"]}></div>
             <div className={maincss.containerinside}><DataTable
         columns={columns}

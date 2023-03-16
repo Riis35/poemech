@@ -19,7 +19,6 @@ export default function Navbar() {
   const [sidebar, setSidebar] = useState(false);
   const {id} =  useParams();
   
-
   const SidebarData = [
     {
       title: "Poemech",
@@ -95,14 +94,29 @@ export default function Navbar() {
               </Link>
             </li>
             {SidebarData.map((item, index) => {
-              return (
-                <li key={index} className={item.cName} onClick = {item.title === "Çıkış" ? logout : null}>
-                  <Link to={item.title === "Çıkış" ? item.path : item.path+"/"+id }>
-                    {item.icon}
-                    <span>{item.title}</span>
-                  </Link>
-                </li>
-              );
+              if(item.title !== "Kullanıcı Detayları"){
+                return (
+                  <li key={index} className={item.cName} onClick = {item.title === "Çıkış" ? logout : null}>
+                    <Link to={item.title === "Çıkış" ? item.path : item.path+"/"+id }>
+                      {item.icon}
+                      <span>{item.title}</span>
+                    </Link>
+                  </li>
+                );
+              }
+              else{
+                if(id === "15"){
+                  return (
+                    <li key={index} className={item.cName} onClick = {item.title === "Çıkış" ? logout : null}>
+                      <Link to={item.title === "Çıkış" ? item.path : item.path+"/"+id }>
+                        {item.icon}
+                        <span>{item.title}</span>
+                      </Link>
+                    </li>
+                  );
+                }
+              }
+              
             })}
           </ul>
         </nav>

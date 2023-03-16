@@ -42,7 +42,7 @@ export default function Company(props) {
         else{
             setRows(datas.map(el => {  //alınan verileri mapleme
                 return {
-                    Com_name: el.Com_name,
+                    Com_name: el.Cab_id,
                     Cab_name: el.Cab_name,
                     Date: el.Date,
                     Card_id: el.Card_id,
@@ -54,7 +54,7 @@ export default function Company(props) {
     }, [datas])
 
     const getData = () =>{
-      if(id === "9"){
+      if(id === "15"){
         Axios.post(`${process.env.REACT_APP_URL}/api/getAdminOperations`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
                               {id: id,
                               }).then((response2) => {
@@ -72,7 +72,7 @@ export default function Company(props) {
 
 
     const columns = [{
-        name: 'Şirket Adı',
+        name: 'Kabin Numarası',
         selector: row => row.Com_name,
         sortable: true,
         style: {
@@ -120,10 +120,10 @@ export default function Company(props) {
     return (
         <div className= {maincss.container}>
             <div className={maincss.donut}>
-           {id === "9" ? null : <Donut id = {id}></Donut> }
+           {id === "15" ? null : <Donut id = {id}></Donut> }
             </div>
             <div>
-            {id === "9" ? null : <Chart id = {id}></Chart> }
+            {id === "15" ? null : <Chart id = {id}></Chart> }
             </div>
             
             <div className={maincss.partialcontainer}>

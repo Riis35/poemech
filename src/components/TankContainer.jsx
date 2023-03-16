@@ -17,7 +17,7 @@ export default function TankContainer(props) {
   const {id} = useParams();
 
    useEffect(() => {
-    if(id === "9"){
+    if(id === "15"){
       axios.post(`${process.env.REACT_APP_URL}/api/CabinAdminInfo`,
         {id: id,
         }).then((response) => {
