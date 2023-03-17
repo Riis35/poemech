@@ -11,7 +11,7 @@ import Main from './pages/Main.jsx';
 import CabinInfo from './pages/CabinInfo.jsx';
 import Signup from './pages/Signup';
 import DeviceList from './components/DeviceList';
-import Login from './loginPage/Login';
+import Login from './loginPage/Login.jsx';
 import CompanyInfo from './pages/CompanyInfo';
 import Cabin from './pages/Cabin';
 import Operations from './pages/Operations';
