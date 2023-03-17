@@ -30,9 +30,10 @@ app.post('/api/register', (req,res) => {
     const username = req.body.username
     const password = bcrypt.hashSync(req.body.password,parseInt(process.env.REACT_APP_HASH))
     const mail = req.body.mail
+    const role = req.body.role
 
-    db.query("INSERT INTO Users (U_name, U_pass, U_mail) values (?,?,?)",
-    [username, password, mail],
+    db.query("INSERT INTO Users (U_name, U_pass, U_mail, U_role) values (?,?,?,?)",
+    [username, password, mail, role],
     (err, result) => {
         if(err){
             res.json({done: false})

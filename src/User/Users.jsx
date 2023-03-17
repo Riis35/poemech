@@ -16,6 +16,7 @@ export default function Company(props) {
     const [newName, setnewName] = useState();
     const [newMail, setnewMail] = useState();
     const [newPass, setnewPass] = useState();
+    const [newRole, setnewRole] = useState();
     const [selectedRows, setSelectedRows] = useState([]);
     const [status, setstatus] = useState();
     const {id} = useParams();
@@ -49,11 +50,13 @@ export default function Company(props) {
         const user = newName;
         const pass = newPass;
         const mail = newMail;
+        const role = newRole;
 
         axios.post(`${process.env.REACT_APP_URL}/api/register`,
         {username: user,
-        password: pass,
-        mail: mail}).then((response) => {
+         password: pass,
+         mail: mail,
+         role: role}).then((response) => {
           if(response.data.done){
             setstatus("Başarılı")
             getData();
@@ -152,6 +155,8 @@ export default function Company(props) {
                 <input type="password" id="pass" onChange={(e) => setnewPass(e.target.value)}/>
                 <label for="mail">Mail Adresi: </label>
                 <input type="email" id="mail" onChange={(e) => setnewMail(e.target.value)}/>
+                <label for="role">Kullanıcı Rolü: </label>
+                <input type="email" id="role" onChange={(e) => setnewRole(e.target.value)}/>
                 <p>{status}</p>
                 <button className={maincss.newButton} onClick={register}>Kaydet</button>
                 </div>
