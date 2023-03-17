@@ -18,9 +18,10 @@ import axios from 'axios';
 export default function DeviceList(id) {
 
   const realid = id.id;
+  const role = localStorage.getItem("top")
 
   const getDevice = () =>{
-    if(realid === "9"){
+    if(role === "0"){
       axios.post(`${process.env.REACT_APP_URL}/api/CabinAdminInfo`,
       {id: realid,
       }).then((response) => {
@@ -30,10 +31,13 @@ export default function DeviceList(id) {
       }
       else{
         var dummy = [];
+        var dummyId = [];
         for (let i = 0; i < response.data.result.length; i++) {
-          dummy[i] = response.data.result[i].Cab_name;
+          dummy[i] = response.data.result[i].Cab_name + " - Cihaz No: " + response.data.result[i].Cab_id;
+          dummyId[i] = response.data.result[i].Cab_id;
         }
         setDevArr(dummy);
+        setId(dummyId);
       }
     })
     }
@@ -47,10 +51,13 @@ export default function DeviceList(id) {
       }
       else{
         var dummy = [];
+        var dummyId = [];
         for (let i = 0; i < response.data.result.length; i++) {
-          dummy[i] = response.data.result[i].Cab_name;
+          dummy[i] = response.data.result[i].Cab_name + " - Cihaz No: " + response.data.result[i].Cab_id;
+          dummyId[i] = response.data.result[i].Cab_id;
         }
         setDevArr(dummy);
+        setId(dummyId);
       }
     })
     }
@@ -64,6 +71,7 @@ export default function DeviceList(id) {
         }, []);*/
     //prepare hooks
     const [devArr, setDevArr] = useState([]);
+    const [Cabid, setId] = useState([]);
     const [query, setQuery] = useState('');
     const [queryMatch, setQueryMatch] = useState(devArr)
    
@@ -95,10 +103,9 @@ export default function DeviceList(id) {
 
   return (
     <div className={DeviceListCss.container}>       
-        <input className={DeviceListCss.searchBar} value={query} onChange={handleQuery} placeholder="arama yapın..." ></input>
-        <p> search is  {query}    queryMatch is {queryMatch}</p>
+        <input className={DeviceListCss.searchBar} value={query} onChange={handleQuery} placeholder="Arama yapın..." ></input>
         {queryMatch.map((device,i)=>(
-            <div key={i}> <Device name={device}  key={i} index={i} color={i.toString()}/></div> 
+            <div key={i}> <Device name={device}  key={i} index={i} color={i.toString()} id={Cabid[i]}/></div> 
         ))}
 
     </div>

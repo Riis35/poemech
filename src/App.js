@@ -15,6 +15,7 @@ import Login from './loginPage/Login';
 import CompanyInfo from './pages/CompanyInfo';
 import Cabin from './pages/Cabin';
 import Operations from './pages/Operations';
+import User from './pages/Users';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
       <Route path='/company/:id' element={< CompanyInfo />}></Route>
       <Route path='/cabin/:id' element={< Cabin />}></Route>
       <Route path='/card/:id' element={< Operations />}></Route>
+      <Route path='/user/:id' element={< User />}></Route>
     </Routes>
   </BrowserRouter>
 

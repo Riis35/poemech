@@ -28,14 +28,33 @@ const db = mysql.createPool({
 app.post('/api/register', (req,res) => {
 
     const username = req.body.username
-    const password = bcrypt.hashSync(req.body.password,10)
+    const password = bcrypt.hashSync(req.body.password,parseInt(process.env.REACT_APP_HASH))
     const mail = req.body.mail
+    const role = req.body.role
 
-    db.query("INSERT INTO Users (U_name, U_pass, U_mail) values (?,?,?)",
-    [username, password, mail],
+    db.query("INSERT INTO Users (U_name, U_pass, U_mail, U_role) values (?,?,?,?)",
+    [username, password, mail, role],
     (err, result) => {
         if(err){
             res.json({done: false})
+        }
+        else{
+            res.json({done: true})
+        }
+    })
+})
+
+app.post('/api/deleteUser', (req,res) => {
+
+    const username = req.body.username
+
+
+    db.query("Delete FROM Users WHERE U_name = '" + username + "';",
+    [username],
+    (err, result) => {
+        if(err){
+            res.json({done: false})
+            console.log(err)
         }
         else{
             res.json({done: true})
@@ -73,7 +92,7 @@ app.post('/api/CabinInfo', (req,res) => {
 
     const id = req.body.id
 
-    db.query("SELECT Users.U_name, companies.Com_name, Cabin.Cab_name, CabinInfo.f15, CabinInfo.f30, CabinInfo.f50, CabinInfo.nemlendirici, CabinInfo.bronzlastirici, CabinInfo.su, CabinInfo.dezenfektan, CabinInfo.duskopugu, CabinInfo.kopekkrem, CabinInfo.kopeksampuan  FROM Users CROSS JOIN (companies, Cabin, CabinInfo) ON (Users.U_id=companies.U_id AND companies.Com_id=Cabin.Com_id AND Cabin.Cab_id=CabinInfo.Cab_id) where Users.U_id = ?",
+    db.query("SELECT Users.U_name, companies.Com_name, Cabin.Cab_id, Cabin.Cab_name, CabinInfo.f15, CabinInfo.f30, CabinInfo.f50, CabinInfo.nemlendirici, CabinInfo.bronzlastirici, CabinInfo.su, CabinInfo.dezenfektan, CabinInfo.duskopugu, CabinInfo.kopekkrem, CabinInfo.kopeksampuan  FROM Users CROSS JOIN (companies, Cabin, CabinInfo) ON (Users.U_id=companies.U_id AND companies.Com_id=Cabin.Com_id AND Cabin.Cab_id=CabinInfo.Cab_id) where Users.U_id = ?",
     [id],
     async (err, result) => {
         if(err){
@@ -99,7 +118,7 @@ app.post('/api/CabinAdminInfo', (req,res) => {
 
     const id = req.body.id
 
-    db.query("SELECT Users.U_name, companies.Com_name, Cabin.Cab_name, CabinInfo.f15, CabinInfo.f30, CabinInfo.f50, CabinInfo.nemlendirici, CabinInfo.bronzlastirici, CabinInfo.su, CabinInfo.dezenfektan, CabinInfo.duskopugu, CabinInfo.kopekkrem, CabinInfo.kopeksampuan  FROM Users CROSS JOIN (companies, Cabin, CabinInfo) ON (Users.U_id=companies.U_id AND companies.Com_id=Cabin.Com_id AND Cabin.Cab_id=CabinInfo.Cab_id)",
+    db.query("SELECT Users.U_name, companies.Com_name, Cabin.Cab_id, Cabin.Cab_name, CabinInfo.f15, CabinInfo.f30, CabinInfo.f50, CabinInfo.nemlendirici, CabinInfo.bronzlastirici, CabinInfo.su, CabinInfo.dezenfektan, CabinInfo.duskopugu, CabinInfo.kopekkrem, CabinInfo.kopeksampuan  FROM Users CROSS JOIN (companies, Cabin, CabinInfo) ON (Users.U_id=companies.U_id AND companies.Com_id=Cabin.Com_id AND Cabin.Cab_id=CabinInfo.Cab_id)",
     async (err, result) => {
         if(err){
             res.send({err});
@@ -245,7 +264,7 @@ app.post('/api/login', (req,res) => {
                 
                 const id = result[0].U_id;
                 const token = jwt.sign({id}, sec, {expiresIn: "2 days",});
-                res.json({auth: true, token: token, id: result[0].U_id, uname: result[0].U_name})
+                res.json({auth: true, token: token, id: result[0].U_id, uname: result[0].U_name, role: result[0].U_role})
             }
             else{
                 res.json({auth: false, message: "Hatalı Şifre"})
@@ -500,7 +519,7 @@ app.post('/api/getOperations', (req,res) => {
 
     const id = req.body.id
 
-    db.query("Select Cabin.Cab_name, companies.Com_name, Operations.Date, Operations.Card_id, Operations.Operation from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id CROSS JOIN Operations ON Cabin.Cab_id = Operations.Cabin_id Where Users.U_id = ? ",
+    db.query("Select Cabin.Cab_name, Cabin.Cab_id, companies.Com_name, Operations.Date, Operations.Card_id, Operations.Operation from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id CROSS JOIN Operations ON Cabin.Cab_id = Operations.Cabin_id Where Users.U_id = ? ",
     [id],
     async (err, result) => {
         if(err){
@@ -521,7 +540,7 @@ app.post('/api/getOperations', (req,res) => {
 //To get operations Admin
 app.post('/api/getAdminOperations', (req,res) => {
 
-    db.query("Select Cabin.Cab_name, companies.Com_name, Operations.Date, Operations.Card_id, Operations.Operation from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id CROSS JOIN Operations ON Cabin.Cab_id = Operations.Cabin_id",
+    db.query("Select Cabin.Cab_name, Cabin.Cab_id, companies.Com_name, Operations.Date, Operations.Card_id, Operations.Operation from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id CROSS JOIN Operations ON Cabin.Cab_id = Operations.Cabin_id",
     async (err, result) => {
         if(err){
             res.json({done: false})
@@ -546,6 +565,77 @@ app.post('/api/getForDoughnut', (req,res) => {
 
     db.query("SELECT Operations.Operation, COUNT(*) as count FROM Users CROSS JOIN companies ON companies.U_id = Users.U_id CROSS JOIN Cabin ON Cabin.Com_id = companies.Com_id CROSS JOIN Operations ON Operations.Cabin_id = Cabin.Cab_id Where Users.U_id = ? GROUP BY Operations.Operation",
     [id],
+    async (err, result) => {
+        if(err){
+            res.json({done: false})
+        }
+
+        if (result.length > 0){
+            res.json({done: true, result})
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+//To get Statistics 
+
+app.post('/api/getForBar', (req,res) => {
+    const id = req.body.id;
+    const date = req.body.date
+
+    db.query("SELECT DATE(Operations.Date) as OpDate, COUNT(*) as count FROM Users CROSS JOIN companies ON companies.U_id = Users.U_id CROSS JOIN Cabin ON Cabin.Com_id = companies.Com_id CROSS JOIN Operations ON Operations.Cabin_id = Cabin.Cab_id Where Users.U_id = ? AND DATE(Operations.Date) >= '" + date +"' GROUP BY DATE(Operations.Date)",
+    [id],
+    async (err, result) => {
+        if(err){
+            res.json({done: false})
+        }
+
+        if (result.length > 0){
+            res.json({done: true, result})
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+
+//To get Users
+
+app.post('/api/getUsers', (req,res) => {
+
+    const id = req.body.id;
+
+    db.query("SELECT * from Users Where U_id = ?",
+    [id],
+    async (err, result) => {
+        if(err){
+            res.json({done: false})
+        }
+
+        if (result.length > 0){
+            res.json({done: true, result})
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+//To get All Users 
+
+app.post('/api/getAdminUsers', (req,res) => {
+
+
+    db.query("SELECT * from Users",
     async (err, result) => {
         if(err){
             res.json({done: false})

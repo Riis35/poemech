@@ -20,6 +20,8 @@ export default function Company(props) {
     const [status, setstatus] = useState();
     const {id} = useParams();
     const [selectedRows, setSelectedRows] = React.useState([]);
+    const role = localStorage.getItem("top")
+
     useEffect(() => {
         getData();
         
@@ -47,7 +49,7 @@ export default function Company(props) {
     }, [datas])
 
     const getData = () =>{
-      if(id === "9"){
+      if(role === "0"){
         Axios.post(`${process.env.REACT_APP_URL}/api/CompanyAdminInfo`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
                               {id: id,
                               }).then((response2) => {
@@ -121,6 +123,7 @@ export default function Company(props) {
     
     const columns = [{
         name: 'Şirket Adı',
+        allowOverflow: true,
         selector: row => row.Com_name,
         compact: false,
         style: {
@@ -129,6 +132,7 @@ export default function Company(props) {
     },
     {
       name: 'Adres',
+      allowOverflow: true,
       selector: row => row.Address,
       style: {
         			
@@ -143,10 +147,12 @@ export default function Company(props) {
       },
       {
         name: 'Mail Adresi',
+        allowOverflow: true,
         selector: row => row.Mail,
         style: {
                       
                   },
+        
       },
       {
 
@@ -166,16 +172,16 @@ export default function Company(props) {
         data={data}
         highlightOnHover= {true}
         striped = {true}
-        selectableRows = {id === "9"}
-        selectableRowsHighlight = {id === "9"}
+        selectableRows = {role === "0"}
+        selectableRowsHighlight = {role === "0"}
         onSelectedRowsChange={handleRowSelected}
         selectableRowsSingle = {true}
     />
-    {id === "9" ? <button className={maincss.newButton} onClick={deleteCompany}>Sil</button> : null}
+    {role === "0" ? <button className={maincss.newButton} onClick={deleteCompany}>Sil</button> : null}
     
     </div>
             </div>
-            {id === "9" ? <div className={maincss.newCompany}>
+            {role === "0" ? <div className={maincss.newCompany}>
                 <p className={maincss.newP}>Yenİ Şİrket Formu</p>
                 <div className={maincss.grid}>
                 <label for="name">Şirket Adı: </label>

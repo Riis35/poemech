@@ -36,7 +36,7 @@ export default function Device(props) {
         <div className={DeviceCss.arrow} style={arrow} key={collapse}></div>
         <button className={DeviceCss.name} onClick={handleCollapse}>
           {" "}
-          Cihaz Adı : {props.name}
+          Cİhaz Adı : {props.name}
         </button>
       </div>
       <div className={DeviceCss.tankContainer}>

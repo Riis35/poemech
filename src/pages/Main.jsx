@@ -16,6 +16,7 @@ function Main () {
     
     const {id} = useParams();
     const [cabinNames, setnames] = useState(); //Kabin isimlerini tutan array
+    const role = localStorage.getItem("top");
 
 
     const Cabins = () => {
@@ -23,7 +24,7 @@ function Main () {
       {id: id
       }).then((response) => {
       if(!response.data.done){
-
+        setnames([]);
       }
       else{
       setnames(response.data.result);
@@ -61,7 +62,7 @@ function Main () {
   
 
  useEffect(() => {
-    if(id === "9"){
+    if(role === "0"){
       AdminCabins();
     }
     else{
@@ -77,7 +78,6 @@ function Main () {
 
 
   if(cabinNames === undefined){
-    console.log("undefined")
     return(
       
       <div>
@@ -86,15 +86,13 @@ function Main () {
     )
   }
   else{
-    console.log("defined")
     //console.log(cabinNames.length)
     var elements=[];
         for(var i=0;i<cabinNames.length;i++){
              // push the component to elements!
-            elements.push(<MainComp name = {cabinNames[i].Cab_name} id = {cabinNames[i].Cab_id} User = {id} company = {id === "9" ? cabinNames[i].Com_name : null}/>);
+            elements.push(<MainComp name = {cabinNames[i].Cab_name} id = {cabinNames[i].Cab_id} User = {id} company = {role === "0" ? cabinNames[i].Com_name : null}/>);
         }
 
-        console.log(elements)
 
 
 // arrays for test  of table maker code

@@ -20,6 +20,8 @@ export default function Company(props) {
     const [status, setstatus] = useState();
     const {id} = useParams();
     const [selectedRows, setSelectedRows] = React.useState([]);
+    const role = localStorage.getItem("top");
+
     useEffect(() => {
         getCabins();
         
@@ -32,7 +34,7 @@ export default function Company(props) {
         else{
             setRows(datas.map(el => {  //alınan verileri mapleme
                 return {
-                    Name: el.Com_name,
+                    Name: el.Cab_id,
                     Cab_name: el.Cab_name,
                     Address: el.Cab_address,
                     Phone: el.Com_phone,
@@ -84,7 +86,7 @@ export default function Company(props) {
     }
 
     const getCabins = () => {
-        if(id === "9"){
+        if(role === "0"){
             Axios.post(`${process.env.REACT_APP_URL}/api/getAdminCabinDefault`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
                                   {id: id,
                                   }).then((response2) => {
@@ -118,9 +120,10 @@ export default function Company(props) {
     }
     
     const columns = [{
-        name: 'Şirket Adı',
+        name: 'Kabin No',
         selector: row => row.Name,
         compact: false,
+        allowOverflow: true,
         sortable: true,
         style: {
             
@@ -129,6 +132,7 @@ export default function Company(props) {
     {
       name: 'Kabin Adı',
       selector: row => row.Cab_name,
+      allowOverflow: true,
       style: {
         			
         		},
@@ -136,6 +140,7 @@ export default function Company(props) {
     {
         name: 'Kabin Adresi',
         selector: row => row.Address,
+        allowOverflow: true,
         style: {
                       
                   },
@@ -166,15 +171,15 @@ export default function Company(props) {
         highlightOnHover= {true}
         striped = {true}
         backgroundcolor= 'rgba(187, 204, 221, 1)'
-        selectableRows = {id === "9"}
-        selectableRowsHighlight = {id === "9"}
+        selectableRows = {role === "0"}
+        selectableRowsHighlight = {role === "0"}
         onSelectedRowsChange={handleRowSelected}
         selectableRowsSingle = {true}
     />
-     {id === "9" ? <button className={maincss.newButton} onClick={deleteCabin}>Sil</button> : null}
+     {role === "0" ? <button className={maincss.newButton} onClick={deleteCabin}>Sil</button> : null}
     </div>
             </div>
-            {id === "9" ? <div className={maincss.newCompany}>
+            {role === "0" ? <div className={maincss.newCompany}>
                 <p className={maincss.newP}>Yenİ Kabİn Formu</p>
                 <div className={maincss.grid}>
                 <label for="name">Şirket Adı: </label>

@@ -1,5 +1,5 @@
 import React from 'react'
-import Company from '../Company/Company'
+import User from '../User/Users'
 import Navbar from "../navbar/navbar";
 import { BrowserRouter as Router, Routes, Route, Navigate, useParams}
     from 'react-router-dom';
@@ -7,12 +7,11 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useParams}
 export default function CompanyInfo() {
 
   const {id} = useParams();
-  const role = localStorage.getItem("top")
 
   return (
     <div>
         <Navbar />
-        <Company id = {id} role = {role}/>
+        <User id = {id}/>
     </div>
   )
 }

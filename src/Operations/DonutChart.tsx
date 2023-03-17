@@ -46,7 +46,10 @@ export default function Donut(props) {
         Axios.post(`${process.env.REACT_APP_URL}/api/getForDoughnut`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
                               {id: props.id,
                               }).then((response2) => {
-                                setDbData(response2.data.result)
+                                if(response2.data.done){
+                                  setDbData(response2.data.result)
+                                }
+                                
                               })
     }
 
