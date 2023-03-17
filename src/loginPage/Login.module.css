@@ -28,12 +28,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
+ /*
     animation-name: backgroundGlow;
     animation-duration: 6s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
-
+*/
     border-radius: 5px ;
 
 
