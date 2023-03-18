@@ -122,7 +122,6 @@ const reps = [1,2,3]
               <div className={maincss.container}>
               <h2>Uygulanan işlem sayıları</h2>
               {elements} 
-              <button onClick={Mail}> At Mail Hocaaaam</button>
               </div>
             </div>
           );
