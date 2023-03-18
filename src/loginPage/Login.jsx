@@ -9,7 +9,6 @@ export default function Login() {
  const [Password, setPassword] = useState("");
  const [alpha, setAlpha] = useState('');
 
-
 const handleTyping = ({target}) =>{
   if(target.id === "username"){setUsername(()=> target.value)}
   if (target.id === "password"){setPassword(()=> target.value)}
@@ -17,7 +16,6 @@ const handleTyping = ({target}) =>{
 
 const[id, setId] = useState();
 
-    const [loginstatus, setLoginStatus] = useState("");
   
     const navigate = useNavigate();
 
@@ -27,8 +25,11 @@ const[id, setId] = useState();
       setAlpha((prev) =>(prev=0)); // bu big brain satır prev in değerinin 1 0 arası değişmesini sağlar, eğer prev 0 ise prev=0 ifaedesi 1 döner eğer prev 1 ise prev=0 hata olduğundan 0 döner
      }
 
+     const deneme = () => {
+      console.log("pırt")
+     }
+    
     const loginfunc = () =>{
-
         axios.post(`${process.env.REACT_APP_URL}/api/login`,
         {username: Username,
         password: Password,
@@ -58,10 +59,11 @@ const[id, setId] = useState();
         })
       }
       const [authenticated, setauthenticated] = useState(null);
+      
       useEffect(() => {
         AuthPls();
       }, []);
-    
+      
       if(authenticated){
         navigate(`/main/${id}`);
       }
@@ -88,7 +90,7 @@ const[id, setId] = useState();
                <input className={LoginCss.inputSpace} type="password" id="password"  value={Password}  onChange={handleTyping} />
                </div>
 
-              <div className={LoginCss.error} >  {alpha}</div>
+               <div className={LoginCss.error} >  {alpha}</div>
 
                <div className={LoginCss.buttonArea} >
                <button className={LoginCss.logButton} onClick={loginfunc}> Giriş Yap</button>
