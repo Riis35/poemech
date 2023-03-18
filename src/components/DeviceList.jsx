@@ -3,6 +3,7 @@ import Navbar from '../navbar/navbar.jsx'
 import Device from './Device.jsx'
 import DeviceListCss from './DeviceList.module.css'
 import axios from 'axios';
+import RoundGauge from './RoundGauge.jsx';
 
 
 //search func 
@@ -102,7 +103,7 @@ export default function DeviceList(id) {
  */
 
   return (
-    <div className={DeviceListCss.container}>       
+    <div className={DeviceListCss.container}>   
         <input className={DeviceListCss.searchBar} value={query} onChange={handleQuery} placeholder="Arama yapın..." ></input>
         {queryMatch.map((device,i)=>(
             <div key={i}> <Device name={device}  key={i} index={i} color={i.toString()} id={Cabid[i]}/></div> 

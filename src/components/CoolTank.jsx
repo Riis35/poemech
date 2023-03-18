@@ -41,9 +41,15 @@ export default function CoolTank(props) {
     backgroundImage: `linear-gradient(to bottom left, rgb( ${valR}, ${valG},83) , rgb( ${valR}, ${valG},3) )`,
   };
 
+  var name = props.tankName;
+
   return (
+    <div className={CoolTankCss.outline}>
+
+<p className={CoolTankCss.name}>{props.tankName}</p>
+
+
     <div className={CoolTankCss.container}>
-      <p className={CoolTankCss.name}>  {props.tankName} </p>
       <div className={CoolTankCss.handle}>
         <div className={CoolTankCss.valve}></div>
         <div className={CoolTankCss.neck}></div>
@@ -58,6 +64,7 @@ export default function CoolTank(props) {
       <div className={CoolTankCss.bottom}></div>
 
       
+    </div>
     </div>
   );
 }
