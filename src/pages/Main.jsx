@@ -44,6 +44,20 @@ function Main () {
 })
     }
 
+    const Mail = () => {
+      Axios.post(`${process.env.REACT_APP_URL}/api/mail/emergencyButton`,   //Kullanıcının sahip olduğu kabinlerin ID'leri
+      {id: id,
+        mail: "farukozkan56@hotmail.com"
+      }).then((response) => {
+      if(!response.data.done){
+        console.log("atamadık")
+      }
+      else{
+        console.log("attık")
+  }
+})
+    }
+
     const AuthPls = () =>{
         Axios.get(`${process.env.REACT_APP_URL}/api/isAuth`, {
           headers: {
@@ -108,6 +122,7 @@ const reps = [1,2,3]
               <div className={maincss.container}>
               <h2>Uygulanan işlem sayıları</h2>
               {elements} 
+              <button onClick={Mail}> At Mail Hocaaaam</button>
               </div>
             </div>
           );
