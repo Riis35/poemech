@@ -1,0 +1,48 @@
+:root{
+    --width : 200px;
+    --height : 200px:
+}
+
+.imdiv{
+    
+    height: var(--height);
+    width: var(--width);
+}
+
+.GaugeBody{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(50px+ var(--height));
+    width: var(--width);
+    border-style: solid;
+    border-color: green ;
+    border-width:  20px 20px 20px 20px;
+    border-image: linear-gradient(to top, red ,green) 0 50%;
+    position: relative;
+
+
+
+
+}
+
+.box1,
+.box2{
+    position: absolute;
+    bottom: 0;
+    width: 50px;
+    height: 50px;
+}
+
+.box1{
+    left: 0;
+    border: solid 5px green;
+    mask: alpha;
+    z-index: 20;
+}
+
+.box2{
+    left: 30px;
+    background-color: aqua;
+    z-index: 1;
+}
