@@ -50,10 +50,8 @@ function Main () {
         mail: "farukozkan56@hotmail.com"
       }).then((response) => {
       if(!response.data.done){
-        console.log("atamadık")
       }
       else{
-        console.log("attık")
   }
 })
     }
