@@ -660,11 +660,17 @@ app.post('/api/mail/emergencyButton' , (req,res) => {
     const id = req.body.id
     const mail = req.body.mail
     
+    console.log(req.body);
+    console.log(id);
+    console.log(mail);
     exec(`echo "${id} Seri Numaralı ABYSSOS Pro\'nuzun Acil Durum Butonu\'na basıldı.\n Sorun giderilene kadar makineniz kullanım dışı bırakılmıştır.Acilen müdahale etmeniz gerekmektedir." | mail -s "Acil Durum" -a "From: noreply@poemech.com.tr" ${mail}`, function (error, stdout, stderr) {
         if(error || stderr){
             res.json({done: false})
         }
         else{
+            console.log(error)
+            console.log(stderr)
+            console.log(stdout)
             res.json({done: true})
         }
     });

@@ -1,5 +1,5 @@
 :root {
-    --navBg: #262833;
+    --navBg: rgb(56, 62, 66);
   }
   
   .navbar {
@@ -96,4 +96,13 @@
     font-size: 22px;
 
     
+  }
+
+  .bannerimage{
+    width: 10%;
+  }
+
+  .leftbannerimage{
+    margin-left: 35%;
+    width: 30%;
   }

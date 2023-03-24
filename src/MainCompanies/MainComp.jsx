@@ -9,6 +9,7 @@ export default function Company(props) {
     const [datas, setdata] = useState([]);
     const [data, setRows] = useState([]);
     const role = localStorage.getItem("top");
+    const starter = props.id < 10 ? "ABY0000" : props.id.length < 100 ? "ABY000" : props.id.length < 1000 ? "ABY00" : props.id.length < 10000 ? "ABY0" : "ABY";
 
     useEffect(() => {
         if(role === "0"){
@@ -67,7 +68,7 @@ export default function Company(props) {
     //<div className={maincss["line-1"]}></div>
     return (
         <div className={maincss.partialcontainer}>
-            {role === "0" ? <p>{props.company} - {props.name} : Cİhaz Numarası: {props.id}</p> : <p>{props.name}: Cİhaz Numarası: {props.id}</p>}
+            {role === "0" ? <p>{props.company} - {props.name} : Makina Kodu : {starter}{props.id}</p> : <p>{props.name}: Makina Kodu: {starter}{props.id}</p>}
             <div className={maincss["line-1"]}></div>
             <div className={maincss.containerinside}><DataTable
         columns={columns}
