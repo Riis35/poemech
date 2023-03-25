@@ -102,7 +102,7 @@ function Main () {
     var elements=[];
         for(var i=0;i<cabinNames.length;i++){
              // push the component to elements!
-            elements.push(<MainComp name = {cabinNames[i].Cab_name} id = {cabinNames[i].Cab_id} User = {id} company = {role === "0" ? cabinNames[i].Com_name : null}/>);
+            elements.push(<MainComp name = {cabinNames[i].Cab_name} id = {cabinNames[i].Cab_id} User = {id} company = {role === "0" ? cabinNames[i].Com_name : null} type = {cabinNames[i].Cab_type}/>);
         }
 
 

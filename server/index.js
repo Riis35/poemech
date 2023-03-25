@@ -338,7 +338,7 @@ app.post('/api/GetNumbers', (req,res) => {
 
     const id = req.body.id
 
-    db.query("Select Cabin.Cab_id, Cabin.Cab_name from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id Where Users.U_id = ?",
+    db.query("Select Cabin.Cab_id, Cabin.Cab_name, Cabin.Cab_type from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id Where Users.U_id = ?",
     [id],
     async (err, result) => {
         if(err){
@@ -360,7 +360,7 @@ app.post('/api/GetNumbers', (req,res) => {
 app.post('/api/GetAdminNumbers', (req,res) => {
 
 
-    db.query("Select Cabin.Cab_id, Cabin.Cab_name, companies.Com_name from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id",
+    db.query("Select Cabin.Cab_id, Cabin.Cab_name, companies.Com_name, Cabin.Cab_type from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id",
     async (err, result) => {
         if(err){
             res.json({done: false})
