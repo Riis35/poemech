@@ -6,6 +6,16 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useParams}
 
 import CoolTank from "./CoolTank";
 import TankContainerCss from "./TankContainer.module.css";
+import spf15 from "../image/spf15.png";
+import spf30 from "../image/spf30.png";
+import spf50 from "../image/spf50.png";
+import moist from "../image/moist.png";
+import bronz from "../image/bronz.png";
+import su from "../image/shower.png";
+import dezenfektan from "../image/change.png";
+import duskopugu from "../image/spf15.png";
+import kopekkrem from "../image/spf15.png";
+import kopeksampuan from "../image/spf15.png";
 
 // Dynamically adds tanks inside Device
 
@@ -25,11 +35,11 @@ export default function TankContainer(props) {
           if(!response.data.done){
           }
           else{
-            const data = [["15 Faktör", `${response.data.result[props.index].f15}`, "154s8a"], ["30 Faktör", `${response.data.result[props.index].f30}`,"154qef1"],
-            ["50 Faktör", `${response.data.result[props.index].f50}`,"1541231"], ["Nemlendirici", `${response.data.result[props.index].nemlendirici}`,"154kgiks1"],
-            ["Bronzlaştırıcı", `${response.data.result[props.index].bronzlastirici}`,"154s51q"], ["Su", `${response.data.result[props.index].su}`,"154s7q5s"],
-            ["Dezenfektan", `${response.data.result[props.index].dezenfektan}`,"154q87eq9s"],["Duş Köpüğü", `${response.data.result[props.index].duskopugu}`,"1jkviaq1"],
-            ["Köpek Kremi", `${response.data.result[props.index].kopekkrem}`,"15i1841a"],["Köpek Şampuanı", `${response.data.result[props.index].kopeksampuan}`,"5618s8a"]];
+            const data = [[spf15, `${response.data.result[props.index].f15}`, "154s8a"], [spf30, `${response.data.result[props.index].f30}`,"154qef1"],
+            [spf50, `${response.data.result[props.index].f50}`,"1541231"], [moist, `${response.data.result[props.index].nemlendirici}`,"154kgiks1"],
+            [bronz, `${response.data.result[props.index].bronzlastirici}`,"154s51q"], [su, `${response.data.result[props.index].su}`,"154s7q5s"],
+            [dezenfektan, `${response.data.result[props.index].dezenfektan}`,"154q87eq9s"],[duskopugu, `${response.data.result[props.index].duskopugu}`,"1jkviaq1"],
+            [kopekkrem, `${response.data.result[props.index].kopekkrem}`,"15i1841a"],[kopeksampuan, `${response.data.result[props.index].kopeksampuan}`,"5618s8a"]];
             setTankProps(data);
           }
         })
@@ -41,11 +51,11 @@ export default function TankContainer(props) {
           if(!response.data.done){
           }
           else{
-            const data = [["15 Faktör", `${response.data.result[props.index].f15}`, "154s8a"], ["30 Faktör", `${response.data.result[props.index].f30}`,"154qef1"],
-            ["50 Faktör", `${response.data.result[props.index].f50}`,"1541231"], ["Nemlendirici", `${response.data.result[props.index].nemlendirici}`,"154kgiks1"],
-            ["Bronzlaştırıcı", `${response.data.result[props.index].bronzlastirici}`,"154s51q"], ["Su", `${response.data.result[props.index].su}`,"154s7q5s"],
-            ["Dezenfektan", `${response.data.result[props.index].dezenfektan}`,"154q87eq9s"],["Duş Köpüğü", `${response.data.result[props.index].duskopugu}`,"1jkviaq1"],
-            ["Köpek Kremi", `${response.data.result[props.index].kopekkrem}`,"15i1841a"],["Köpek Şampuanı", `${response.data.result[props.index].kopeksampuan}`,"5618s8a"]];
+            const data = [[spf15, `${response.data.result[props.index].f15}`, "154s8a"], [spf30, `${response.data.result[props.index].f30}`,"154qef1"],
+            [spf50, `${response.data.result[props.index].f50}`,"1541231"], [moist, `${response.data.result[props.index].nemlendirici}`,"154kgiks1"],
+            [bronz, `${response.data.result[props.index].bronzlastirici}`,"154s51q"], [su, `${response.data.result[props.index].su}`,"154s7q5s"],
+            [dezenfektan, `${response.data.result[props.index].dezenfektan}`,"154q87eq9s"],[duskopugu, `${response.data.result[props.index].duskopugu}`,"1jkviaq1"],
+            [kopekkrem, `${response.data.result[props.index].kopekkrem}`,"15i1841a"],[kopeksampuan, `${response.data.result[props.index].kopeksampuan}`,"5618s8a"]];
             setTankProps(data);
           }
         })
