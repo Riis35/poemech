@@ -34,7 +34,7 @@ export default function Device(props) {
   // eğer yüzde 5 altında ise alarm verme yeri bura isUnderFivePercent true ise alrm veriyo false ise takmıyo
   
   let  isUnderFivePercent = false ;
-  const bgStyle = {};
+  let bgStyle = {};
    if(isUnderFivePercent) { bgStyle =  { backgroundColor : "red"};}
    else { bgStyle = { backgroundColor: colorPalette[parseInt(props.color)]}}
 
