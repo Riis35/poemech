@@ -10,7 +10,7 @@ export default function Company(props) {
     const [datas, setdata] = useState([]);
     const [data, setRows] = useState([]);
     const role = localStorage.getItem("top");
-    const starter = props.id < 10 ? "ABY0000" : props.id.length < 100 ? "ABY000" : props.id.length < 1000 ? "ABY00" : props.id.length < 10000 ? "ABY0" : "ABY";
+    const starter = props.id < 10 ? "ABY0000" : props.id < 100 ? "ABY000" : props.id < 1000 ? "ABY00" : props.id < 10000 ? "ABY0" : "ABY";
 
     useEffect(() => {
         if(role === "0"){

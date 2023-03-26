@@ -40,14 +40,13 @@ export default function Device(props) {
 
    // alarm yeri biddi
   
-
   return (
     <div className={DeviceCss.container}  style={bgStyle}>
       <div className={DeviceCss.buttonAndArrow}>
         <div className={DeviceCss.arrow} style={arrow} key={collapse}></div>
         <button className={DeviceCss.name} onClick={handleCollapse}>
           {" "}
-          Cİhaz Adı : {props.name}
+          Cihaz Adı : {props.name}
         </button>
       </div>
       <div className={DeviceCss.tankContainer}>
