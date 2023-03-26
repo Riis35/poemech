@@ -44,6 +44,8 @@ export default function CoolTank(props) {
   var name = props.tankName;
 //  <p className={CoolTankCss.name}>{props.tankName}</p> 
   return (
+
+    <div className={ props.tankPercentage == 0 ? CoolTankCss.grayscale : null }>  
     <div className={CoolTankCss.outline}>
 
 <img className={CoolTankCss.icons} src={props.tankName}></img>
@@ -54,7 +56,7 @@ export default function CoolTank(props) {
         <div className={CoolTankCss.valve}></div>
         <div className={CoolTankCss.neck}></div>
       </div>
-      <div className={CoolTankCss.body}>
+      <div className={CoolTankCss.body} >
         <div className={CoolTankCss.window}>
           <div className={CoolTankCss.bolt}></div>
           <div className={CoolTankCss.liquid} style={divStyleLiquid}></div>
@@ -64,6 +66,7 @@ export default function CoolTank(props) {
       <div className={CoolTankCss.bottom}></div>
 
       
+    </div>
     </div>
     </div>
   );

@@ -147,10 +147,26 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
+
 }
+
+
+.grayscale { 
+    filter: grayscale(100%) blur(1px) brightness(90%) opacity( 90%);
+    
+
+}
+
+
 
 .icons{
     margin-top: 0;
     margin-bottom: 5px;
     width: 80px;
+}
+
+
+.body .empty{
+    color: rgba(141, 141, 141, 0.54);
 }
