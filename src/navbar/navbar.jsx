@@ -6,6 +6,8 @@ import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
 
 import { IconContext } from "react-icons";
+import banner from "../image/banner.png";
+import solbanner from "../image/solbanner.png";
 
 // ROUTING
 
@@ -22,7 +24,7 @@ export default function Navbar() {
   
   const SidebarData = [
     {
-      title: "Poemech",
+      title: "Ana Sayfa",
       path: `/main`,
       icon: <AiIcons.AiFillHome />,
       cName: "nav-text"
@@ -84,7 +86,7 @@ export default function Navbar() {
           </Link>
 
                   {/*   burası navbara bişiler yazmak içim*/}
-          <div className="navbarBanner"> POEMECH </div>
+          <div className="navbarBanner"> <img src={banner} className="bannerimage"/> </div>
 
 
         </div>
@@ -93,6 +95,11 @@ export default function Navbar() {
             <li className="navbar-toggle">
               <Link to="#" className="menu-bars">
                 <AiIcons.AiOutlineClose />
+              </Link>
+            </li>
+            <li>
+              <Link to="#">
+              <img src={solbanner} className="leftbannerimage"/>
               </Link>
             </li>
             {SidebarData.map((item, index) => {

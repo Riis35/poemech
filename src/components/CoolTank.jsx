@@ -42,11 +42,11 @@ export default function CoolTank(props) {
   };
 
   var name = props.tankName;
-
+//  <p className={CoolTankCss.name}>{props.tankName}</p> 
   return (
     <div className={CoolTankCss.outline}>
 
-<p className={CoolTankCss.name}>{props.tankName}</p>
+<img className={CoolTankCss.icons} src={props.tankName}></img>
 
 
     <div className={CoolTankCss.container}>
