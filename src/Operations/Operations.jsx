@@ -43,8 +43,9 @@ export default function Company(props) {
         }
         else{
             setRows(datas.map(el => {  //alınan verileri mapleme
+                const starter =  el.Cab_id < 10 ? "ABY0000" : el.Cab_id < 100 ? "ABY000" : el.Cab_id < 1000 ? "ABY00" : el.Cab_id < 10000 ? "ABY0" : "ABY";
                 return {
-                    Com_name: el.Cab_id,
+                    Com_name: starter + el.Cab_id,
                     Cab_name: el.Cab_name,
                     Date: el.Date,
                     Card_id: el.Card_id,
