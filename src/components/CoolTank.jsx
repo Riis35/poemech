@@ -13,6 +13,7 @@ export default function CoolTank(props) {
   var percentage = 50;
 
   // if percentage is given as prop
+ /* Checking if the prop is a number and if it is, it is setting the percentage to that number. */
   const perVal = parseInt(props.tankPercentage)
   percentage = perVal;
   //if(percentage < 5){props.parentCallback(true);}
@@ -45,9 +46,12 @@ export default function CoolTank(props) {
   var name = props.tankName;
 //  <p className={CoolTankCss.name}>{props.tankName}</p> 
   return (
+
+    <div className={ props.tankPercentage == 0 ? CoolTankCss.grayscale : null }>  
     <div className={CoolTankCss.outline}>
 
 <img className={CoolTankCss.icons} src={props.tankName}></img>
+
 
 
     <div className={CoolTankCss.container}>
@@ -55,7 +59,7 @@ export default function CoolTank(props) {
         <div className={CoolTankCss.valve}></div>
         <div className={CoolTankCss.neck}></div>
       </div>
-      <div className={CoolTankCss.body}>
+      <div className={CoolTankCss.body} >
         <div className={CoolTankCss.window}>
           <div className={CoolTankCss.bolt}></div>
           <div className={CoolTankCss.liquid} style={divStyleLiquid}></div>
@@ -65,6 +69,7 @@ export default function CoolTank(props) {
       <div className={CoolTankCss.bottom}></div>
 
       
+    </div>
     </div>
     </div>
   );
