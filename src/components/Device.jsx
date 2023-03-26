@@ -31,7 +31,7 @@ export default function Device(props) {
 
 
 
-  // eğer yüzde 5 altında ise alarm verme yeri bura isUnderFive percent true ise alrm veriyo false ise takmıyo
+  // eğer yüzde 5 altında ise alarm verme yeri bura isUnderFivePercent true ise alrm veriyo false ise takmıyo
   
   const isUnderFivePercent = true ;
 
