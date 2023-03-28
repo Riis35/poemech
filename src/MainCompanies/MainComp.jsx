@@ -1,5 +1,5 @@
 import React from 'react'
-import DataTable from 'react-data-table-component';
+import DataTable,{ createTheme } from 'react-data-table-component';
 import Axios from 'axios';
 import { useEffect, useState } from "react";
 import maincss from "../pages/Main.module.css"
@@ -64,6 +64,26 @@ export default function Company(props) {
         		},
     },
     ]
+
+    createTheme(
+      	'solarized',
+      	{
+          striped: {
+            default: 'rgba(165,228,227,1)',
+            text: 'rgba(52,73,102,1)',
+          },
+          background: {
+            			default:'rgba(87,197,182,1)',
+            		},
+          text: {
+                  primary: 'rgba(52,73,102,1)',
+                },
+                highlightOnHover: {
+                  default: '#ffffff',
+                  text: 'rgba(0, 0, 0, 1)',
+                },
+      	},
+      );
     //<div className={maincss["line-1"]}></div>
     return (
       <div >
@@ -72,14 +92,14 @@ export default function Company(props) {
           </div>
         <div className={maincss.partialcontainer}>
           <div>
-            {role === "0" ? <p>{props.company} - {props.name} : Makina Kodu : {starter}{props.id}</p> : <p>{props.name}: Makina Kodu: {starter}{props.id}</p>}
+            {role === "0" ? <p>{props.company} - {props.name} : Makine Kodu : {starter}{props.id}</p> : <p>{props.name}: Makine Kodu: {starter}{props.id}</p>}
             <div className={maincss["line-1"]}></div>
             <div className={maincss.containerinside}><DataTable
         columns={columns}
         data={data}
         highlightOnHover= {true}
         striped = {true}
-        backgroundcolor= 'rgba(187, 204, 221, 1)'
+        theme="solarized"
     /></div>
     </div>
             </div>
