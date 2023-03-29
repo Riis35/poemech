@@ -44,10 +44,10 @@ export default function CoolTank(props) {
   };
 
   var name = props.tankName;
-//  <p className={CoolTankCss.name}>{props.tankName}</p> 
+//  <p className={CoolTankCss.name}>{props.tankName}</p> className={ props.tankPercentage == 0 ? CoolTankCss.grayscale : null }
   return (
 
-    <div className={ props.tankPercentage == 0 ? CoolTankCss.grayscale : null }>  
+    <div>  
     <div className={CoolTankCss.outline}>
 
 <img className={CoolTankCss.icons} src={props.tankName}></img>
