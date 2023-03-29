@@ -203,7 +203,7 @@ export default function Company(props) {
     </div>
             </div>
             {role === "0" ? <div className={maincss.newCompany}>
-                <p className={maincss.newP}>Yenİ Şİrket Formu</p>
+                <p className={maincss.newP}>Yeni Şirket Formu</p>
                 <div className={maincss.grid}>
                 <label for="name">Şirket Adı: </label>
                 <input type="text" id="name" onChange={(e) => setnewCompanyName(e.target.value)}/>

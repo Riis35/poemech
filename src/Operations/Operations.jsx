@@ -137,6 +137,13 @@ export default function Company(props) {
                 },
         },
       );
+    
+      const paginationComponentOptions = {
+        rowsPerPageText: 'Sayfa Başı Satır Sayısı',
+        rangeSeparatorText: 'total',
+        selectAllRowsItem: true,
+        selectAllRowsItemText: 'Hepsi',
+    };
 
     //<div className={maincss["line-1"]}></div>
 
@@ -159,6 +166,8 @@ export default function Company(props) {
         striped = {true}
         defaultSortFieldId={3}
         theme="solarized"
+        pagination
+        paginationComponentOptions={paginationComponentOptions}
     />
     
     </div>
