@@ -1,5 +1,5 @@
 import React from 'react'
-import DataTable from 'react-data-table-component';
+import DataTable,{ createTheme } from 'react-data-table-component';
 import Axios from 'axios';
 import { useEffect, useState } from "react";
 import maincss from "./Cabin.module.css"
@@ -159,6 +159,27 @@ export default function Company(props) {
     
     ]
 
+    createTheme(
+      'solarized',
+      {
+        striped: {
+          default: 'rgba(165,228,227,1)',
+          text: 'rgba(52,73,102,1)',
+        },
+        background: {
+                default:'rgba(87,197,182,1)',
+              },
+        text: {
+                primary: 'rgba(52,73,102,1)',
+              },
+              highlightOnHover: {
+                default: '#ffffff',
+                text: 'rgba(0, 0, 0, 1)',
+              },
+      },
+    );
+
+
     //<div className={maincss["line-1"]}></div>
 
     return (
@@ -176,12 +197,13 @@ export default function Company(props) {
         selectableRowsHighlight = {role === "0"}
         onSelectedRowsChange={handleRowSelected}
         selectableRowsSingle = {true}
+        theme="solarized"
     />
      {role === "0" ? <button className={maincss.newButton} onClick={deleteCabin}>Sil</button> : null}
     </div>
             </div>
             {role === "0" ? <div className={maincss.newCompany}>
-                <p className={maincss.newP}>Yenİ Kabİn Formu</p>
+                <p className={maincss.newP}>Yeni Kabin Formu</p>
                 <div className={maincss.grid}>
                 <label for="name">Şirket Adı: </label>
                 <input type="text" id="name" onChange={(e) => setnewCompanyName(e.target.value)}/>

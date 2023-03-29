@@ -63,9 +63,20 @@ export default function TankContainer(props) {
     
       }, []);
     
+  
+  //parentCallback = {props.parentCallback}
 
     //list of tanks in device
   const [tankProps, setTankProps] = useState([]);
+
+  useEffect(() => {
+    for (let index = 0; index < tankProps.length; index++) {
+      if(tankProps[index][1] < 5){
+        props.parentCallback(true);
+      }
+      
+    }
+  }, [tankProps])
 
   const handleClick =({target}) =>{
     setCollapse(()=> {if(isCollapse){return false} else{return true}});
@@ -75,7 +86,7 @@ export default function TankContainer(props) {
     <div  className={TankContainerCss.containerBody} >
      
      
-      {collapsableTank(isCollapse, tankProps, handleClick)}
+      {collapsableTank(isCollapse, tankProps, handleClick, props)}
      
     </div>
   );
@@ -85,15 +96,16 @@ export default function TankContainer(props) {
 
 //collapsable tank list
 
-const collapsableTank = (isCollapse, tankProps, handleClick) => {
+const collapsableTank = (isCollapse, tankProps, handleClick, props) => {
 
-  if(isCollapse){return(
+  if(isCollapse){
+
+    return(
      //<button onClick={handleClick} id={Math.random()}> click to unfold </button> 
      <div className={TankContainerCss.touch}> Detayları Görmek İçin Cihaz Adına Tıklayın</div>
      )}
-  else{return( 
-    
-   
+  else{
+    return( 
     tankProps.map((name, i) => (
     <div key={Math.random()} className={TankContainerCss.scroll} >
       {<CoolTank tankName={name[0]} tankPercentage={name[1]} key={name[2]}  /> }

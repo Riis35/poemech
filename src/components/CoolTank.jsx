@@ -15,7 +15,8 @@ export default function CoolTank(props) {
   // if percentage is given as prop
  /* Checking if the prop is a number and if it is, it is setting the percentage to that number. */
   const perVal = parseInt(props.tankPercentage)
-  if(perVal > -1){percentage = perVal;}
+  percentage = perVal;
+  //if(percentage < 5){props.parentCallback(true);}
 
   
   

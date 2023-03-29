@@ -51,6 +51,7 @@ td {
 p{
     text-align: left;
     padding-left: 20px;
+    color: rgba(255,255,255,1);
 }
 
 
@@ -60,7 +61,7 @@ p{
     flex-direction: column;
     
     margin-top: 5%;
-    background-color:whitesmoke;
+    background-color:rgba(130,172,167,1);
     
     margin-bottom: 10%;
 }
@@ -79,8 +80,8 @@ h2{
 }
 
 .leftbannerimage{
-    margin-left: 30%;
-    width: 50%;
+    margin-left: 20%;
+    width: 70%;
   }
 
 .imagediv{

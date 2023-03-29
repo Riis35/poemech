@@ -1,6 +1,6 @@
 import DeviceCss from "./Device.module.css";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TankContainer from "./TankContainer";
 
 export default function Device(props) {
@@ -26,15 +26,25 @@ export default function Device(props) {
     });
   };
 
-
+  const [isUnderFivePercent, setisUnderFivePercent] = useState(false);
   const colorPalette = ["#e8dff5", "#fce1e4", "#cf4dd", "#ddedea", "#daeaf6"];
 
+  useEffect(() => {
+  
+    }, [isUnderFivePercent])
+  
 
 
   // eğer yüzde 5 altında ise alarm verme yeri bura isUnderFivePercent true ise alrm veriyo false ise takmıyo
   
-  let  isUnderFivePercent = false;
-  let bgStyle = {};
+
+  
+  const handleCallback = (childData) =>{
+    setisUnderFivePercent(childData)
+  }
+
+
+let bgStyle = {};
    if(isUnderFivePercent) { bgStyle =  { backgroundColor : "red"};}
    else { bgStyle = { backgroundColor: colorPalette[parseInt(props.color)]}}
 
@@ -52,6 +62,7 @@ export default function Device(props) {
       <div className={DeviceCss.tankContainer}>
         {" "}
         <TankContainer
+          parentCallback = {handleCallback}
           key={collapse}
           isCollapsed={`${collapse}`}
           index={props.index}
