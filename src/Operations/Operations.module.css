@@ -64,7 +64,7 @@ p{
     display: flex;
     flex-direction: column;
     
-    background-color:rgba(130,172,167,1);
+    background-color:rgba(56, 62, 66, 0.7);
     margin-top: 1%;
     margin-bottom: 5%;
 }
@@ -77,6 +77,16 @@ p{
     margin-top: 5%;
     margin-left: 5%;
     align-items: end;
+    height: 32px;
+	width: 200px;
+	border-radius: 3px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border: 1px solid #e5e5e5;
+    padding-left: 1%;
+    font-weight: 500;
 }
 
 .line-1 {
@@ -129,5 +139,4 @@ p{
 
 .filter{
     padding-right: 5%;
-    float: right;
 }
