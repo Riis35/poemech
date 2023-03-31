@@ -54,7 +54,7 @@ p{
     padding-left: 20px;
 }
 .newP{
-    text-transform: uppercase;
+    color: black;
     text-align: center;
     padding-left: 20px;
 }
@@ -65,7 +65,7 @@ p{
     flex-direction: column;
     
     margin-top: 5%;
-    background-color:rgba(130,172,167,1);
+    background-color:rgba(56, 62, 66, 0.7);
     
     margin-bottom: 5%;
 }

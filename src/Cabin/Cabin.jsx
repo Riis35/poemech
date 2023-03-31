@@ -197,7 +197,6 @@ export default function Company(props) {
         selectableRowsHighlight = {role === "0"}
         onSelectedRowsChange={handleRowSelected}
         selectableRowsSingle = {true}
-        theme="solarized"
     />
      {role === "0" ? <button className={maincss.newButton} onClick={deleteCabin}>Sil</button> : null}
     </div>

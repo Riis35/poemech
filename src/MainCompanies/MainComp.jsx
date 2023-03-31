@@ -99,7 +99,6 @@ export default function Company(props) {
         data={data}
         highlightOnHover= {true}
         striped = {true}
-        theme="solarized"
         
     /></div>
     </div>
