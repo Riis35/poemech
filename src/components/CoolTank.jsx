@@ -44,14 +44,10 @@ export default function CoolTank(props) {
   };
 
   var name = props.tankName;
-  var isAlert= false;
-  
-  if (props.tankPercentage < 11 && props.tankPercentage>0) {isAlert=true}
-  else{isAlert=false}
 //  <p className={CoolTankCss.name}>{props.tankName}</p> 
   return (
 
-    <div className={ props.tankPercentage == 0 ? CoolTankCss.grayscale : null }>  
+    <div>  
     <div className={CoolTankCss.outline}>
 
 <div className={isAlert== true ? CoolTankCss.iconsAlert: CoolTankCss.iconsNoAlert} >
