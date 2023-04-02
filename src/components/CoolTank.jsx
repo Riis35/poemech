@@ -42,7 +42,10 @@ export default function CoolTank(props) {
     height: liquid,
     backgroundImage: `linear-gradient(to bottom left, rgb( ${valR}, ${valG},83) , rgb( ${valR}, ${valG},3) )`,
   };
-
+  var isAlert= false;
+  
+  if (props.tankPercentage < 11 && props.tankPercentage>0) {isAlert=true}
+  else{isAlert=false}
   var name = props.tankName;
 //  <p className={CoolTankCss.name}>{props.tankName}</p> 
   return (
