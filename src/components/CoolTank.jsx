@@ -42,6 +42,9 @@ export default function CoolTank(props) {
     height: liquid,
     backgroundImage: `linear-gradient(to bottom left, rgb( ${valR}, ${valG},83) , rgb( ${valR}, ${valG},3) )`,
   };
+
+
+
   var isAlert= false;
   
   if (props.tankPercentage < 11 && props.tankPercentage>0) {isAlert=true}
@@ -66,7 +69,7 @@ export default function CoolTank(props) {
       <div className={CoolTankCss.body} >
         <div className={CoolTankCss.window}>
           <div className={CoolTankCss.bolt}></div>
-          <div className={CoolTankCss.liquid} style={divStyleLiquid}></div>
+          <div className={props.tankPercentage>=95 ? CoolTankCss.liquidFull: CoolTankCss.liquid} style={divStyleLiquid}></div>
           <div className={CoolTankCss.emptyliquid} style={divStyleEmpty}></div>
         </div>
       </div>

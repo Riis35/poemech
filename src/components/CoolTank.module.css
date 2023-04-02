@@ -130,6 +130,18 @@
     box-shadow: 1px -2px 2px 2px inset #19476da7;
 }
 
+.liquidFull {
+    background-image: linear-gradient(to bottom left, aqua, #194e78);
+    width: 33px;
+    height: var(--liquid);
+
+    position: absolute;
+    left: 8px;
+    bottom: 10px ;
+    border-radius: 16px 16px 16px 16px;
+    box-shadow: 1px -2px 2px 2px inset #19476da7;
+}
+
 /* The empty part of the liquid. */
 .emptyliquid {
     border-radius: 16px 16px 0px 0px;
