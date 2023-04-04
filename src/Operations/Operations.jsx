@@ -234,9 +234,12 @@ export default function Company(props) {
             <Chart id = {id}></Chart> 
             </div>
             <div className={maincss.filter}>
-            <Export onExport={() => downloadCSV(filteredItems)} />            
-            <Provider width="size-100" theme={lightTheme}>
-              <ComboBox
+              <div className={maincss.exportButton}>
+            <Export onExport={() => downloadCSV(filteredItems)}  />  
+            </div>
+            <div className={maincss.combo}          >
+            <Provider width="size-100" theme={lightTheme}  >
+              <ComboBox 
                 label="Arama kriteri seçin"
                 defaultItems={options}
                 onSelectionChange={setselectedId}
@@ -245,6 +248,7 @@ export default function Company(props) {
                 {item => <Item>{item.name}</Item>}
               </ComboBox>
               </Provider >
+              </div>
               <input className={maincss.pdiv} type="text" id="search" placeholder='Arayın' onChange={(e) => setFilterText(e.target.value)}/>
             </div>
             <div className={maincss.partialcontainer}>

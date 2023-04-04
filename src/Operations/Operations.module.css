@@ -73,21 +73,7 @@ p{
     margin: auto;
    
 }
-.pdiv{
-    margin-top: 5%;
-    margin-left: 5%;
-    align-items: end;
-    height: 32px;
-	width: 200px;
-	border-radius: 3px;
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
-	border: 1px solid #e5e5e5;
-    padding-left: 1%;
-    font-weight: 500;
-}
+
 
 .line-1 {
     height: 1px;
@@ -137,6 +123,50 @@ p{
     box-shadow: 0 1px 4px rgb(0 0 0 / 30%);
 }
 
+
+/*  maindiv */
 .filter{
-    width: 25%;
+    position: relative;
+    
+    flex-direction: row;
+    height: 60px;
+    width: 100%;
+    
+    
+}
+
+/*  input area */
+.pdiv{
+    position: absolute;
+    right: 10px;
+    top: 15px;
+
+    height: 32px;
+	width: 200px;
+	border-radius: 3px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border: 1px solid #e5e5e5;
+    
+    font-weight: 500;
+}
+
+.combo{
+    position: absolute;
+    top : 0px;
+    right: 250px;
+    
+    width: 200px;
+}
+
+.exportButton{
+
+    
+   position: absolute;
+   top: 15px;
+   left: 5px;
+   
+
 }
