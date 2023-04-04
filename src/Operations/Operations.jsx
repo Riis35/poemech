@@ -209,7 +209,6 @@ export default function Company(props) {
         highlightOnHover= {true}
         striped = {true}
         defaultSortFieldId={3}
-        theme="solarized"
         pagination
         paginationComponentOptions={paginationComponentOptions}
     />
