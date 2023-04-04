@@ -9,7 +9,14 @@ import axios from 'axios';
 import differenceBy from 'lodash/differenceBy';
 import Donut from "./DonutChart.tsx"
 import Chart from './DateChart.tsx';
-import styled from 'styled-components';
+import {ComboBox, Item, Section, Provider,defaultTheme, lightTheme } from '@adobe/react-spectrum'
+
+const sec = [
+  { id: 1, name: 'Şirket Adı' },
+  { id: 2, name: 'Makine Kodu' },
+  { id: 3, name: 'Kart' },
+  { id: 4, name: 'Operasyon' },
+]
 
 export default function Company(props) {  
     const [datas, setdata] = useState([]);
@@ -18,6 +25,7 @@ export default function Company(props) {
     const role = localStorage.getItem("top")
     const [filterText, setFilterText] = React.useState('');
     const [resetPaginationToggle, setResetPaginationToggle] = React.useState(false);
+    const [selectedId, setselectedId] = React.useState(1);
 
     useEffect(() => {
         getData();
@@ -86,7 +94,7 @@ export default function Company(props) {
         		},
     },
     {
-      name: 'Makine No',
+      name: 'Makine Kodu',
       selector: row => row.Şirket,
       left: true,
       sortable: true,
@@ -128,10 +136,12 @@ export default function Company(props) {
 
 
   const filteredItems = data.filter(
-    item => item.Kabin && item.Kabin.toLowerCase().includes(filterText.toLowerCase()),
+    selectedId === 1 ? item => item.Kabin && item.Kabin.toLowerCase().includes(filterText.toLowerCase()) : selectedId === 2 ?
+    item => item.Şirket && item.Şirket.toLowerCase().includes(filterText.toLowerCase()) : selectedId === 3 ? 
+    item => item.Kart && item.Kart.toLowerCase().includes(filterText.toLowerCase()) : 
+    item => item.Operasyon && item.Operasyon.toLowerCase().includes(filterText.toLowerCase())
   );
       
-    
 
 
 
@@ -189,6 +199,13 @@ export default function Company(props) {
     
       return result;
     }
+
+    let options = [
+      {id: 1, name: 'Şirket Adı'},
+      {id: 2, name: 'Makine Numarası'},
+      {id: 3, name: 'Kart'},
+      {id: 4, name: 'Operasyon'}
+    ];
     
     function downloadCSV(array) {
       const link = document.createElement('a');
@@ -217,8 +234,18 @@ export default function Company(props) {
             <Chart id = {id}></Chart> 
             </div>
             <div className={maincss.filter}>
-            <Export onExport={() => downloadCSV(filteredItems)} />
-            <input className={maincss.pdiv} type="text" id="search" placeholder='Şirket Adı' onChange={(e) => setFilterText(e.target.value)}/>
+            <Export onExport={() => downloadCSV(filteredItems)} />            
+            <Provider width="size-100" theme={lightTheme}>
+              <ComboBox
+                label="Arama kriteri seçin"
+                defaultItems={options}
+                onSelectionChange={setselectedId}
+                defaultInputValue={"Şirket Adı"}
+                >
+                {item => <Item>{item.name}</Item>}
+              </ComboBox>
+              </Provider >
+              <input className={maincss.pdiv} type="text" id="search" placeholder='Arayın' onChange={(e) => setFilterText(e.target.value)}/>
             </div>
             <div className={maincss.partialcontainer}>
             <p >İşlemler</p>

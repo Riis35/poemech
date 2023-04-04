@@ -129,7 +129,7 @@ p{
     color: #fff;
     height: 36px;
     transition: all 75ms ease-in-out;
-    margin-left: 65%;
+    margin-left: 25%;
     
 }
 
@@ -138,5 +138,5 @@ p{
 }
 
 .filter{
-    padding-right: 5%;
+    width: 25%;
 }
