@@ -47,11 +47,11 @@ export default function Company(props) {
             setRows(datas.map(el => {  //alınan verileri mapleme
                 const starter =  el.Cab_id < 10 ? "ABY0000" : el.Cab_id < 100 ? "ABY000" : el.Cab_id < 1000 ? "ABY00" : el.Cab_id < 10000 ? "ABY0" : "ABY";
                 return {
-                    Com_name: starter + el.Cab_id,
-                    Cab_name: el.Com_name,
-                    Date: el.Date,
-                    Card_id: el.Card_id,
-                    Operation: el.Operation,
+                    Şirket: starter + el.Cab_id,
+                    Kabin: el.Com_name,
+                    Tarih: el.Date,
+                    Kart: el.Card_id,
+                    Operasyon: el.Operation,
                 }  
             })) 
         }
@@ -79,7 +79,7 @@ export default function Company(props) {
     const columns = [
     {
       name: 'Şirket Adı',
-      selector: row => row.Cab_name,
+      selector: row => row.Kabin,
       sortable: true,
       style: {
         			
@@ -87,7 +87,7 @@ export default function Company(props) {
     },
     {
       name: 'Makine No',
-      selector: row => row.Com_name,
+      selector: row => row.Şirket,
       left: true,
       sortable: true,
       style: {
@@ -96,7 +96,7 @@ export default function Company(props) {
   },
     {
         name: 'Tarih',
-        selector: row => row.Date,
+        selector: row => row.Tarih,
         sortable: true,
         sortFunction: Zort,
         style: {
@@ -105,7 +105,7 @@ export default function Company(props) {
       },
       {
         name: 'Kart',
-        selector: row => row.Card_id,
+        selector: row => row.Kart,
         sortable: true,
         style: {
                       
@@ -113,7 +113,7 @@ export default function Company(props) {
       },
       {
         name: 'Operasyon',
-        selector: row => row.Operation,
+        selector: row => row.Operasyon,
         sortable: true,
         style: {
                       
@@ -128,7 +128,7 @@ export default function Company(props) {
 
 
   const filteredItems = data.filter(
-    item => item.Cab_name && item.Cab_name.toLowerCase().includes(filterText.toLowerCase()),
+    item => item.Kabin && item.Kabin.toLowerCase().includes(filterText.toLowerCase()),
   );
       
     
@@ -190,7 +190,6 @@ export default function Company(props) {
       return result;
     }
     
-    // Blatant "inspiration" from https://codepen.io/Jacqueline34/pen/pyVoWr
     function downloadCSV(array) {
       const link = document.createElement('a');
       let csv = convertArrayOfObjectsToCSV(array);
@@ -218,7 +217,7 @@ export default function Company(props) {
             {role === "0" ? null : <Chart id = {id}></Chart> }
             </div>
             <div className={maincss.filter}>
-            <Export onExport={() => downloadCSV(data)} />
+            <Export onExport={() => downloadCSV(filteredItems)} />
             <input className={maincss.pdiv} type="text" id="search" placeholder='Şirket Adı' onChange={(e) => setFilterText(e.target.value)}/>
             </div>
             <div className={maincss.partialcontainer}>
