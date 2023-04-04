@@ -190,7 +190,6 @@ export default function Company(props) {
       return result;
     }
     
-    // Blatant "inspiration" from https://codepen.io/Jacqueline34/pen/pyVoWr
     function downloadCSV(array) {
       const link = document.createElement('a');
       let csv = convertArrayOfObjectsToCSV(array);
