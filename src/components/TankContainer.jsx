@@ -12,10 +12,10 @@ import spf50 from "../image/spf50.png";
 import moist from "../image/moist.png";
 import bronz from "../image/bronz.png";
 import su from "../image/shower.png";
-import dezenfektan from "../image/change.png";
-import duskopugu from "../image/spf15.png";
-import kopekkrem from "../image/spf15.png";
-import kopeksampuan from "../image/spf15.png";
+import dezenfektan from "../image/disinfect.png";
+import duskopugu from "../image/foam.png";
+import kopekkrem from "../image/dogcream.png";
+import kopeksampuan from "../image/dogshampoo.png";
 
 // Dynamically adds tanks inside Device
 
