@@ -48,12 +48,6 @@ export default function Navbar() {
       cName: ["nav-text"]
     },
     {
-      title: "Kullanım",
-      path: `/card`,
-      icon: <FaIcons.FaIdCard />,
-      cName: ["nav-text"]
-    },
-    {
       title: "Kullanıcı Detayları",
       path: `/user`,
       icon: <FaIcons.FaUser />,

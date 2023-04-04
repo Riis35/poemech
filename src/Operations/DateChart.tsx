@@ -44,6 +44,7 @@ export default function Chart(props) {
     const[DbData, setDbData] = useState<any[]>([]);
     var labels : string[] = []
     var count : number[] = []
+    const role = localStorage.getItem("top")
 
     const[data, setData] = useState({
       labels,
@@ -64,7 +65,20 @@ export default function Chart(props) {
     }
 
     const getData = () => {
-        const today = labels[9];
+
+        if(role === "0"){
+          const today = labels[9];
+        Axios.post(`${process.env.REACT_APP_URL}/api/getForBarAdmin`,   //Alınan ID'lere göre gün bazında toplam işlem sayıları
+                              {date: today,
+                              }).then((response2) => {
+                                if(response2.data.done){
+                                    setDbData(response2.data.result)
+                                }
+                                
+                              })
+        }
+        else{
+          const today = labels[9];
         Axios.post(`${process.env.REACT_APP_URL}/api/getForBar`,   //Alınan ID'lere göre gün bazında toplam işlem sayıları
                               {id: props.id,
                                 date: today,
@@ -74,6 +88,8 @@ export default function Chart(props) {
                                 }
                                 
                               })
+        }
+        
     }
 
     useEffect(() => {

@@ -45,8 +45,8 @@ export default function Device(props) {
 
 
 let bgStyle = {};
-   if(isUnderFivePercent) { bgStyle =  { backgroundColor : "red"};}
-   else { bgStyle = { backgroundColor: colorPalette[parseInt(props.color)]}}
+   if(isUnderFivePercent) { bgStyle =  { backgroundColor : "#FFDE0F"};}
+   else { bgStyle = { backgroundColor: "#e8dff5"}}
 
    // alarm yeri biddi
   
