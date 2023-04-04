@@ -9,15 +9,13 @@ import axios from 'axios';
 import differenceBy from 'lodash/differenceBy';
 import Donut from "./DonutChart.tsx"
 import Chart from './DateChart.tsx';
-import styled from 'styled-components';
+
 
 export default function Company(props) {  
     const [datas, setdata] = useState([]);
     const [data, setRows] = useState([]);
     const {id} = useParams();
     const role = localStorage.getItem("top")
-    const [filterText, setFilterText] = React.useState('');
-    const [resetPaginationToggle, setResetPaginationToggle] = React.useState(false);
 
     useEffect(() => {
         getData();
@@ -48,7 +46,7 @@ export default function Company(props) {
                 const starter =  el.Cab_id < 10 ? "ABY0000" : el.Cab_id < 100 ? "ABY000" : el.Cab_id < 1000 ? "ABY00" : el.Cab_id < 10000 ? "ABY0" : "ABY";
                 return {
                     Com_name: starter + el.Cab_id,
-                    Cab_name: el.Com_name,
+                    Cab_name: el.Cab_name,
                     Date: el.Date,
                     Card_id: el.Card_id,
                     Operation: el.Operation,
@@ -76,24 +74,22 @@ export default function Company(props) {
     }
 
 
-    const columns = [
+    const columns = [{
+        name: 'Kabin Numarası',
+        selector: row => row.Com_name,
+        sortable: true,
+        style: {
+            
+        },
+    },
     {
-      name: 'Şirket Adı',
+      name: 'Kabin Adı',
       selector: row => row.Cab_name,
       sortable: true,
       style: {
         			
         		},
     },
-    {
-      name: 'Makine No',
-      selector: row => row.Com_name,
-      left: true,
-      sortable: true,
-      style: {
-          
-      },
-  },
     {
         name: 'Tarih',
         selector: row => row.Date,
@@ -121,19 +117,6 @@ export default function Company(props) {
       }
     
     ]
-
-
-
-
-
-
-  const filteredItems = data.filter(
-    item => item.Cab_name && item.Cab_name.toLowerCase().includes(filterText.toLowerCase()),
-  );
-      
-    
-
-
 
     createTheme(
         'solarized',
@@ -216,19 +199,17 @@ export default function Company(props) {
             <div>
             {role === "0" ? null : <Chart id = {id}></Chart> }
             </div>
-            <div className={maincss.filter}>
-            <Export onExport={() => downloadCSV(data)} />
-            <input className={maincss.pdiv} type="text" id="search" placeholder='Şirket Adı' onChange={(e) => setFilterText(e.target.value)}/>
-            </div>
+            
             <div className={maincss.partialcontainer}>
             <p >İşlemler</p>
             <div className={maincss["line-1"]}></div>
             <div className={maincss.containerinside}><DataTable
         columns={columns}
-        data={filteredItems}
+        data={data}
         highlightOnHover= {true}
         striped = {true}
         defaultSortFieldId={3}
+        theme="solarized"
         pagination
         paginationComponentOptions={paginationComponentOptions}
     />
@@ -240,5 +221,3 @@ export default function Company(props) {
         
     );
 }
-
-
