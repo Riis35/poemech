@@ -211,10 +211,10 @@ export default function Company(props) {
     return (
         <div className= {maincss.container}>
             <div className={maincss.donut}>
-           {role === "0" ? null : <Donut id = {id}></Donut> }
+           <Donut id = {id}></Donut> 
             </div>
             <div>
-            {role === "0" ? null : <Chart id = {id}></Chart> }
+            <Chart id = {id}></Chart> 
             </div>
             <div className={maincss.filter}>
             <Export onExport={() => downloadCSV(filteredItems)} />

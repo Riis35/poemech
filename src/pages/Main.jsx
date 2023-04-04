@@ -8,7 +8,7 @@ import Navbar from "../navbar/navbar";
 import DataTable from 'react-data-table-component';
 import MainComp from "../MainCompanies/MainComp"
 import maincss from "./Main.module.css"
-
+import Operation from '../Operations/Operations'
 
 
 function Main () {
@@ -118,6 +118,8 @@ const reps = [1,2,3]
             <div>
               <Navbar/>
               <div className={maincss.container}>
+              <h2>Genel Kullanım</h2>
+              <Operation></Operation>
               <h2>Uygulanan işlem sayıları</h2>
               {elements} 
               </div>

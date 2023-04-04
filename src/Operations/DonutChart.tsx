@@ -12,6 +12,8 @@ export default function Donut(props) {
     const[DbData, setDbData] = useState<any[]>([]);
     let Operations : string[] = [];
     let Count : number[] = [];
+    const role = localStorage.getItem("top")
+
     const[data, setData] = useState({
         labels: Operations,
         datasets: [
@@ -44,8 +46,8 @@ export default function Donut(props) {
       });
     
     const getData = () => {
-
-        Axios.post(`${process.env.REACT_APP_URL}/api/getForDoughnut`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
+        if(role === "0"){
+          Axios.post(`${process.env.REACT_APP_URL}/api/getForDoughnutAdmin`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
                               {id: props.id,
                               }).then((response2) => {
                                 if(response2.data.done){
@@ -54,6 +56,19 @@ export default function Donut(props) {
                                 }
                                 
                               })
+        }
+        else{
+          Axios.post(`${process.env.REACT_APP_URL}/api/getForDoughnut`,   //Alınan ID'lere göre her kabindeki operasyon sayıları
+                              {id: props.id,
+                              }).then((response2) => {
+                                if(response2.data.done){
+                                  setDbData(response2.data.result)
+                                  console.log(response2.data.result)
+                                }
+                                
+                              })
+        }
+        
     }
 
     useEffect(() => {

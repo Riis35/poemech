@@ -6,6 +6,7 @@ import maincss from "../pages/Main.module.css"
 import Cabin from "../image/kabin.png";
 
 
+
 export default function Company(props) {  
     const [datas, setdata] = useState([]);
     const [data, setRows] = useState([]);
@@ -87,6 +88,8 @@ export default function Company(props) {
     //<div className={maincss["line-1"]}></div>
     return (
       <div >
+        <div>
+        </div>
         <div className={maincss.imagediv}>
             <img src={props.type === "AbyssosV1" ? Cabin : null} className={maincss.leftbannerimage} />
           </div>

@@ -582,6 +582,25 @@ app.post('/api/getForDoughnut', (req,res) => {
     
 })
 
+
+app.post('/api/getForDoughnutAdmin', (req,res) => {
+
+    db.query("SELECT Operations.Operation, COUNT(*) as count FROM Users CROSS JOIN companies ON companies.U_id = Users.U_id CROSS JOIN Cabin ON Cabin.Com_id = companies.Com_id CROSS JOIN Operations ON Operations.Cabin_id = Cabin.Cab_id GROUP BY Operations.Operation",
+    async (err, result) => {
+        if(err){
+            res.json({done: false})
+        }
+
+        if (result.length > 0){
+            res.json({done: true, result})
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
 //To get Statistics 
 
 app.post('/api/getForBar', (req,res) => {
@@ -590,6 +609,26 @@ app.post('/api/getForBar', (req,res) => {
 
     db.query("SELECT DATE(Operations.Date) as OpDate, COUNT(*) as count FROM Users CROSS JOIN companies ON companies.U_id = Users.U_id CROSS JOIN Cabin ON Cabin.Com_id = companies.Com_id CROSS JOIN Operations ON Operations.Cabin_id = Cabin.Cab_id Where Users.U_id = ? AND DATE(Operations.Date) >= '" + date +"' GROUP BY DATE(Operations.Date)",
     [id],
+    async (err, result) => {
+        if(err){
+            res.json({done: false})
+        }
+
+        if (result.length > 0){
+            res.json({done: true, result})
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+app.post('/api/getForBarAdmin', (req,res) => {
+    const date = req.body.date
+
+    db.query("SELECT DATE(Operations.Date) as OpDate, COUNT(*) as count FROM Users CROSS JOIN companies ON companies.U_id = Users.U_id CROSS JOIN Cabin ON Cabin.Com_id = companies.Com_id CROSS JOIN Operations ON Operations.Cabin_id = Cabin.Cab_id Where DATE(Operations.Date) >= '" + date +"' GROUP BY DATE(Operations.Date)",
     async (err, result) => {
         if(err){
             res.json({done: false})
