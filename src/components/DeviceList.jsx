@@ -35,7 +35,7 @@ export default function DeviceList(id) {
         var dummyId = [];
         for (let i = 0; i < response.data.result.length; i++) {
           const starter = response.data.result[i].Cab_id < 10 ? "ABY0000" : response.data.result[i].Cab_id < 100 ? "ABY000" : response.data.result[i].Cab_id < 1000 ? "ABY00" : response.data.result[i].Cab_id < 10000 ? "ABY0" : "ABY";
-          dummy[i] = response.data.result[i].Cab_name + " - Makine Kodu: " + starter + response.data.result[i].Cab_id;
+          dummy[i] = response.data.result[i].Cab_name + " - Makina Kodu: " + starter + response.data.result[i].Cab_id;
           dummyId[i] = response.data.result[i].Cab_id;
         }
         setDevArr(dummy);
@@ -56,7 +56,7 @@ export default function DeviceList(id) {
         var dummyId = [];
         for (let i = 0; i < response.data.result.length; i++) {
           const starter = response.data.result[i].Cab_id < 10 ? "ABY0000" : response.data.result[i].Cab_id < 100 ? "ABY000" : response.data.result[i].Cab_id < 1000 ? "ABY00" : response.data.result[i].Cab_id < 10000 ? "ABY0" : "ABY";
-          dummy[i] = response.data.result[i].Cab_name + " - Makine Kodu: " + starter +response.data.result[i].Cab_id;
+          dummy[i] = response.data.result[i].Cab_name + " - Makina Kodu: " + starter +response.data.result[i].Cab_id;
           dummyId[i] = response.data.result[i].Cab_id;
         }
         setDevArr(dummy);

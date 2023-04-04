@@ -28,7 +28,7 @@ export default function Device(props) {
 
   const [isUnderFivePercent, setisUnderFivePercent] = useState(false);
   const colorPalette = ["#e8dff5", "#fce1e4", "#cf4dd", "#ddedea", "#daeaf6"];
-  //
+
   useEffect(() => {
   
     }, [isUnderFivePercent])
@@ -44,10 +44,9 @@ export default function Device(props) {
   }
 
 
-
 let bgStyle = {};
-   if(isUnderFivePercent) { bgStyle =  { backgroundColor : "#FFDE0F"};}
-   else { bgStyle = { backgroundColor: "#e8dff5"}}
+   if(isUnderFivePercent) { bgStyle =  { backgroundColor : "red"};}
+   else { bgStyle = { backgroundColor: colorPalette[parseInt(props.color)]}}
 
    // alarm yeri biddi
   

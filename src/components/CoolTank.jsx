@@ -43,15 +43,22 @@ export default function CoolTank(props) {
     backgroundImage: `linear-gradient(to bottom left, rgb( ${valR}, ${valG},83) , rgb( ${valR}, ${valG},3) )`,
   };
 
+
+
+  var isAlert= false;
+  
+  if (props.tankPercentage < 11 && props.tankPercentage>0) {isAlert=true}
+  else{isAlert=false}
   var name = props.tankName;
-//  <p className={CoolTankCss.name}>{props.tankName}</p> className={ props.tankPercentage == 0 ? CoolTankCss.grayscale : null }
+//  <p className={CoolTankCss.name}>{props.tankName}</p> 
   return (
 
     <div>  
     <div className={CoolTankCss.outline}>
 
+<div className={isAlert== true ? CoolTankCss.iconsAlert: CoolTankCss.iconsNoAlert} >
 <img className={CoolTankCss.icons} src={props.tankName}></img>
-
+</div>
 
 
     <div className={CoolTankCss.container}>
@@ -62,7 +69,7 @@ export default function CoolTank(props) {
       <div className={CoolTankCss.body} >
         <div className={CoolTankCss.window}>
           <div className={CoolTankCss.bolt}></div>
-          <div className={CoolTankCss.liquid} style={divStyleLiquid}></div>
+          <div className={props.tankPercentage>=95 ? CoolTankCss.liquidFull: CoolTankCss.liquid} style={divStyleLiquid}></div>
           <div className={CoolTankCss.emptyliquid} style={divStyleEmpty}></div>
         </div>
       </div>
