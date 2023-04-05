@@ -38,6 +38,7 @@ export default function Company(props) {
         else{
             setRows(datas.map(el => {  //alınan verileri mapleme
                 return {
+                    User_name: el.U_name,
                     Com_name: el.Com_name,
                     Address: el.Com_address,
                     Phone: el.Com_phone,
@@ -121,7 +122,18 @@ export default function Company(props) {
             });
     }
     
-    const columns = [{
+    const columns = [
+    role === "0" ?
+      {
+        name: 'Kullanıcı Adı',
+        allowOverflow: true,
+        selector: row => row.User_name,
+        compact: false,
+        style: {
+            
+        },
+    } : {width:"0px"},
+      {
         name: 'Şirket Adı',
         allowOverflow: true,
         selector: row => row.Com_name,
@@ -160,6 +172,42 @@ export default function Company(props) {
     
     ]
 
+    const columnsCab = [{
+      name: 'Makine Kodu',
+      selector: row => row.Phone,
+      compact: false,
+      allowOverflow: true,
+      sortable: true,
+      style: {
+          
+      },
+  },
+  {
+    name: 'Makine Adı',
+    selector: row => row.Mail,
+    allowOverflow: true,
+    style: {
+            
+          },
+  },
+  {
+      name: 'Makine Adresi',
+      selector: row => row.Address,
+      allowOverflow: true,
+      style: {
+                    
+                },
+    },  
+  ]
+
+    const ExpanableComponent = ({data}) =>
+  <DataTable
+    columns={columnsCab}
+    data={data}
+    striped={true}
+    highlightOnHover={true}
+  />;
+
     createTheme(
       'solarized',
       {
@@ -196,6 +244,9 @@ export default function Company(props) {
         selectableRowsHighlight = {role === "0"}
         onSelectedRowsChange={handleRowSelected}
         selectableRowsSingle = {true}
+        expandableRows
+        expandOnRowClicked= {true}
+        expandableRowsComponent={ExpanableComponent}
     />
     {role === "0" ? <button className={maincss.newButton} onClick={deleteCompany}>Sil</button> : null}
     
