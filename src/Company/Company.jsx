@@ -68,15 +68,35 @@ export default function Company(props) {
     }
     }
 
-    const deleteCompany = () =>{
+    const updateCompany = row =>{
 
-      const name = selectedRows[0].Com_name;
+      const name = row.Com_name;
 
+      console.log(row)
+      /*Axios.post(`${process.env.REACT_APP_URL}/api/DeleteCompany`,   //Şirketi sil
+                              {name: name,
+                              }).then((response2) => {
+                                if(response2.data.done){
+                                  setdata(differenceBy(datas, selectedRows, 'Com_name'));
+                                }
+                                else{
+                                  console.log("olduramadık")
+                                }
+                              })*/
+      
+    }
+
+    const deleteCompany = row =>{
+
+      const name = row.Com_name;
+
+      console.log(name)
       Axios.post(`${process.env.REACT_APP_URL}/api/DeleteCompany`,   //Şirketi sil
                               {name: name,
                               }).then((response2) => {
                                 if(response2.data.done){
                                   setdata(differenceBy(datas, selectedRows, 'Com_name'));
+                                  getData();
                                 }
                                 else{
                                   console.log("olduramadık")
@@ -159,6 +179,7 @@ export default function Company(props) {
     {
         name: 'Telefon',
         selector: row => row.Phone,
+        width: "170px",
         style: {
                       
                   },
@@ -166,10 +187,28 @@ export default function Company(props) {
       {
         name: 'Mail Adresi',
         allowOverflow: true,
+        width: "250px",
         selector: row => row.Mail,
         style: {
                       
                   },
+        
+      },
+      {
+        name: 'Güncelle',
+        allowOverflow: true,
+        button: true,
+        maxwidth: "1px",
+        cell: (props) => <button className={maincss.newButton} onClick={() => updateCompany(props)}>Güncelle</button>,
+        
+      },
+      {
+        name: 'Sil',
+        allowOverflow: true,
+        button: true,
+        right: true,
+        maxwidth: "1px",
+        cell: (props) => <button className={maincss.newButtonDel} onClick={() => deleteCompany(props)}>Sil</button>,
         
       },
       {
@@ -210,8 +249,8 @@ export default function Company(props) {
         data={data}
         highlightOnHover= {true}
         striped = {true}
-        selectableRows = {role === "0"}
-        selectableRowsHighlight = {role === "0"}
+        /*selectableRows = {role === "0"}
+        selectableRowsHighlight = {role === "0"}*/
         onSelectedRowsChange={handleRowSelected}
         selectableRowsSingle = {true}
         expandableRows

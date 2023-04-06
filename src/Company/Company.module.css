@@ -118,6 +118,23 @@ p{
     transition: all 75ms ease-in-out;
     
 }
+.newButtonDel{
+    
+    display: inline-block;
+    outline: 0;
+    border: none;
+    cursor: pointer;
+    line-height: 1.2rem;
+    font-weight: 500;
+    background: #ae0224;
+    padding: 8px 14px 9px;
+    font-size: 15px;
+    border-radius: 4px;
+    color: #fff;
+    height: 36px;
+    transition: all 75ms ease-in-out;
+    
+}
 
 .newButton :hover{
     box-shadow: 0 1px 4px rgb(0 0 0 / 30%);
