@@ -32,6 +32,7 @@ export default function Cabin(props) {
         if(datas === undefined){
         }
         else{
+          console.log(datas)
           const filter = datas.filter(item => item.Com_name && item.Com_name.toLowerCase().includes(props.cab.data.Com_name.toLowerCase()))
             setRows(filter.map(el => {  //alınan verileri mapleme
                 const starter =  el.Cab_id < 10 ? "ABY0000" : el.Cab_id < 100 ? "ABY000" : el.Cab_id < 1000 ? "ABY00" : el.Cab_id < 10000 ? "ABY0" : "ABY";
@@ -154,14 +155,14 @@ export default function Cabin(props) {
       'solarized',
       {
         striped: {
-          default: 'rgba(165,228,227,1)',
+          default: 'rgba(239, 241, 243,1)',
           text: 'rgba(52,73,102,1)',
         },
         background: {
-                default:'rgba(87,197,182,1)',
+                default:'rgba(252, 245, 222,1)',
               },
         text: {
-                primary: 'rgba(52,73,102,1)',
+                primary: 'rgba(0,0,0,0.9)',
               },
               highlightOnHover: {
                 default: '#ffffff',
@@ -185,6 +186,8 @@ export default function Cabin(props) {
         selectableRowsHighlight = {role === "0"}
         onSelectedRowsChange={handleRowSelected}
         selectableRowsSingle = {true}
+        noDataComponent="Şirkete ait kabin bulunmuyor"
+        theme='solarized'
     />
 
         </div>

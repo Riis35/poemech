@@ -102,6 +102,7 @@ export default function Company(props) {
         data={data}
         highlightOnHover= {true}
         striped = {true}
+        noDataComponent="Makine henüz kullanılmamış"
         
     /></div>
     </div>

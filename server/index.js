@@ -406,7 +406,7 @@ app.post('/api/getAdminCabinDefault', (req,res) => {
     const id = req.body.id
     const cabin = req.body.cabin
 
-    db.query("Select Select Cabin.Cab_id, Cabin.Cab_name, Cabin.Cab_address, companies.Com_name, companies.Com_phone, companies.Com_address, companies.Com_phone, companies.Com_mail, companies.Com_id, Users.U_name from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id",
+    db.query("Select Cabin.Cab_id, Cabin.Cab_name, Cabin.Cab_address, companies.Com_name, companies.Com_phone, companies.Com_address, companies.Com_phone, companies.Com_mail, companies.Com_id, Users.U_name from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id",
     [cabin],
     async (err, result) => {
         if(err){
