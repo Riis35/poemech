@@ -36,12 +36,6 @@ export default function Navbar() {
       cName: "nav-text"
     },
     {
-      title: "Kabin Bilgileri",
-      path: `/cabin`,
-      icon: <FaIcons.FaBoxes />,
-      cName: "nav-text"
-    },
-    {
       title: "Kabin Detayları",
       path: `/cabininfo`,
       icon: <FaIcons.FaBox />,

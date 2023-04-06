@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useParams}
     from 'react-router-dom';
 import axios from 'axios';
 import differenceBy from 'lodash/differenceBy';
+import Cabin from '../Cabin/Cabin'
+import { Row } from '@adobe/react-spectrum';
 
 
 export default function Company(props) {  
@@ -121,6 +123,10 @@ export default function Company(props) {
               
             });
     }
+
+    const deneme = row => 
+         <Cabin cab={row}/>;
+    
     
     const columns = [
     role === "0" ?
@@ -172,42 +178,6 @@ export default function Company(props) {
     
     ]
 
-    const columnsCab = [{
-      name: 'Makine Kodu',
-      selector: row => row.Phone,
-      compact: false,
-      allowOverflow: true,
-      sortable: true,
-      style: {
-          
-      },
-  },
-  {
-    name: 'Makine Adı',
-    selector: row => row.Mail,
-    allowOverflow: true,
-    style: {
-            
-          },
-  },
-  {
-      name: 'Makine Adresi',
-      selector: row => row.Address,
-      allowOverflow: true,
-      style: {
-                    
-                },
-    },  
-  ]
-
-    const ExpanableComponent = ({data}) =>
-  <DataTable
-    columns={columnsCab}
-    data={data}
-    striped={true}
-    highlightOnHover={true}
-  />;
-
     createTheme(
       'solarized',
       {
@@ -246,7 +216,7 @@ export default function Company(props) {
         selectableRowsSingle = {true}
         expandableRows
         expandOnRowClicked= {true}
-        expandableRowsComponent={ExpanableComponent}
+        expandableRowsComponent={deneme}
     />
     {role === "0" ? <button className={maincss.newButton} onClick={deleteCompany}>Sil</button> : null}
     

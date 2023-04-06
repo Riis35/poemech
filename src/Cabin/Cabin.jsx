@@ -9,7 +9,7 @@ import axios from 'axios';
 import differenceBy from 'lodash/differenceBy';
 
 
-export default function Company(props) {  
+export default function Cabin(props) {  
     const [datas, setdata] = useState([]);
     const [data, setRows] = useState([]);
     const [newCompanyName, setnewCompanyName] = useState();
@@ -32,7 +32,8 @@ export default function Company(props) {
         if(datas === undefined){
         }
         else{
-            setRows(datas.map(el => {  //alınan verileri mapleme
+          const filter = datas.filter(item => item.Com_name && item.Com_name.toLowerCase().includes(props.cab.data.Com_name.toLowerCase()))
+            setRows(filter.map(el => {  //alınan verileri mapleme
                 const starter =  el.Cab_id < 10 ? "ABY0000" : el.Cab_id < 100 ? "ABY000" : el.Cab_id < 1000 ? "ABY00" : el.Cab_id < 10000 ? "ABY0" : "ABY";
                 return {
                     Name: starter + el.Cab_id,
@@ -121,7 +122,7 @@ export default function Company(props) {
     }
     
     const columns = [{
-        name: 'Kabin No',
+        name: 'Makine Kodu',
         selector: row => row.Name,
         compact: false,
         allowOverflow: true,
@@ -131,7 +132,7 @@ export default function Company(props) {
         },
     },
     {
-      name: 'Kabin Adı',
+      name: 'Makine Adı',
       selector: row => row.Cab_name,
       allowOverflow: true,
       style: {
@@ -139,23 +140,13 @@ export default function Company(props) {
         		},
     },
     {
-        name: 'Kabin Adresi',
+        name: 'Makine Adresi',
         selector: row => row.Address,
         allowOverflow: true,
         style: {
                       
                   },
       },
-      {
-        name: 'Şirket Telefonu',
-        selector: row => row.Phone,
-        style: {
-                      
-                  },
-      },
-      {
-
-      }
     
     ]
 
@@ -184,10 +175,7 @@ export default function Company(props) {
 
     return (
         <div className= {maincss.container}>
-            <div className={maincss.partialcontainer}>
-            <p >Kabin Bilgileri</p>
-            <div className={maincss["line-1"]}></div>
-            <div className={maincss.containerinside}><DataTable
+<DataTable
         columns={columns}
         data={data}
         highlightOnHover= {true}
@@ -198,22 +186,7 @@ export default function Company(props) {
         onSelectedRowsChange={handleRowSelected}
         selectableRowsSingle = {true}
     />
-     {role === "0" ? <button className={maincss.newButton} onClick={deleteCabin}>Sil</button> : null}
-    </div>
-            </div>
-            {role === "0" ? <div className={maincss.newCompany}>
-                <p className={maincss.newP}>Yeni Kabin Formu</p>
-                <div className={maincss.grid}>
-                <label for="name">Şirket Adı: </label>
-                <input type="text" id="name" onChange={(e) => setnewCompanyName(e.target.value)}/>
-                <label for="Cabname">Kabin Adı: </label>
-                <input type="text" id="Cabname" onChange={(e) => setnewCompanyAddress(e.target.value)}/>
-                <label for="Address">Kabin Adresi: </label>
-                <input type="text" id="Address" onChange={(e) => setnewCompanyPhone(e.target.value)}/>
-                <p>{status}</p>
-                <button className={maincss.newButton} onClick={register}>Kaydet</button>
-                </div>
-            </div> : null}
+
         </div>
         
         
