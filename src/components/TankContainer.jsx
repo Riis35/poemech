@@ -71,7 +71,7 @@ export default function TankContainer(props) {
 
   useEffect(() => {
     for (let index = 0; index < tankProps.length; index++) {
-      if(tankProps[index][1] < 5){
+      if(tankProps[index][1] <= 5){
         props.parentCallback(true);
       }
       

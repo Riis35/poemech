@@ -120,6 +120,58 @@ p{
     
 }
 
+.newButtonDel{
+    
+    display: inline-block;
+    outline: 0;
+    border: none;
+    cursor: pointer;
+    line-height: 1.2rem;
+    font-weight: 500;
+    background: #ae0224;
+    padding: 8px 14px 9px;
+    font-size: 15px;
+    border-radius: 4px;
+    color: #fff;
+    height: 36px;
+    transition: all 75ms ease-in-out;
+    
+}
+
 .newButton :hover{
     box-shadow: 0 1px 4px rgb(0 0 0 / 30%);
+}
+
+.modal {
+    font-size: 12px;
+    color: black;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
+  }
+.buttondiv{
+    align-items: end;
+}
+.content{
+    margin-bottom: 3%;
+}
+
+.PopButtonDel{
+    
+    display: inline-block;
+    outline: 0;
+    border: none;
+    cursor: pointer;
+    line-height: 1.2rem;
+    font-weight: 500;
+    background: #ae0224;
+    padding: 8px 14px 9px;
+    font-size: 15px;
+    border-radius: 4px;
+    color: #fff;
+    height: 36px;
+    transition: all 75ms ease-in-out;
+    margin-right: 3%;
+
 }

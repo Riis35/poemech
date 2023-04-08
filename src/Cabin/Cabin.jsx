@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useParams}
     from 'react-router-dom';
 import axios from 'axios';
 import differenceBy from 'lodash/differenceBy';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 
 export default function Cabin(props) {  
@@ -51,42 +53,7 @@ export default function Cabin(props) {
       setSelectedRows(state.selectedRows);
     }, []);
 
-    const register = () => {
-
-            const Cabname = newCompanyAddress;
-            const address = newCompanyPhone;
-
-            const username = newCompanyName;
     
-    
-            axios.post(`${process.env.REACT_APP_URL}/api/GetCompanyId`,
-            {username: username,}).then((response) => {
-              if(response.data.done){
-                axios.post(`${process.env.REACT_APP_URL}/api/RegisterCabin`,
-                {
-                name:Cabname,
-                address:address,
-                id:response.data.result[0].Com_id, 
-                }).then((response) => {
-                if(response.data.done){
-                  setstatus("Başarılı")
-                  getCabins();
-              }
-              else{
-                setstatus("Kaydedilemedi.");
-              }
-              
-            })
-              }
-              else{
-                setstatus("Böyle bir şirket yok.");
-              }
-              
-            })
-            .catch(function (error) {
-              
-            });
-    }
 
     const getCabins = () => {
         if(role === "0"){
@@ -105,15 +72,16 @@ export default function Cabin(props) {
         }
     }
 
-    const deleteCabin = () =>{
+    const deleteCabin = row =>{
 
-      const name = selectedRows[0].Cab_name;
+      const name = row.Cab_name;
 
       Axios.post(`${process.env.REACT_APP_URL}/api/DeleteCabin`,   //Şirketi sil
                               {name: name,
                               }).then((response2) => {
                                 if(response2.data.done){
                                   setdata(differenceBy(datas, selectedRows, 'Cab_name'));
+                                  getCabins();
                                 }
                                 else{
                                   console.log("olduramadık")
@@ -148,6 +116,45 @@ export default function Cabin(props) {
                       
                   },
       },
+      role === "0" ? {
+        name: '',
+        allowOverflow: true,
+        button: true,
+        maxwidth: "1px",
+        cell: (props) => <button className={maincss.newButton} onClick={() => deleteCabin(props)}>Güncelle</button>,
+        
+      } : {maxwidth :'0px'},
+      role === "0" ?{
+        name: '',
+        allowOverflow: true,
+        button: true,
+        right: true,
+        maxwidth: "1px",
+        cell: (props) => <Popup contentStyle={{width: "20%"}} trigger=
+        {<button className={maincss.newButtonDel}>Sil</button>}
+        modal nested>
+        {
+            close => (
+                <div className={maincss.modal}>
+                    <div className={maincss.content}>
+                        Kabin "{props.Cab_name}" silinecek, emin misiniz?
+                    </div>
+                    <div className={maincss.buttondiv}>
+                        <button className={maincss.PopButtonDel} onClick={() => deleteCabin(props)}>
+                                Sil
+                        </button>
+                        <button className={maincss.newButton} onClick=
+                            {() => close()}>
+                                İptal
+                        </button>
+                    </div>
+                </div>
+            )
+        }
+    </Popup>,
+        
+        
+      }: {maxwidth:'0px'},
     
     ]
 
@@ -182,8 +189,6 @@ export default function Cabin(props) {
         highlightOnHover= {true}
         striped = {true}
         backgroundcolor= 'rgba(187, 204, 221, 1)'
-        selectableRows = {role === "0"}
-        selectableRowsHighlight = {role === "0"}
         onSelectedRowsChange={handleRowSelected}
         selectableRowsSingle = {true}
         noDataComponent="Şirkete ait kabin bulunmuyor"

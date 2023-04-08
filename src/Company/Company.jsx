@@ -9,6 +9,8 @@ import axios from 'axios';
 import differenceBy from 'lodash/differenceBy';
 import Cabin from '../Cabin/Cabin'
 import { Row } from '@adobe/react-spectrum';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 
 export default function Company(props) {  
@@ -19,7 +21,11 @@ export default function Company(props) {
     const [newCompanyPhone, setnewCompanyPhone] = useState();
     const [newCompanyUser, setnewCompanyUser] = useState();
     const [newCompanyMail, setnewCompanyMail] = useState();
+    const [newCabCom, setnewCabCom] = useState();
+    const [newCabName, setnewCabName] = useState();
+    const [newCabAddress, setnewCabAddress] = useState();
     const [status, setstatus] = useState();
+    const [status2, setstatus2] = useState();
     const {id} = useParams();
     const [selectedRows, setSelectedRows] = React.useState([]);
     const role = localStorage.getItem("top")
@@ -144,6 +150,43 @@ export default function Company(props) {
             });
     }
 
+    const registerCab = () => {
+
+      const Cabname = newCabName;
+      const address = newCabAddress;
+
+      const username = newCabCom;
+
+
+      axios.post(`${process.env.REACT_APP_URL}/api/GetCompanyId`,
+      {username: username,}).then((response) => {
+        if(response.data.done){
+          axios.post(`${process.env.REACT_APP_URL}/api/RegisterCabin`,
+          {
+          name:Cabname,
+          address:address,
+          id:response.data.result[0].Com_id, 
+          }).then((response) => {
+          if(response.data.done){
+            setstatus2("Başarılı")
+            getData();
+        }
+        else{
+          setstatus2("Kaydedilemedi.");
+        }
+        
+      })
+        }
+        else{
+          setstatus2("Böyle bir şirket yok.");
+        }
+        
+      })
+      .catch(function (error) {
+        
+      });
+}
+
     const deneme = row => 
          <Cabin cab={row}/>;
     
@@ -194,28 +237,69 @@ export default function Company(props) {
                   },
         
       },
-      {
-        name: 'Güncelle',
+      role === "0" ? {
+        name: '',
         allowOverflow: true,
         button: true,
         maxwidth: "1px",
-        cell: (props) => <button className={maincss.newButton} onClick={() => updateCompany(props)}>Güncelle</button>,
+        cell: (props) => <Popup contentStyle={{width: "20%"}} trigger=
+        {<button className={maincss.newButton}>Güncelle</button>}
+        modal nested>
+        {
+            close => (
+                <div className={maincss.modal}>
+                    <div className={maincss.content}>
+                        Şirket {props.Com_name} silinecek, emin misiniz?
+                    </div>
+                    <div className={maincss.buttondiv}>
+                        <button className={maincss.PopButtonDel} onClick={() => updateCompany(props)}>
+                                Sil
+                        </button>
+                        <button className={maincss.newButton} onClick=
+                            {() => close()}>
+                                İptal
+                        </button>
+                    </div>
+                </div>
+            )
+        }
+    </Popup>,
         
-      },
-      {
-        name: 'Sil',
+      } : {maxwidth :'0px'},
+      role === "0" ?{
+        name: '',
         allowOverflow: true,
         button: true,
         right: true,
         maxwidth: "1px",
-        cell: (props) => <button className={maincss.newButtonDel} onClick={() => deleteCompany(props)}>Sil</button>,
+        cell: (props) => <Popup contentStyle={{width: "20%"}} trigger=
+        {<button className={maincss.newButtonDel}>Sil</button>}
+        modal nested>
+        {
+            close => (
+                <div className={maincss.modal}>
+                    <div className={maincss.content}>
+                        Şirket "{props.Com_name}" silinecek, emin misiniz?
+                    </div>
+                    <div className={maincss.buttondiv}>
+                        <button className={maincss.PopButtonDel} onClick={() => deleteCompany(props)}>
+                                Sil
+                        </button>
+                        <button className={maincss.newButton} onClick=
+                            {() => close()}>
+                                İptal
+                        </button>
+                    </div>
+                </div>
+            )
+        }
+    </Popup>,
         
-      },
-      {
-
-      }
+      }: {maxwidth:'0px'},
     
     ]
+
+    
 
     createTheme(
       'solarized',
@@ -257,7 +341,6 @@ export default function Company(props) {
         expandOnRowClicked= {true}
         expandableRowsComponent={deneme}
     />
-    {role === "0" ? <button className={maincss.newButton} onClick={deleteCompany}>Sil</button> : null}
     
     </div>
             </div>
@@ -274,8 +357,22 @@ export default function Company(props) {
                 <input type="text" id="username" onChange={(e) => setnewCompanyUser(e.target.value)}/>
                 <label for="mail">Mail: </label>
                 <input type="email" id="mail" onChange={(e) => setnewCompanyMail(e.target.value)}/>
-                <p>{status}</p>
+                <p className={maincss.newP}>{status}</p>
                 <button className={maincss.newButton} onClick={register}>Kaydet</button>
+                </div>
+            </div>
+             : null}
+             {role === "0" ? <div className={maincss.newCompany}>
+                <p className={maincss.newP}>Yeni Kabin Formu</p>
+                <div className={maincss.grid}>
+                <label for="name">Şirket Adı: </label>
+                <input type="text" id="name" onChange={(e) => setnewCabCom(e.target.value)}/>
+                <label for="Cabname">Kabin Adı: </label>
+                <input type="text" id="Cabname" onChange={(e) => setnewCabName(e.target.value)}/>
+                <label for="Address">Kabin Adresi: </label>
+                <input type="text" id="Address" onChange={(e) => setnewCabAddress(e.target.value)}/>
+                <p className={maincss.newP}>{status2}</p>
+                <button className={maincss.newButton} onClick={registerCab}>Kaydet</button>
                 </div>
             </div> : null}
         </div>
