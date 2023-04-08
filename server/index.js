@@ -692,6 +692,62 @@ app.post('/api/getAdminUsers', (req,res) => {
     
 })
 
+//Update Company
+
+app.post('/api/UpdateCompany', (req,res) => {
+
+    const oldname = req.body.oldname;
+    const name = req.body.name;
+    const address = req.body.address;
+    const phone = req.body.phone;
+    const mail = req.body.mail;
+
+    db.query("Update companies SET Com_name = ?, Com_address = ?, Com_phone = ?, Com_mail = ? Where Com_name = ?",
+    [name, address, phone, mail, oldname],
+    async (err, result) => {
+        
+        if(err){
+            res.json({done: false})
+        }
+
+        if (result.affectedRows > 0){
+            res.json({done: true})
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
+//Update Cabin
+
+app.post('/api/UpdateCab', (req,res) => {
+
+    const oldname = req.body.oldname;
+    const name = req.body.name;
+    const address = req.body.address;
+
+    db.query("Update Cabin SET Cab_name = ?, Cab_address = ? Where Cab_name = ?",
+    [name, address, oldname],
+    async (err, result) => {
+        
+        if(err){
+            res.json({done: false})
+        }
+
+        if (result.affectedRows > 0){
+            res.json({done: true})
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
 //Mails
 app.post('/api/mail/emergencyButton' , (req,res) => {
     var util = require('util')
@@ -699,9 +755,6 @@ app.post('/api/mail/emergencyButton' , (req,res) => {
     const id = req.body.id
     const mail = req.body.mail
     
-    console.log(req.body);
-    console.log(id);
-    console.log(mail);
     exec(`echo "${id} Seri Numaralı ABYSSOS Pro\'nuzun Acil Durum Butonu\'na basıldı.\n Sorun giderilene kadar makineniz kullanım dışı bırakılmıştır.Acilen müdahale etmeniz gerekmektedir." | mail -s "Acil Durum" -a "From: noreply@poemech.com.tr" ${mail}`, function (error, stdout, stderr) {
         if(error || stderr){
             res.json({done: false})

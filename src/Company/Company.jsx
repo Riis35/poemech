@@ -76,19 +76,27 @@ export default function Company(props) {
 
     const updateCompany = row =>{
 
-      const name = row.Com_name;
+      const oldname = row.Com_name;
+      const name = document.getElementById("Upname").value;
+      const address = document.getElementById("Upaddress").value;
+      const phone = document.getElementById("Upphone").value;
+      const mail = document.getElementById("Upmail").value;
 
-      console.log(row)
-      /*Axios.post(`${process.env.REACT_APP_URL}/api/DeleteCompany`,   //Şirketi sil
-                              {name: name,
+      
+      Axios.post(`${process.env.REACT_APP_URL}/api/UpdateCompany`,   //Şirketi güncelle
+                              { oldname: oldname,
+                                name: name,
+                                address: address,
+                                phone: phone,
+                                mail: mail,
                               }).then((response2) => {
                                 if(response2.data.done){
-                                  setdata(differenceBy(datas, selectedRows, 'Com_name'));
+                                  getData();
                                 }
                                 else{
                                   console.log("olduramadık")
                                 }
-                              })*/
+                              })
       
     }
 
@@ -242,24 +250,32 @@ export default function Company(props) {
         allowOverflow: true,
         button: true,
         maxwidth: "1px",
-        cell: (props) => <Popup contentStyle={{width: "20%"}} trigger=
+        cell: (props) => <Popup contentStyle={{width: "40%", height: "30%"}} trigger=
         {<button className={maincss.newButton}>Güncelle</button>}
         modal nested>
         {
             close => (
                 <div className={maincss.modal}>
-                    <div className={maincss.content}>
-                        Şirket {props.Com_name} silinecek, emin misiniz?
-                    </div>
-                    <div className={maincss.buttondiv}>
-                        <button className={maincss.PopButtonDel} onClick={() => updateCompany(props)}>
-                                Sil
+                    <div className={maincss.grid}>
+                <label for="Upname">Şirket Adı: </label>
+                <input type="text" id="Upname" defaultValue={props.Com_name}/>
+                <label for="Upaddress">Adres: </label>
+                <input type="text" id="Upaddress" defaultValue={props.Address}/>
+                <label for="Upphone">Telefon: </label>
+                <input type="phone" id="Upphone" defaultValue={props.Phone}/>
+                <label for="Upmail">Mail: </label>
+                <input type="email" id="Upmail" defaultValue={props.Mail}/>
+                <p className={maincss.newP}>{status}</p>
+                <div className={maincss.buttondiv}>
+                        <button className={maincss.PopButtonDel} onClick={() => {updateCompany(props); close();}}>
+                                Güncelle
                         </button>
                         <button className={maincss.newButton} onClick=
                             {() => close()}>
                                 İptal
                         </button>
                     </div>
+                </div>
                 </div>
             )
         }

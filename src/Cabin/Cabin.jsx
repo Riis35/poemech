@@ -34,7 +34,6 @@ export default function Cabin(props) {
         if(datas === undefined){
         }
         else{
-          console.log(datas)
           const filter = datas.filter(item => item.Com_name && item.Com_name.toLowerCase().includes(props.cab.data.Com_name.toLowerCase()))
             setRows(filter.map(el => {  //alınan verileri mapleme
                 const starter =  el.Cab_id < 10 ? "ABY0000" : el.Cab_id < 100 ? "ABY000" : el.Cab_id < 1000 ? "ABY00" : el.Cab_id < 10000 ? "ABY0" : "ABY";
@@ -89,6 +88,28 @@ export default function Cabin(props) {
                               })
       
     }
+
+    const updateCab = row =>{
+
+      const oldname = row.Cab_name;
+      const name = document.getElementById("Upname").value;
+      const address = document.getElementById("Upaddress").value;
+
+      console.log(oldname, name, address)
+      Axios.post(`${process.env.REACT_APP_URL}/api/UpdateCab`,  //Şirket update
+                              { oldname: oldname,
+                                name: name,
+                                address: address,
+                              }).then((response2) => {
+                                if(response2.data.done){
+                                  getCabins();
+                                }
+                                else{
+                                  console.log("olduramadık")
+                                }
+                              })
+      
+    }
     
     const columns = [{
         name: 'Makine Kodu',
@@ -121,7 +142,32 @@ export default function Cabin(props) {
         allowOverflow: true,
         button: true,
         maxwidth: "1px",
-        cell: (props) => <button className={maincss.newButton} onClick={() => deleteCabin(props)}>Güncelle</button>,
+        cell: (props) => <Popup contentStyle={{width: "40%", height: "20%"}} trigger=
+        {<button className={maincss.newButton}>Güncelle</button>}
+        modal nested>
+        {
+            close => (
+                <div className={maincss.modal}>
+                    <div className={maincss.grid}>
+                <label for="Upname">Makine Adı: </label>
+                <input type="text" id="Upname" defaultValue={props.Cab_name}/>
+                <label for="Upaddress">Adres: </label>
+                <input type="text" id="Upaddress" defaultValue={props.Address}/>
+                <p className={maincss.newP}>{status}</p>
+                <div className={maincss.buttondiv}>
+                        <button className={maincss.PopButtonDel} onClick={() => {updateCab(props); close();}}>
+                                Güncelle
+                        </button>
+                        <button className={maincss.newButton} onClick=
+                            {() => close()}>
+                                İptal
+                        </button>
+                    </div>
+                </div>
+                </div>
+            )
+        }
+    </Popup>,
         
       } : {maxwidth :'0px'},
       role === "0" ?{
