@@ -40,3 +40,9 @@
     from {height: 340px;}
     to{height:18px;}
   }
+
+  .newP{
+    text-align: center;
+    font-size: 16px;
+    color: black;
+}

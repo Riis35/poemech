@@ -23,7 +23,7 @@ export default function TankContainer(props) {
   const {isCollapsed = "no",} = props
 
   const [isCollapse, setCollapse] = useState(isCollapsed === "no" ? false : true)
-
+  const [user, setUser] = useState({Cname: "", Phone:"", Mail:""});
   const {id} = useParams();
   const role = localStorage.getItem("top")
 
@@ -40,6 +40,8 @@ export default function TankContainer(props) {
             [bronz, `${response.data.result[props.index].bronzlastirici}`,"154s51q"], [su, `${response.data.result[props.index].su}`,"154s7q5s"],
             [dezenfektan, `${response.data.result[props.index].dezenfektan}`,"154q87eq9s"],[duskopugu, `${response.data.result[props.index].duskopugu}`,"1jkviaq1"],
             [kopekkrem, `${response.data.result[props.index].kopekkrem}`,"15i1841a"],[kopeksampuan, `${response.data.result[props.index].kopeksampuan}`,"5618s8a"]];
+            const newUser = {Cname: response.data.result[props.index].Com_name, Phone: response.data.result[props.index].Com_phone, Mail:response.data.result[props.index].Com_mail}
+            setUser(newUser);
             setTankProps(data);
           }
         })
@@ -56,6 +58,8 @@ export default function TankContainer(props) {
             [bronz, `${response.data.result[props.index].bronzlastirici}`,"154s51q"], [su, `${response.data.result[props.index].su}`,"154s7q5s"],
             [dezenfektan, `${response.data.result[props.index].dezenfektan}`,"154q87eq9s"],[duskopugu, `${response.data.result[props.index].duskopugu}`,"1jkviaq1"],
             [kopekkrem, `${response.data.result[props.index].kopekkrem}`,"15i1841a"],[kopeksampuan, `${response.data.result[props.index].kopeksampuan}`,"5618s8a"]];
+            const newUser = {Cname: response.data.result[props.index].Com_name, Phone: response.data.result[props.index].Com_phone, Mail:response.data.result[props.index].Com_mail}
+            setUser(newUser);
             setTankProps(data);
           }
         })
@@ -87,6 +91,8 @@ export default function TankContainer(props) {
      
      
       {collapsableTank(isCollapse, tankProps, handleClick, props)}
+      
+      {role === "0" ? <div><p className={TankContainerCss.newP}>{user.Cname}</p><p className={TankContainerCss.newP}>{user.Phone}</p><p className={TankContainerCss.newP}>{user.Mail}</p></div> : null}
      
     </div>
   );
@@ -105,11 +111,12 @@ const collapsableTank = (isCollapse, tankProps, handleClick, props) => {
      <div className={TankContainerCss.touch}> Detayları Görmek İçin Cihaz Adına Tıklayın</div>
      )}
   else{
-    return( 
+    return(
     tankProps.map((name, i) => (
     <div key={Math.random()} className={TankContainerCss.scroll} >
       {<CoolTank tankName={name[0]} tankPercentage={name[1]} key={name[2]}  /> }
-    </div> )
+    </div> 
+    )
   
     ) )}
 
