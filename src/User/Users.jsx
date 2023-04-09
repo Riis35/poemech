@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useParams}
     from 'react-router-dom';
 import axios from 'axios';
 import differenceBy from 'lodash/differenceBy';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 
 
@@ -88,9 +90,9 @@ export default function Company(props) {
     }
     }
 
-    const deleteUser = () =>{
+    const deleteUser = row =>{
 
-        const name = selectedRows[0].Username;
+        const name = row.Username;
   
         Axios.post(`${process.env.REACT_APP_URL}/api/deleteUser`,   //Şirketi sil
                                 {username: name,
@@ -103,6 +105,28 @@ export default function Company(props) {
                                     setstatus("Başarısız")
                                   }
                                 })
+        
+      }
+
+      const UpdateUser = row =>{
+
+        const name = row.Username;
+
+        const newname = document.getElementById("Upname").value;
+        const mail = document.getElementById("Upmail").value;
+  
+        Axios.post(`${process.env.REACT_APP_URL}/api/UpdateUser`,   //Şirketi güncelle
+                              { oldname: name,
+                                name: newname,
+                                mail: mail,
+                              }).then((response2) => {
+                                if(response2.data.done){
+                                  getData();
+                                }
+                                else{
+                                  console.log("olduramadık")
+                                }
+                              })
         
       }
 
@@ -122,6 +146,69 @@ export default function Company(props) {
         			
         		},
     },
+    role === "0" ? {
+      name: '',
+      allowOverflow: true,
+      button: true,
+      maxwidth: "1px",
+      cell: (props) => <Popup contentStyle={{width: "40%", height: "30%"}} trigger=
+      {<button className={maincss.newButton}>Güncelle</button>}
+      modal nested>
+      {
+          close => (
+              <div className={maincss.modal}>
+                  <div className={maincss.grid}>
+              <label for="Upname">Kullanıcı Adı: </label>
+              <input type="text" id="Upname" defaultValue={props.Username}/>
+              <label for="Upmail">Mail: </label>
+              <input type="email" id="Upmail" defaultValue={props.Mail}/>
+              <p className={maincss.newP}>{status}</p>
+              <div className={maincss.buttondiv}>
+                      <button className={maincss.PopButtonDel} onClick={() => {UpdateUser(props); close();}}>
+                              Güncelle
+                      </button>
+                      <button className={maincss.newButton} onClick=
+                          {() => close()}>
+                              İptal
+                      </button>
+                  </div>
+              </div>
+              </div>
+          )
+      }
+  </Popup>,
+      
+    } : {maxwidth :'0px'},
+    role === "0" ?{
+      name: '',
+      allowOverflow: true,
+      button: true,
+      right: true,
+      maxwidth: "1px",
+      cell: (props) => <Popup contentStyle={{width: "20%"}} trigger=
+      {<button className={maincss.newButtonDel}>Sil</button>}
+      modal nested>
+      {
+          close => (
+              <div className={maincss.modal}>
+                  <div className={maincss.content}>
+                      Kullanıcı "{props.Username}" silinecek, emin misiniz?
+                  </div>
+                  <div className={maincss.buttondiv}>
+                      <button className={maincss.PopButtonDel} onClick={() => {deleteUser(props); close();}}>
+                              Sil
+                      </button>
+                      <button className={maincss.newButton} onClick=
+                          {() => close()}>
+                              İptal
+                      </button>
+                  </div>
+              </div>
+          )
+      }
+  </Popup>,
+      
+    }: {maxwidth:'0px'},
     
     ]
 
@@ -158,13 +245,7 @@ export default function Company(props) {
         highlightOnHover= {true}
         striped = {true}
         defaultSortFieldId={1}
-        selectableRows = {role === "0"}
-        selectableRowsHighlight = {role === "0"}
-        onSelectedRowsChange={handleRowSelected}
-        selectableRowsSingle = {true}
-        theme="solarized"
     />
-    <button className={maincss.newButton} onClick={deleteUser}>Sil</button>
     </div>
     </div>
     <div className={maincss.newCompany}>
@@ -178,7 +259,7 @@ export default function Company(props) {
                 <input type="email" id="mail" onChange={(e) => setnewMail(e.target.value)}/>
                 <label for="role">Kullanıcı Rolü: </label>
                 <input type="email" id="role" onChange={(e) => setnewRole(e.target.value)}/>
-                <p>{status}</p>
+                <p className={maincss.newP}>{status}</p>
                 <button className={maincss.newButton} onClick={register}>Kaydet</button>
                 </div>
             </div>

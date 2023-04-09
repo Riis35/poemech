@@ -121,12 +121,12 @@ export default function Company(props) {
 
     const register = () => {
 
-            const user = newCompanyName;
-            const address = newCompanyAddress;
-            const phone = newCompanyPhone;
-            const mail = newCompanyMail;
+            const user = document.getElementById("Comname").value;
+            const address = document.getElementById("Comaddress").value;;
+            const phone = document.getElementById("Comphone").value;;
+            const mail = document.getElementById("Commail").value;;
 
-            const username = newCompanyUser;
+            const username = document.getElementById("Comusername").value;;
     
     
             axios.post(`${process.env.REACT_APP_URL}/api/GetId`,
@@ -160,10 +160,10 @@ export default function Company(props) {
 
     const registerCab = () => {
 
-      const Cabname = newCabName;
-      const address = newCabAddress;
+      const Cabname = document.getElementById("CabCabname").value;
+      const address = document.getElementById("CabAddress").value;
 
-      const username = newCabCom;
+      const username = document.getElementById("CabComname").value;
 
 
       axios.post(`${process.env.REACT_APP_URL}/api/GetCompanyId`,
@@ -364,15 +364,15 @@ export default function Company(props) {
                 <p className={maincss.newP}>Yeni Şirket Formu</p>
                 <div className={maincss.grid}>
                 <label for="name">Şirket Adı: </label>
-                <input type="text" id="name" onChange={(e) => setnewCompanyName(e.target.value)}/>
+                <input type="text" id="Comname"/>
                 <label for="address">Adres: </label>
-                <input type="text" id="address" onChange={(e) => setnewCompanyAddress(e.target.value)}/>
+                <input type="text" id="Comaddress"/>
                 <label for="phone">Telefon: </label>
-                <input type="phone" id="phone" onChange={(e) => setnewCompanyPhone(e.target.value)}/>
+                <input type="phone" id="Comphone"/>
                 <label for="username">Kullanıcı Adı: </label>
-                <input type="text" id="username" onChange={(e) => setnewCompanyUser(e.target.value)}/>
+                <input type="text" id="Comusername"/>
                 <label for="mail">Mail: </label>
-                <input type="email" id="mail" onChange={(e) => setnewCompanyMail(e.target.value)}/>
+                <input type="email" id="Commail"/>
                 <p className={maincss.newP}>{status}</p>
                 <button className={maincss.newButton} onClick={register}>Kaydet</button>
                 </div>
@@ -382,11 +382,11 @@ export default function Company(props) {
                 <p className={maincss.newP}>Yeni Kabin Formu</p>
                 <div className={maincss.grid}>
                 <label for="name">Şirket Adı: </label>
-                <input type="text" id="name" onChange={(e) => setnewCabCom(e.target.value)}/>
+                <input type="text" id="CabComname"/>
                 <label for="Cabname">Kabin Adı: </label>
-                <input type="text" id="Cabname" onChange={(e) => setnewCabName(e.target.value)}/>
+                <input type="text" id="CabCabname"/>
                 <label for="Address">Kabin Adresi: </label>
-                <input type="text" id="Address" onChange={(e) => setnewCabAddress(e.target.value)}/>
+                <input type="text" id="CabAddress"/>
                 <p className={maincss.newP}>{status2}</p>
                 <button className={maincss.newButton} onClick={registerCab}>Kaydet</button>
                 </div>

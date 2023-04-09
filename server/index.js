@@ -748,6 +748,31 @@ app.post('/api/UpdateCab', (req,res) => {
     
 })
 
+app.post('/api/UpdateUser', (req,res) => {
+
+    const oldname = req.body.oldname;
+    const name = req.body.name;
+    const mail = req.body.mail;
+
+    db.query("Update Users SET U_name = ?, U_mail = ? Where U_name = ?",
+    [name, mail, oldname],
+    async (err, result) => {
+        
+        if(err){
+            res.json({done: false})
+        }
+
+        if (result.affectedRows > 0){
+            res.json({done: true})
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
+})
+
 //Mails
 app.post('/api/mail/emergencyButton' , (req,res) => {
     var util = require('util')
