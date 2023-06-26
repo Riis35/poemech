@@ -18,7 +18,7 @@ import { Link, useParams } from "react-router-dom";
 import "./navbar.css";
 
 export default function Navbar() {
-  const [sidebar, setSidebar] = useState(false);
+  const [sidebar, setSidebar] = useState(true);
   const {id} =  useParams();
   const role = localStorage.getItem("top");
   
@@ -48,6 +48,12 @@ export default function Navbar() {
       cName: ["nav-text"]
     },
     {
+      title: "Alımlar",
+      path: `/user`,
+      icon: <FaIcons.FaShoppingCart />,
+      cName: ["nav-text"]
+    },
+    {
       title: "Çıkış",
       path: "/login",
       icon: <IoIcons.IoMdExit />,
@@ -69,9 +75,6 @@ export default function Navbar() {
         {/* All the icons now are white */}
         <div className="navbar"> 
           
-          <Link to="#" className="menu-bars">
-            <FaIcons.FaBars onClick={showSidebar} />
-          </Link>
 
                   {/*   burası navbara bişiler yazmak içim*/}
           <div className="navbarBanner"> <img src={banner} className="bannerimage"/> </div>
@@ -80,11 +83,6 @@ export default function Navbar() {
         </div>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
           <ul className= "nav-menu-items" onClick={showSidebar}>
-            <li className="navbar-toggle">
-              <Link to="#" className="menu-bars">
-                <AiIcons.AiOutlineClose />
-              </Link>
-            </li>
             <li>
               <Link to="#">
               <img src={solbanner} className="leftbannerimage"/>
