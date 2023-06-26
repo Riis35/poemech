@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto:wght@300&display=swap');
 .container {
     /*border: solid red 2px;*/
     width:60%;
@@ -92,14 +93,11 @@ p{
     grid-template-columns: 20% 40%;
     grid-gap: 10%;
   }
-  @font-face {
-    font-family: Gilroy; /*a name to be used later*/
-    src: url('https://poemech.com.tr/fonts/Gilroy-Bold.ttf'); /*URL to font*/
-}
 
 * {
-    font-family: Gilroy sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 14px;
+    font-weight: 600;
   }
   .newButton{
     
