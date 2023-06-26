@@ -9,6 +9,7 @@ import DataTable from 'react-data-table-component';
 import MainComp from "../MainCompanies/MainComp"
 import maincss from "./Main.module.css"
 import Operation from '../Operations/Operations'
+import * as FaIcons from "react-icons/fa";
 
 
 function Main () {
@@ -55,7 +56,6 @@ function Main () {
   }
 })
     }
-
     const AuthPls = () =>{
         Axios.get(`${process.env.REACT_APP_URL}/api/isAuth`, {
           headers: {
@@ -112,16 +112,36 @@ const name = ["faktor10","faktor45","nem"];
 const reps = [1,2,3]
 
 
-
-
+//
+//<h2>Uygulanan işlem sayıları</h2>
+//{elements} 
     return (
             <div>
               <Navbar/>
               <div className={maincss.container}>
-              <h2>Genel Kullanım</h2>
+              <h2>Hoşgeldiniz</h2>
+              <div className={maincss.cards}>
+                <div className={maincss.green}>
+                  <h1 className={maincss.inside}>Sorunsuz</h1>
+                  <h1 className={maincss.insidenumber}>52</h1>
+                  <a href={"/cabininfo/" + id} class={maincss.greenbutton}>Detaylara Git <FaIcons.FaAngleRight className={maincss.icons}/></a>
+                </div>
+                <div className={maincss.yellow}>
+                  <h1 className={maincss.inside}>Riskli</h1>
+                  <h1 className={maincss.insidenumber}>52</h1>
+                  <a href={"/cabininfo/" + id} class={maincss.yellowbutton}>Detaylara Git <FaIcons.FaAngleRight className={maincss.icons}/></a>
+                </div>
+                <div className={maincss.red}>
+                <h1 className={maincss.inside}>Durmuş</h1>
+                  <h1 className={maincss.insidenumber}>52</h1>
+                  <a href={"/cabininfo/" + id} class={maincss.redbutton}>Detaylara Git <FaIcons.FaAngleRight className={maincss.icons}/></a>
+                </div>
+
+              </div>
+              <div className={maincss.operations}>
               <Operation></Operation>
-              <h2>Uygulanan işlem sayıları</h2>
-              {elements} 
+              </div>
+              
               </div>
             </div>
           );
