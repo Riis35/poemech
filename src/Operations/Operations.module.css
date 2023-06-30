@@ -3,6 +3,8 @@
     /*border: solid red 2px;*/
     width: 100%;
     margin: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 table {
@@ -64,7 +66,7 @@ p{
 .partialcontainer{
     display: flex;
     flex-direction: column;
-    
+    width: 92.5%;
     background-color:rgba(56, 62, 66, 0.7);
     margin-top: 1%;
     margin-bottom: 5%;
@@ -129,8 +131,8 @@ p{
     
     flex-direction: row;
     height: 60px;
-    width: 100%;
-    
+    width: 93%;
+    margin-top: 2%;
     
 }
 
@@ -168,4 +170,45 @@ p{
    left: 5px;
    
 
+}
+.leftpart{
+    width: 43%;
+    height: 100%;
+    border: 0.15em solid #e5e5e5;
+    border-radius: 5px;
+    margin-right: 6%;
+}
+.topleft{
+    width: 100%;
+    height: 40px;
+    background-color: #f7f7f7;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+.leftchart{
+    max-height: 300px;
+    margin: 3% 3% 3% 3%;
+}
+.charttext{
+    padding-left: 4%;
+    padding-top: 2%;
+    font-size: 14px;
+    margin-top: 0;
+}
+.icons{
+    
+    margin-right: 2%;
+}
+.rightpart{
+    width: 43%;
+    height: 100%;
+    border: 0.15em solid #e5e5e5;
+    border-radius: 5px;
+}
+.rightchart{
+    max-height: 300px;
+    margin: 3% 3% 3% 3%;
+}
+.charts{
+    display: flex;
+    flex-direction: row;
 }

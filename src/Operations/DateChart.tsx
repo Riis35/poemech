@@ -28,11 +28,8 @@ export const options = {
     maintainAspectRatio: false,
   plugins: {
     legend: {
+      display: false,
       position: 'top' as const,
-    },
-    title: {
-      display: true,
-      text: 'Günlere Göre Kullanım',
     },
   },
 };
@@ -52,8 +49,8 @@ export default function Chart(props) {
           {
             label: 'Kullanım Sayıları',
             data: count,
-            borderColor: 'rgb(255, 99, 132, 1)',
-            backgroundColor: 'rgba(255, 99, 132, 1)',
+            borderColor: 'rgb(21, 112, 200, 1)',
+            backgroundColor: 'rgba(106, 164, 222, 1)',
           },
         ],
       })
@@ -121,8 +118,8 @@ export default function Chart(props) {
                   {
                     label: 'Kullanım Sayısı',
                     data: count,
-                    borderColor: 'rgb(255, 99, 132)',
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    borderColor: 'rgb(21, 112, 200, 1)',
+                    backgroundColor: 'rgba(106, 164, 222, 1)',
                   },
                 ],
               }

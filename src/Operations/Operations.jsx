@@ -10,6 +10,7 @@ import differenceBy from 'lodash/differenceBy';
 import Donut from "./DonutChart.tsx"
 import Chart from './DateChart.tsx';
 import {ComboBox, Item, Section, Provider,defaultTheme, lightTheme } from '@adobe/react-spectrum'
+import * as FaIcons from "react-icons/fa";
 
 const sec = [
   { id: 1, name: 'Şirket Adı' },
@@ -227,12 +228,26 @@ export default function Company(props) {
 
     return (
         <div className= {maincss.container}>
-            <div className={maincss.donut}>
-           <Donut id = {id}></Donut> 
+          <div className={maincss.charts}>
+            <div className={maincss.leftpart}>
+              <div className={maincss.topleft}>
+              <h2 className={maincss.charttext}><FaIcons.FaChartLine className={maincss.icons}></FaIcons.FaChartLine> Günlük Kullanım</h2>
+              </div>
+              <div className={maincss.leftchart}>
+                <Chart id = {id}></Chart> 
+              </div>
+              
             </div>
-            <div>
-            <Chart id = {id}></Chart> 
+            <div className={maincss.rightpart}>
+            <div className={maincss.topleft}>
+              <h2 className={maincss.charttext}><FaIcons.FaChartPie className={maincss.icons}></FaIcons.FaChartPie> Genel Kullanım</h2>
+              </div>
+              <div className={maincss.rightchart}>
+              <Donut id = {id}></Donut> 
             </div>
+            </div>
+            </div>
+            
             <div className={maincss.filter}>
               <div className={maincss.exportButton}>
             <Export onExport={() => downloadCSV(filteredItems)}  />  

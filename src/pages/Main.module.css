@@ -108,6 +108,7 @@ h2{
     border-radius: 5px;
     display: flex;
     flex-direction: column;
+    margin-left: 5%;
 }
 .greenbutton {
     display: inline-block;
@@ -166,6 +167,27 @@ h2{
   .redbutton:hover {
     background-color: #AB2C00;
   }
+  .blue{
+    width: 300px;
+    height: 125px;
+    background-color:#007aff;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.bluebutton {
+    display: inline-block;
+    padding: 10px 10%;
+    background-color: #0066D5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .bluebutton:hover {
+    background-color: #004B9D;
+  }
 .inside{
     margin-top: 10%;
     margin-left: 10%;
@@ -180,5 +202,6 @@ h2{
     padding-left: 50%;
 }
 .operations{
+    margin-top: 2%;
     width: 80%;
 }

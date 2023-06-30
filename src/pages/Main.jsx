@@ -121,6 +121,11 @@ const reps = [1,2,3]
               <div className={maincss.container}>
               <h2>Hoşgeldiniz</h2>
               <div className={maincss.cards}>
+              <div className={maincss.blue}>
+                  <h1 className={maincss.inside}>Toplam Makina</h1>
+                  <h1 className={maincss.insidenumber}>52</h1>
+                  <a href={"/cabininfo/" + id} class={maincss.bluebutton}>Detaylara Git <FaIcons.FaAngleRight className={maincss.icons}/></a>
+                </div>
                 <div className={maincss.green}>
                   <h1 className={maincss.inside}>Sorunsuz</h1>
                   <h1 className={maincss.insidenumber}>52</h1>
