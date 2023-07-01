@@ -4,12 +4,13 @@
     position: relative;
     flex-wrap: wrap;
     gap: 10px;
-    width: 90%;
+    width: 80%;
     height: auto;
     min-height: 55px;
     justify-content: left;
     background-color: bisque;
     margin: 10px;
+    margin-left: 13%;
     border-radius: 10px;
 
 }
