@@ -156,15 +156,17 @@ p{
 
 .combo{
     position: absolute;
+    display: flex;
+    flex-direction: row;
     top : 0px;
     right: 250px;
-    
-    width: 200px;
+    width: 700px;
 }
 
+.dates{
+    margin-right: 15%;
+}
 .exportButton{
-
-    
    position: absolute;
    top: 20px;
    left: 5px;

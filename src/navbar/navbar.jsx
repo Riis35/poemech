@@ -94,7 +94,7 @@ export default function Navbar() {
                   <li key={index} className={item.cName} onClick = {item.title === "Çıkış" ? logout : null}>
                     <Link to={item.title === "Çıkış" ? item.path : item.path+"/"+id }>
                       {item.icon}
-                      <span>{item.title}</span>
+                      <span className="menuspan">{item.title}</span>
                     </Link>
                   </li>
                 );
@@ -105,7 +105,7 @@ export default function Navbar() {
                     <li key={index} className={item.cName} onClick = {item.title === "Çıkış" ? logout : null}>
                       <Link to={item.title === "Çıkış" ? item.path : item.path+"/"+id }>
                         {item.icon}
-                        <span>{item.title}</span>
+                        <span className="menuspan">{item.title}</span>
                       </Link>
                     </li>
                   );

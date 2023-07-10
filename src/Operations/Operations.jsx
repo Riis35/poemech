@@ -9,8 +9,9 @@ import axios from 'axios';
 import differenceBy from 'lodash/differenceBy';
 import Donut from "./DonutChart.tsx"
 import Chart from './DateChart.tsx';
-import {ComboBox, Item, Section, Provider,defaultTheme, lightTheme } from '@adobe/react-spectrum'
+import {ComboBox, Item, Section, Provider,defaultTheme, lightTheme, DatePicker, Flex } from '@adobe/react-spectrum'
 import * as FaIcons from "react-icons/fa";
+import {parseDate} from '@internationalized/date';
 
 const sec = [
   { id: 1, name: 'Şirket Adı' },
@@ -27,6 +28,8 @@ export default function Company(props) {
     const [filterText, setFilterText] = React.useState('');
     const [resetPaginationToggle, setResetPaginationToggle] = React.useState(false);
     const [selectedId, setselectedId] = React.useState(1);
+    const [dateStart, setDateStart] = React.useState();
+    const [dateEnd, setDateEnd] = React.useState(parseDate('2020-02-03'));
 
     useEffect(() => {
         getData();
@@ -252,8 +255,23 @@ export default function Company(props) {
               <div className={maincss.exportButton}>
             <Export onExport={() => downloadCSV(filteredItems)}  />  
             </div>
-            <div className={maincss.combo}          >
-            <Provider width="size-100" theme={lightTheme}  >
+            <div className={maincss.combo}>
+              <div className={maincss.dates}>
+              <Provider theme={lightTheme}>
+              <Flex gap="size-150">
+              <DatePicker
+                  label="Başlangıç"
+                  value={dateStart}
+                  onChange={setDateStart}
+                  marginStart="0px" />
+                <DatePicker
+                  label="Bitiş"
+                  value={dateEnd}
+                  onChange={setDateEnd} />
+              </Flex>
+              </Provider>
+              </div>
+            <Provider width="size-100" theme={lightTheme} >
               <ComboBox 
                 label="Arama kriteri seçin"
                 defaultItems={options}
