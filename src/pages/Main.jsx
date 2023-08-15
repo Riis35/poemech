@@ -17,6 +17,10 @@ function Main () {
     
     const {id} = useParams();
     const [cabinNames, setnames] = useState(); //Kabin isimlerini tutan array
+    const [total, setTotal] = useState(0);
+    const [working, setWorking] = useState(0);
+    const [risky, setRisky] = useState(0);
+    const [stopped, setStopped] = useState(0);
     const role = localStorage.getItem("top");
 
 
@@ -28,6 +32,7 @@ function Main () {
         setnames([]);
       }
       else{
+      setTotal(response.data.result.length);
       setnames(response.data.result);
   }
 })
@@ -40,6 +45,7 @@ function Main () {
       if(!response.data.done){
       }
       else{
+      setTotal(response.data.result.length);
       setnames(response.data.result);
   }
 })
@@ -123,7 +129,7 @@ const reps = [1,2,3]
               <div className={maincss.cards}>
               <div className={maincss.blue}>
                   <h1 className={maincss.inside}>Toplam Makina</h1>
-                  <h1 className={maincss.insidenumber}>52</h1>
+                  <h1 className={maincss.insidenumber}>{total}</h1>
                   <a href={"/cabininfo/" + id} class={maincss.bluebutton}>Detaylara Git <FaIcons.FaAngleRight className={maincss.icons}/></a>
                 </div>
                 <div className={maincss.green}>

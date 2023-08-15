@@ -9,7 +9,7 @@ import axios from 'axios';
 import differenceBy from 'lodash/differenceBy';
 import Donut from "./DonutChart.tsx"
 import Chart from './DateChart.tsx';
-import {ComboBox, Item, Section, Provider,defaultTheme, lightTheme, DatePicker, Flex } from '@adobe/react-spectrum'
+import {ComboBox, Item, Section, Provider,defaultTheme, lightTheme, DatePicker, Flex, Calendar } from '@adobe/react-spectrum'
 import * as FaIcons from "react-icons/fa";
 import {parseDate} from '@internationalized/date';
 
@@ -28,8 +28,14 @@ export default function Company(props) {
     const [filterText, setFilterText] = React.useState('');
     const [resetPaginationToggle, setResetPaginationToggle] = React.useState(false);
     const [selectedId, setselectedId] = React.useState(1);
-    const [dateStart, setDateStart] = React.useState();
-    const [dateEnd, setDateEnd] = React.useState(parseDate('2020-02-03'));
+    var dummyDate = new Date();
+    var today = new Date();
+    dummyDate.setDate(today.getDate() - 9);
+    var noTime = dummyDate.toJSON().slice(0,10).replace(/-/g,'-').toString();
+    dummyDate.setDate(today.getDate());
+    var noTimeEnd = dummyDate.toJSON().slice(0,10).replace(/-/g,'-').toString();
+    const [dateStart, setDateStart] = React.useState(parseDate(noTime));
+    const [dateEnd, setDateEnd] = React.useState(parseDate(noTimeEnd));
 
     useEffect(() => {
         getData();
@@ -140,10 +146,10 @@ export default function Company(props) {
 
 
   const filteredItems = data.filter(
-    selectedId === 1 ? item => item.Kabin && item.Kabin.toLowerCase().includes(filterText.toLowerCase()) : selectedId === 2 ?
-    item => item.Şirket && item.Şirket.toLowerCase().includes(filterText.toLowerCase()) : selectedId === 3 ? 
-    item => item.Kart && item.Kart.toLowerCase().includes(filterText.toLowerCase()) : 
-    item => item.Operasyon && item.Operasyon.toLowerCase().includes(filterText.toLowerCase())
+    selectedId === 1 ? item => item.Kabin && item.Kabin.toLowerCase().includes(filterText.toLowerCase()) && item.Tarih >= dateStart && item.Tarih < dateEnd: selectedId === 2 ?
+    item => item.Şirket && item.Şirket.toLowerCase().includes(filterText.toLowerCase()) && item.Tarih >= dateStart && item.Tarih < dateEnd : selectedId === 3 ? 
+    item => item.Kart && item.Kart.toLowerCase().includes(filterText.toLowerCase()) && item.Tarih >= dateStart && item.Tarih < dateEnd: 
+    item => item.Operasyon && item.Operasyon.toLowerCase().includes(filterText.toLowerCase()) && item.Tarih >= dateStart && item.Tarih < dateEnd
   );
       
 
@@ -262,8 +268,7 @@ export default function Company(props) {
               <DatePicker
                   label="Başlangıç"
                   value={dateStart}
-                  onChange={setDateStart}
-                  marginStart="0px" />
+                  onChange={setDateStart}/>
                 <DatePicker
                   label="Bitiş"
                   value={dateEnd}
