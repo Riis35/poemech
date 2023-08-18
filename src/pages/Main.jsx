@@ -17,10 +17,7 @@ function Main () {
     
     const {id} = useParams();
     const [cabinNames, setnames] = useState(); //Kabin isimlerini tutan array
-    const [total, setTotal] = useState(0);
-    const [working, setWorking] = useState(0);
-    const [risky, setRisky] = useState(0);
-    const [stopped, setStopped] = useState(0);
+    const[numbers, setNumbers] = useState([0,0,0,0])
     const role = localStorage.getItem("top");
 
 
@@ -32,7 +29,6 @@ function Main () {
         setnames([]);
       }
       else{
-      setTotal(response.data.result.length);
       setnames(response.data.result);
   }
 })
@@ -45,10 +41,75 @@ function Main () {
       if(!response.data.done){
       }
       else{
-      setTotal(response.data.result.length);
       setnames(response.data.result);
   }
 })
+    }
+
+    const Count = () => {
+      var data = [0,0,0,0];
+      if(role === "0"){
+        Axios.post(`${process.env.REACT_APP_URL}/api/CabinAdminInfo`,
+        {id: id,
+        }).then((response) => {
+        if(!response.data.done){
+          //console.log(response)
+          //console.log("başaramadık")
+        }
+        else{
+          var dummyRisk = 0;
+          var dummyStopped = 0;
+          var total = 0;
+          for (let i = 0; i < response.data.result.length; i++) {
+            if(response.data.result[i].bronzlastirici <= 5 || response.data.result[i].dezenfektan <= 5 || response.data.result[i].duskopugu <= 5 || response.data.result[i].f15 <= 5
+              || response.data.result[i].f30 <= 5 || response.data.result[i].f50 <= 5 || response.data.result[i].kopekkrem <= 5 || response.data.result[i].kopeksampuan <= 5 || 
+              response.data.result[i].nemlendirici <= 5 || response.data.result[i].su <= 5){
+                dummyRisk = dummyRisk + 1;
+            }
+            if(response.data.result[i].onoff == 0){
+              dummyStopped = dummyStopped + 1;
+            }
+          }
+          
+          data[0] = response.data.result.length;
+          data[1] = response.data.result.length - dummyRisk - dummyStopped;
+          data[2] = dummyRisk;
+          data[3] = dummyStopped;
+          setNumbers(data);
+        }
+      })
+      }
+      else{
+        Axios.post(`${process.env.REACT_APP_URL}/api/CabinInfo`,
+        {id: id,
+        }).then((response) => {
+        if(!response.data.done){
+          //console.log(response)
+          //console.log("başaramadık")
+        }
+        else{
+          var dummyRisk = 0;
+          var dummyStopped = 0;
+          var total = 0;
+          for (let i = 0; i < response.data.result.length; i++) {
+            if(response.data.result[i].bronzlastirici <= 5 || response.data.result[i].dezenfektan <= 5 || response.data.result[i].duskopugu <= 5 || response.data.result[i].f15 <= 5
+              || response.data.result[i].f30 <= 5 || response.data.result[i].f50 <= 5 || response.data.result[i].kopekkrem <= 5 || response.data.result[i].kopeksampuan <= 5 || 
+              response.data.result[i].nemlendirici <= 5 || response.data.result[i].su <= 5){
+                dummyRisk = dummyRisk + 1;
+            }
+            if(response.data.result[i].onoff == 0){
+              dummyStopped = dummyStopped + 1;
+            }
+          }
+
+          data[0] = response.data.result.length;
+          data[1] = response.data.result.length - dummyRisk - dummyStopped;
+          data[2] = dummyRisk;
+          data[3] = dummyStopped;
+          setNumbers(data);
+        }
+      })
+      }
     }
 
     const Mail = () => {
@@ -82,9 +143,11 @@ function Main () {
  useEffect(() => {
     if(role === "0"){
       AdminCabins();
+      Count();
     }
     else{
       Cabins();
+      Count();
     }
     
   }, []);
@@ -129,22 +192,22 @@ const reps = [1,2,3]
               <div className={maincss.cards}>
               <div className={maincss.blue}>
                   <h1 className={maincss.inside}>Toplam Makina</h1>
-                  <h1 className={maincss.insidenumber}>{total}</h1>
+                  <h1 className={maincss.insidenumber}>{numbers[0]}</h1>
                   <a href={"/cabininfo/" + id} class={maincss.bluebutton}>Detaylara Git <FaIcons.FaAngleRight className={maincss.icons}/></a>
                 </div>
                 <div className={maincss.green}>
                   <h1 className={maincss.inside}>Sorunsuz</h1>
-                  <h1 className={maincss.insidenumber}>52</h1>
+                  <h1 className={maincss.insidenumber}>{numbers[1]}</h1>
                   <a href={"/cabininfo/" + id} class={maincss.greenbutton}>Detaylara Git <FaIcons.FaAngleRight className={maincss.icons}/></a>
                 </div>
                 <div className={maincss.yellow}>
                   <h1 className={maincss.inside}>Riskli</h1>
-                  <h1 className={maincss.insidenumber}>52</h1>
+                  <h1 className={maincss.insidenumber}>{numbers[2]}</h1>
                   <a href={"/cabininfo/" + id} class={maincss.yellowbutton}>Detaylara Git <FaIcons.FaAngleRight className={maincss.icons}/></a>
                 </div>
                 <div className={maincss.red}>
                 <h1 className={maincss.inside}>Durmuş</h1>
-                  <h1 className={maincss.insidenumber}>52</h1>
+                  <h1 className={maincss.insidenumber}>{numbers[3]}</h1>
                   <a href={"/cabininfo/" + id} class={maincss.redbutton}>Detaylara Git <FaIcons.FaAngleRight className={maincss.icons}/></a>
                 </div>
 

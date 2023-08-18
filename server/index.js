@@ -8,6 +8,7 @@ const app = express();
 var bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const dotenv = require("dotenv");
+const { on } = require("events");
 dotenv.config();
 var sec = process.env.REACT_APP_TOKEN;
 
@@ -93,7 +94,7 @@ app.post('/api/CabinInfo', (req,res) => {
 
     const id = req.body.id
 
-    db.query("SELECT Users.U_name, companies.Com_name, companies.Com_phone, companies.Com_mail, Cabin.Cab_id, Cabin.Cab_name, CabinInfo.f15, CabinInfo.f30, CabinInfo.f50, CabinInfo.nemlendirici, CabinInfo.bronzlastirici, CabinInfo.su, CabinInfo.dezenfektan, CabinInfo.duskopugu, CabinInfo.kopekkrem, CabinInfo.kopeksampuan  FROM Users CROSS JOIN (companies, Cabin, CabinInfo) ON (Users.U_id=companies.U_id AND companies.Com_id=Cabin.Com_id AND Cabin.Cab_id=CabinInfo.Cab_id) where Users.U_id = ?",
+    db.query("SELECT Users.U_name, companies.Com_name, companies.Com_phone, companies.Com_mail, Cabin.Cab_id, Cabin.Cab_name, CabinInfo.f15, CabinInfo.f30, CabinInfo.f50, CabinInfo.nemlendirici, CabinInfo.bronzlastirici, CabinInfo.su, CabinInfo.dezenfektan, CabinInfo.duskopugu, CabinInfo.kopekkrem, CabinInfo.kopeksampuan, CabinInfo.onoff  FROM Users CROSS JOIN (companies, Cabin, CabinInfo) ON (Users.U_id=companies.U_id AND companies.Com_id=Cabin.Com_id AND Cabin.Cab_id=CabinInfo.Cab_id) where Users.U_id = ?",
     [id],
     async (err, result) => {
         if(err){
@@ -119,7 +120,7 @@ app.post('/api/CabinAdminInfo', (req,res) => {
 
     const id = req.body.id
 
-    db.query("SELECT Users.U_name, companies.Com_name, companies.Com_phone, companies.Com_mail, Cabin.Cab_id, Cabin.Cab_name, CabinInfo.f15, CabinInfo.f30, CabinInfo.f50, CabinInfo.nemlendirici, CabinInfo.bronzlastirici, CabinInfo.su, CabinInfo.dezenfektan, CabinInfo.duskopugu, CabinInfo.kopekkrem, CabinInfo.kopeksampuan  FROM Users CROSS JOIN (companies, Cabin, CabinInfo) ON (Users.U_id=companies.U_id AND companies.Com_id=Cabin.Com_id AND Cabin.Cab_id=CabinInfo.Cab_id)",
+    db.query("SELECT Users.U_name, companies.Com_name, companies.Com_phone, companies.Com_mail, Cabin.Cab_id, Cabin.Cab_name, CabinInfo.f15, CabinInfo.f30, CabinInfo.f50, CabinInfo.nemlendirici, CabinInfo.bronzlastirici, CabinInfo.su, CabinInfo.dezenfektan, CabinInfo.duskopugu, CabinInfo.kopekkrem, CabinInfo.kopeksampuan, CabinInfo.onoff  FROM Users CROSS JOIN (companies, Cabin, CabinInfo) ON (Users.U_id=companies.U_id AND companies.Com_id=Cabin.Com_id AND Cabin.Cab_id=CabinInfo.Cab_id)",
     async (err, result) => {
         if(err){
             res.send({err});
@@ -791,6 +792,42 @@ app.post('/api/mail/emergencyButton' , (req,res) => {
             res.json({done: true})
         }
     });
+})
+
+
+//FOR RPI
+app.post('/api/UpdateInformation', (req,res) => {
+
+    const id = req.body.id;
+    const f15 = req.body.f15;
+    const f30 = req.body.f30;
+    const f50 = req.body.f50;
+    const su = req.body.su;
+    const nemlendirici = req.body.nemlendirici;
+    const bronzlastirici = req.body.bronzlastirici;
+    const dezenfektan = req.body.dezenfektan;
+    const duskopugu = req.body.duskopugu;
+    const kopekkrem = req.body.kopekkrem;
+    const kopeksampuan = req.body.kopeksampuan;
+    const onoff = req.body.onoff;
+
+    db.query("Update CabinInfo SET f15 = ?, f30 = ?, f50=?, nemlendirici=?, bronzlastirici =?, su=?, dezenfektan=?, duskopugu=?, kopekkrem=?, kopeksampuan=?, onoff=? Where Cab_id = ?",
+    [f15, f30,f50, nemlendirici, bronzlastirici, su, dezenfektan, duskopugu, kopekkrem, kopeksampuan, onoff, id],
+    async (err, result) => {
+        
+        if(err){
+            res.json({done: false})
+        }
+
+        if (result.affectedRows > 0){
+            res.json({done: true})
+        }
+        else{
+            res.json({done: false, message: "Hatalı Kullanıcı Adı"})
+        }
+        
+    })
+    
 })
 
 var options = {
