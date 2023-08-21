@@ -48,7 +48,7 @@ export default function Navbar() {
       cName: ["nav-text"]
     },
     {
-      title: "Alımlar",
+      title: "Sarf Tedariği",
       path: `/user`,
       icon: <FaIcons.FaShoppingCart />,
       cName: ["nav-text"]

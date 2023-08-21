@@ -39,7 +39,7 @@ export default function TankContainer(props) {
             [spf50, `${response.data.result[props.index].f50}`,"1541231"], [moist, `${response.data.result[props.index].nemlendirici}`,"154kgiks1"],
             [bronz, `${response.data.result[props.index].bronzlastirici}`,"154s51q"], [su, `${response.data.result[props.index].su}`,"154s7q5s"],
             [dezenfektan, `${response.data.result[props.index].dezenfektan}`,"154q87eq9s"],[duskopugu, `${response.data.result[props.index].duskopugu}`,"1jkviaq1"],
-            [kopekkrem, `${response.data.result[props.index].kopekkrem}`,"15i1841a"],[kopeksampuan, `${response.data.result[props.index].kopeksampuan}`,"5618s8a"]];
+            [kopekkrem, `${response.data.result[props.index].kopekkrem}`,"15i1841a"],[kopeksampuan, `${response.data.result[props.index].kopeksampuan}`,"5618s8a"], [kopeksampuan, `${response.data.result[props.index].onoff}`,"44561897"]];
             const newUser = {Cname: response.data.result[props.index].Com_name, Phone: response.data.result[props.index].Com_phone, Mail:response.data.result[props.index].Com_mail}
             setUser(newUser);
             setTankProps(data);
@@ -57,7 +57,7 @@ export default function TankContainer(props) {
             [spf50, `${response.data.result[props.index].f50}`,"1541231"], [moist, `${response.data.result[props.index].nemlendirici}`,"154kgiks1"],
             [bronz, `${response.data.result[props.index].bronzlastirici}`,"154s51q"], [su, `${response.data.result[props.index].su}`,"154s7q5s"],
             [dezenfektan, `${response.data.result[props.index].dezenfektan}`,"154q87eq9s"],[duskopugu, `${response.data.result[props.index].duskopugu}`,"1jkviaq1"],
-            [kopekkrem, `${response.data.result[props.index].kopekkrem}`,"15i1841a"],[kopeksampuan, `${response.data.result[props.index].kopeksampuan}`,"5618s8a"]];
+            [kopekkrem, `${response.data.result[props.index].kopekkrem}`,"15i1841a"],[kopeksampuan, `${response.data.result[props.index].kopeksampuan}`,"5618s8a"], , [kopeksampuan, `${response.data.result[props.index].onoff}`,"44561897"]];
             const newUser = {Cname: response.data.result[props.index].Com_name, Phone: response.data.result[props.index].Com_phone, Mail:response.data.result[props.index].Com_mail}
             setUser(newUser);
             setTankProps(data);
@@ -74,12 +74,22 @@ export default function TankContainer(props) {
   const [tankProps, setTankProps] = useState([]);
 
   useEffect(() => {
-    for (let index = 0; index < tankProps.length; index++) {
+    var sent = [];
+    var isUnder = false;
+    var isOn = true;
+    for (let index = 0; index < tankProps.length-1; index++) {
       if(tankProps[index][1] <= 5){
-        props.parentCallback(true);
+        isUnder = true;
       }
       
     }
+    if(tankProps.length > 9){
+      if(tankProps[10][1] == 0){
+        isOn = false;
+      }
+    }
+    sent.push(isUnder, isOn);
+    props.parentCallback(sent);
   }, [tankProps])
 
   const handleClick =({target}) =>{
@@ -114,7 +124,7 @@ const collapsableTank = (isCollapse, tankProps, handleClick, props) => {
     return(
     tankProps.map((name, i) => (
     <div key={Math.random()} className={TankContainerCss.scroll} >
-      {<CoolTank tankName={name[0]} tankPercentage={name[1]} key={name[2]}  /> }
+      {name[2] != "44561897" && name[1] <= 100 ? <CoolTank tankName={name[0]} tankPercentage={name[1]} key={name[2]}  /> : <></>}
     </div> 
     )
   

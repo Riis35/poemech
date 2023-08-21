@@ -51,6 +51,7 @@ export default function CoolTank(props) {
   else{isAlert=false}
   var name = props.tankName;
 //  <p className={CoolTankCss.name}>{props.tankName}</p> 
+  
   return (
 
     <div>  
