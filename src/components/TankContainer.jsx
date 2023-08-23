@@ -124,7 +124,7 @@ const collapsableTank = (isCollapse, tankProps, handleClick, props) => {
     return(
     tankProps.map((name, i) => (
     <div key={Math.random()} className={TankContainerCss.scroll} >
-      {name[2] != "44561897" && name[1] <= 100 ? <CoolTank tankName={name[0]} tankPercentage={name[1]} key={name[2]}  /> : <></>}
+      {name[2] != "44561897" && name[1] <= 105 ? <CoolTank tankName={name[0]} tankPercentage={name[1]} key={name[2]}  /> : <></>}
     </div> 
     )
   

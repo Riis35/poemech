@@ -30,9 +30,9 @@ export default function Company(props) {
     const [selectedId, setselectedId] = React.useState(1);
     var dummyDate = new Date();
     var today = new Date();
-    dummyDate.setDate(today.getDate() - 9);
+    dummyDate.setDate(today.getDate() - 8);
     var noTime = dummyDate.toJSON().slice(0,10).replace(/-/g,'-').toString();
-    dummyDate.setDate(today.getDate());
+    dummyDate.setDate(today.getDate() + 1);
     var noTimeEnd = dummyDate.toJSON().slice(0,10).replace(/-/g,'-').toString();
     const [dateStart, setDateStart] = React.useState(parseDate(noTime));
     const [dateEnd, setDateEnd] = React.useState(parseDate(noTimeEnd));
@@ -219,7 +219,8 @@ export default function Company(props) {
     
     function downloadCSV(array) {
       const link = document.createElement('a');
-      let csv = convertArrayOfObjectsToCSV(array);
+      var BOM = "\uFEFF";
+      let csv = BOM + convertArrayOfObjectsToCSV(array);
       if (csv == null) return;
     
       const filename = 'export.csv';
@@ -227,7 +228,6 @@ export default function Company(props) {
       if (!csv.match(/^data:text\/csv/i)) {
         csv = `data:text/csv;charset=utf-8,${csv}`;
       }
-    
       link.setAttribute('href', encodeURI(csv));
       link.setAttribute('download', filename);
       link.click();

@@ -830,6 +830,31 @@ app.post('/api/UpdateInformation', (req,res) => {
     
 })
 
+app.post('/api/AddOperation', (req,res) => {
+
+    const id = req.body.id;
+    const Card_id = req.body.Card_id;
+    const Date = req.body.Date;
+    const Operation = req.body.Operation;
+
+    db.query("Insert into Operations (Cabin_id, Card_id, Date, Operation) values (?, ?, ?, ?)",
+    [id, Card_id, Date, Operation],
+    async (err, result) => {
+        
+        if(err){
+            console.log("ERROR ALDIM KARDEŞ")
+            console.log(err)
+            res.json({done: false})
+        }
+        else{
+            console.log("BAŞARILI")
+            res.json({done: false, message: "Operasyon eklenemedi"})
+        }
+        
+    })
+    
+})
+
 var options = {
     key: fs.readFileSync(`${process.env.REACT_APP_HTTPS_KEY}`),
     cert: fs.readFileSync(`${process.env.REACT_APP_HTTPS_CERT}`)
