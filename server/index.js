@@ -383,7 +383,7 @@ app.post('/api/getCabinDefault', (req,res) => {
 
     const id = req.body.id
 
-    db.query("Select Cabin.Cab_id, Cabin.Cab_name, Cabin.Cab_address, companies.Com_name, companies.Com_phone, companies.Com_address, companies.Com_phone, companies.Com_mail, companies.Com_id, Users.U_name from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id Where Users.U_id = ? ",
+    db.query("Select Cabin.Cab_id, Cabin.Cab_name, Cabin.f30, Cabin.f50, Cabin.f50cocuk, Cabin.dus, Cabin.nemlendirici, Cabin.dezenfektan, Cabin.Cab_address, companies.Com_name, companies.Com_phone, companies.Com_address, companies.Com_phone, companies.Com_mail, companies.Com_id, Users.U_name from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id Where Users.U_id = ? ",
     [id],
     async (err, result) => {
         if(err){
@@ -407,7 +407,7 @@ app.post('/api/getAdminCabinDefault', (req,res) => {
     const id = req.body.id
     const cabin = req.body.cabin
 
-    db.query("Select Cabin.Cab_id, Cabin.Cab_name, Cabin.Cab_address, companies.Com_name, companies.Com_phone, companies.Com_address, companies.Com_phone, companies.Com_mail, companies.Com_id, Users.U_name from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id",
+    db.query("Select Cabin.Cab_id, Cabin.Cab_name, Cabin.Cab_address, Cabin.f30, Cabin.f50, Cabin.f50cocuk, Cabin.dus, Cabin.nemlendirici, Cabin.dezenfektan, companies.Com_name, companies.Com_phone, companies.Com_address, companies.Com_phone, companies.Com_mail, companies.Com_id, Users.U_name from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id",
     [cabin],
     async (err, result) => {
         if(err){
@@ -521,7 +521,7 @@ app.post('/api/getOperations', (req,res) => {
 
     const id = req.body.id
 
-    db.query("Select Cabin.Cab_name, Cabin.Cab_id, companies.Com_name, Operations.Date, Operations.Card_id, Operations.Operation from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id CROSS JOIN Operations ON Cabin.Cab_id = Operations.Cabin_id Where Users.U_id = ? ",
+    db.query("Select Cabin.Cab_name, Cabin.Cab_id, companies.Com_name, Operations.Date, Operations.Card_id, Operations.Operation, Operations.Price from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id CROSS JOIN Operations ON Cabin.Cab_id = Operations.Cabin_id Where Users.U_id = ? ",
     [id],
     async (err, result) => {
         if(err){
@@ -542,7 +542,7 @@ app.post('/api/getOperations', (req,res) => {
 //To get operations Admin
 app.post('/api/getAdminOperations', (req,res) => {
 
-    db.query("Select Cabin.Cab_name, Cabin.Cab_id, companies.Com_name, Operations.Date, Operations.Card_id, Operations.Operation from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id CROSS JOIN Operations ON Cabin.Cab_id = Operations.Cabin_id",
+    db.query("Select Cabin.Cab_name, Cabin.Cab_id, companies.Com_name, Operations.Date, Operations.Card_id, Operations.Operation, Operations.Price from Users CROSS JOIN companies ON Users.U_id = companies.U_id CROSS JOIN Cabin ON companies.Com_id = Cabin.Com_id CROSS JOIN Operations ON Cabin.Cab_id = Operations.Cabin_id",
     async (err, result) => {
         if(err){
             res.json({done: false})
@@ -729,9 +729,15 @@ app.post('/api/UpdateCab', (req,res) => {
     const oldname = req.body.oldname;
     const name = req.body.name;
     const address = req.body.address;
+    const f30 = req.body.f30;
+    const f50 = req.body.f50;
+    const f50cocuk = req.body.f50cocuk;
+    const dus = req.body.dus;
+    const nemlendirici = req.body.nemlendirici;
+    const dezenfektan = req.body.dezenfektan;
 
-    db.query("Update Cabin SET Cab_name = ?, Cab_address = ? Where Cab_name = ?",
-    [name, address, oldname],
+    db.query("Update Cabin SET Cab_name = ?, Cab_address = ?, f30=?, f50=?, f50cocuk =?, dus=?, nemlendirici=?, dezenfektan=? Where Cab_name = ?",
+    [name, address, f30, f50, f50cocuk, dus, nemlendirici, dezenfektan, oldname],
     async (err, result) => {
         
         if(err){

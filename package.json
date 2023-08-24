@@ -13,6 +13,7 @@
     "chart.js": "^4.2.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
+    "file-saver": "^2.0.5",
     "https": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
@@ -25,6 +26,7 @@
     "react-scripts": "5.0.1",
     "reactjs-popup": "^2.0.5",
     "sass": "^1.58.3",
+    "sheetjs-style": "^0.15.8",
     "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4"
   },

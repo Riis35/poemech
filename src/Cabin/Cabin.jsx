@@ -42,6 +42,12 @@ export default function Cabin(props) {
                     Cab_name: el.Cab_name,
                     Address: el.Cab_address,
                     Phone: el.Com_phone,
+                    F30: el.f30,
+                    F50: el.f50,
+                    F50cocuk: el.f50cocuk,
+                    Dus: el.dus,
+                    nemlendirici: el.nemlendirici,
+                    dezenfektan: el.dezenfektan,
                 }  
             })) 
         }
@@ -94,12 +100,24 @@ export default function Cabin(props) {
       const oldname = row.Cab_name;
       const name = document.getElementById("Upname").value;
       const address = document.getElementById("Upaddress").value;
+      const f30 = document.getElementById("Upf30").value;
+      const f50 = document.getElementById("Upf50").value;
+      const f50cocuk = document.getElementById("Upf50cocuk").value;
+      const dus = document.getElementById("dus").value;
+      const nemlendirici = document.getElementById("nemlendirici").value;
+      const dezenfektan = document.getElementById("dezenfektan").value;
 
-      console.log(oldname, name, address)
+
       Axios.post(`${process.env.REACT_APP_URL}/api/UpdateCab`,  //Şirket update
                               { oldname: oldname,
                                 name: name,
                                 address: address,
+                                f30: f30,
+                                f50: f50,
+                                f50cocuk: f50cocuk,
+                                dus: dus,
+                                nemlendirici: nemlendirici,
+                                dezenfektan: dezenfektan,
                               }).then((response2) => {
                                 if(response2.data.done){
                                   getCabins();
@@ -112,7 +130,7 @@ export default function Cabin(props) {
     }
     
     const columns = [{
-        name: 'Makine Kodu',
+        name: 'Kod',
         selector: row => row.Name,
         compact: false,
         allowOverflow: true,
@@ -122,7 +140,7 @@ export default function Cabin(props) {
         },
     },
     {
-      name: 'Makine Adı',
+      name: 'Ad',
       selector: row => row.Cab_name,
       allowOverflow: true,
       style: {
@@ -130,19 +148,67 @@ export default function Cabin(props) {
         		},
     },
     {
-        name: 'Makine Adresi',
+        name: 'Adres',
         selector: row => row.Address,
         allowOverflow: true,
         style: {
                       
                   },
       },
+      {
+        name: 'F30',
+        selector: row => row.F30,
+        allowOverflow: true,
+        style: {
+                
+              },
+      },
+      {
+        name: 'F50',
+        selector: row => row.F50,
+        allowOverflow: true,
+        style: {
+                
+              },
+      },
+      {
+        name: 'F50 Çocuk',
+        selector: row => row.F50cocuk,
+        allowOverflow: true,
+        style: {
+                
+              },
+      },
+      {
+        name: 'Duş',
+        selector: row => row.Dus,
+        allowOverflow: true,
+        style: {
+                
+              },
+      },
+      {
+        name: 'Nemlendirici',
+        selector: row => row.nemlendirici,
+        allowOverflow: true,
+        style: {
+                
+              },
+      },
+      {
+        name: 'Dezenfektan',
+        selector: row => row.dezenfektan,
+        allowOverflow: true,
+        style: {
+                
+              },
+      },
       role === "0" ? {
         name: '',
         allowOverflow: true,
         button: true,
         maxwidth: "1px",
-        cell: (props) => <Popup contentStyle={{width: "40%", height: "20%"}} trigger=
+        cell: (props) => <Popup contentStyle={{width: "40%", height: "45%"}} trigger=
         {<button className={maincss.newButton}>Güncelle</button>}
         modal nested>
         {
@@ -153,6 +219,18 @@ export default function Cabin(props) {
                 <input type="text" id="Upname" defaultValue={props.Cab_name}/>
                 <label for="Upaddress">Adres: </label>
                 <input type="text" id="Upaddress" defaultValue={props.Address}/>
+                <label for="Upf30">F30 Fiyatı: </label>
+                <input type="text" id="Upf30" defaultValue={props.F30}/>
+                <label for="Upf50">F50 Fiyatı: </label>
+                <input type="text" id="Upf50" defaultValue={props.F50}/>
+                <label for="Upf50cocuk">F50 Çocuk Fiyatı: </label>
+                <input type="text" id="Upf50cocuk" defaultValue={props.F50cocuk}/>
+                <label for="dus">Duş Fiyatı: </label>
+                <input type="text" id="dus" defaultValue={props.Dus}/>
+                <label for="nemlendirici">Nemlendirici Fiyatı: </label>
+                <input type="text" id="nemlendirici" defaultValue={props.nemlendirici}/>
+                <label for="dezenfektan">Dezenfektan Fiyatı: </label>
+                <input type="text" id="dezenfektan" defaultValue={props.dezenfektan}/>
                 <p className={maincss.newP}>{status}</p>
                 <div className={maincss.buttondiv}>
                         <button className={maincss.PopButtonDel} onClick={() => {updateCab(props); close();}}>

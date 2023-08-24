@@ -12,6 +12,8 @@ import Chart from './DateChart.tsx';
 import {ComboBox, Item, Section, Provider,defaultTheme, lightTheme, DatePicker, Flex, Calendar } from '@adobe/react-spectrum'
 import * as FaIcons from "react-icons/fa";
 import {parseDate} from '@internationalized/date';
+import * as FileSaver from 'file-saver';
+import XLSX from 'sheetjs-style';
 
 const sec = [
   { id: 1, name: 'Şirket Adı' },
@@ -70,6 +72,7 @@ export default function Company(props) {
                     Tarih: el.Date,
                     Kart: el.Card_id,
                     Operasyon: el.Operation,
+                    Fiyat: el.Price,
                 }  
             })) 
         }
@@ -133,6 +136,13 @@ export default function Company(props) {
         name: 'Operasyon',
         selector: row => row.Operasyon,
         sortable: true,
+        style: {
+                      
+                  },
+      },
+      {
+        name: 'Fiyat',
+        selector: row => row.Fiyat,
         style: {
                       
                   },
@@ -233,6 +243,28 @@ export default function Company(props) {
       link.click();
     }
 
+    const ExportExcel = async (excelData, fileName) =>{
+      const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+      const fileExtension = '.xlsx';
+      let number = 2;
+      var total = 0;
+      const ws = XLSX.utils.json_to_sheet(excelData);
+      let dummy = ws[`F${number}`];
+      while (dummy != undefined) {
+        total = total + dummy['v'];
+        number = number + 1;
+        dummy = ws[`F${number}`];
+      }
+      ws["H1"] = { t: "s", v: "Toplam"};
+      ws["H2"] = { t: "n", v: `${total}`};
+      ws['!ref'] = `A1:H${number-1}`
+      console.log(ws);
+      const wb = {Sheets: {'data': ws}, SheetNames: ['data']};
+      const excelBuffer = XLSX.write(wb, {bookType: 'xlsx', type: 'array'});
+      const data = new Blob([excelBuffer], {type: fileType});
+      FileSaver.saveAs(data, fileName + fileExtension);
+    }
+
     const Export = ({ onExport }) => <button className={maincss.newButton} onClick={e => onExport(e.target.value)}>Excel</button>;
 
     return (
@@ -259,7 +291,7 @@ export default function Company(props) {
             
             <div className={maincss.filter}>
               <div className={maincss.exportButton}>
-            <Export onExport={() => downloadCSV(filteredItems)}  />  
+            <Export onExport={() => ExportExcel(filteredItems, "Export")}  />  
             </div>
             <div className={maincss.combo}>
               <div className={maincss.dates}>
