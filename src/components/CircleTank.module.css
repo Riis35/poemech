@@ -1,0 +1,160 @@
+:root{
+    --gaugeWidth : 500px;
+    }
+    
+    
+    @import url('https://fonts.googleapis.com/css2?familsght@300&display=swap');
+    
+    .gauge {
+    width : 100%;
+    max-width: var(--gaugeWidth);
+    height : calc(var(--gaugeWidth)/2)
+    }
+    
+    .coolHeader{
+        text-align: center;
+    }
+    body{ font-family: 'Montserrat', sans-serif;}
+    
+    .gauge_body{
+        /*bu 2:1 oranında parça yapmak için */
+        width: 100%;
+        height: 0;
+        padding-bottom: 50%;
+         /*bu 2:1 oranında parça yapmak için */
+        background-color: rgb(119, 171, 171);
+    
+        position: relative;
+    
+        /*semi circle */
+        border-top-left-radius: 100% 200%;
+        border-top-right-radius: 100% 200%;
+    
+    
+         /* hides child that goes beyond this */
+         overflow: hidden;
+    
+       
+    }
+    
+    .gauge_fill{
+        position : absolute;
+        top: 100%;
+        left: 0;
+        width: inherit;
+        height: 100%;
+        background-color:red;
+    
+        /* şuan overfilde gizli olan bu elemnti rotateleyerek gauge doldurcaz */
+        transform-origin: center top;
+      
+        transition: all 2s ease-out;
+        transform: rotate(0.05turn);
+    
+    }
+    
+       
+    .gauge_body:hover .gauge_fill{
+         /* son animasyona delay ekleyince ilki bitince başlıyor ve sonda sabit kalıyor */
+        animation: colorTransition 2s linear ,  colorStay 2s linear 2s forwards; }
+    
+    
+    
+    
+    
+    
+    .gauge_cover{
+    
+        width: 75%;
+        height: 150%;
+    
+        background-color: #ffffff;
+    
+        border-radius: 50%;
+             /* absolute çünkü main containera göre yabıyok */
+        position: absolute;
+        top: 25%;
+        left: 50%;
+    
+        transform: translate(-50%);
+    
+       /* for text to show */
+    
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       padding-bottom: 25%;
+    
+       box-sizing: border-box;
+    
+       font-family: 'Montserrat', sans-serif;
+       font-size: 50px;
+       color: #004033;
+    
+    }
+    
+    
+    .container{
+      width: var(--gaugeWidth);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+     
+    }
+    
+    .icon{
+      position: absolute;
+      width: calc(var(--gaugeWidth)*0.70);
+      
+      z-index: 2;
+      top: 17%;
+    }
+    
+    
+    
+    
+      @keyframes count {
+        0% { content: "0%"; }
+        10% { content: "10%"; }
+        20% { content: "20%"; }
+        30% { content: "30%"; }
+        40% { content: "40%"; }
+        50% { content: "50%"; }
+        60% { content: "60"; }
+        70% { content: "70"; }
+        80% { content: "80"; }
+        90% { content: "90"; }
+        100% { content: "100"; }
+      }
+    
+    
+    
+      @keyframes colorTransition {
+        0% {
+          background-color: red;transform: rotate(0.001turn);
+        }
+        50% {
+          background-color: yellow;
+          transform: rotate(0.25turn);
+        }
+        100% {
+            background-color: green;
+            transform: rotate(0.5turn);
+          }
+        
+      }
+    
+    
+      @keyframes colorStay {
+     from {
+            background-color: green;
+            transform: rotate(0.5turn);
+        }
+        
+        to {
+            background-color: green;
+            transform: rotate(0.5turn);
+        }
+      }
+    
+    
