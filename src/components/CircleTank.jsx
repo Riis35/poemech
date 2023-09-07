@@ -54,20 +54,20 @@ export default function CircleTank(props) {
   
   return (
 
-    <div class="container">
-    <div class="gauge">
-      <h1 class="coolHeader"> %10 </h1>
-       <div class="gauge_body"> 
+    <div class={CircleTankCss.container}>
+    <div class={CircleTankCss.gauge}>
+      <h1 class={CircleTankCss.coolHeader}> %10 </h1>
+       <div class={CircleTankCss.gauge_body}> 
       
-        <div class="gauge_fill">  </div>
-        <div class="gauge_cover" >
+        <div class={CircleTankCss.gauge_fill}>  </div>
+        <div class={CircleTankCss.gauge_cover} >
           
             image here S  </div>
 
       </div>
        
     </div>
-    <img class="icon" src="coldwater.png"  />
+    <img class={CircleTankCss.icon} src="../image/coldwater.png"  />
 
     </div>
   );
