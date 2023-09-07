@@ -1,6 +1,8 @@
 import React from "react";
 import CircleTankCss from "./CircleTank.module.css";
 
+import su from "../image/shower.png";
+
 export default function CircleTank(props) {
  
 
@@ -67,7 +69,7 @@ export default function CircleTank(props) {
       </div>
        
     </div>
-    <img class={CircleTankCss.icon} src="../image/coldwater.png"  />
+    <img class={CircleTankCss.icon} src={su}  />
 
     </div>
   );
