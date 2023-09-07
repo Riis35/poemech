@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useParams}
   import { useNavigate } from "react-router-dom";
 
 import CoolTank from "./CoolTank";
+import CircleTank from "./CircleTank";
 import TankContainerCss from "./TankContainer.module.css";
 import spf15 from "../image/spf15.png";
 import spf30 from "../image/spf30.png";
@@ -118,7 +119,10 @@ const collapsableTank = (isCollapse, tankProps, handleClick, props) => {
 
     return(
      //<button onClick={handleClick} id={Math.random()}> click to unfold </button> 
-     <div className={TankContainerCss.touch}> Detayları Görmek İçin Cihaz Adına Tıklayın</div>
+     <div>
+     <div className={TankContainerCss.touch}>  Detayları Görmek İçin Cihaz Adına Tıklayın</div>
+     <CircleTank/>
+     </div>
      )}
   else{
     return(
