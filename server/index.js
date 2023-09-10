@@ -94,7 +94,7 @@ app.post('/api/CabinInfo', (req,res) => {
 
     const id = req.body.id
 
-    db.query("SELECT Users.U_name, companies.Com_name, companies.Com_phone, companies.Com_mail, Cabin.Cab_id, Cabin.Cab_name, CabinInfo.f15, CabinInfo.f30, CabinInfo.f50, CabinInfo.nemlendirici, CabinInfo.bronzlastirici, CabinInfo.su, CabinInfo.dezenfektan, CabinInfo.duskopugu, CabinInfo.kopekkrem, CabinInfo.kopeksampuan, CabinInfo.onoff  FROM Users CROSS JOIN (companies, Cabin, CabinInfo) ON (Users.U_id=companies.U_id AND companies.Com_id=Cabin.Com_id AND Cabin.Cab_id=CabinInfo.Cab_id) where Users.U_id = ?",
+    db.query("SELECT Users.U_name, companies.Com_name, companies.Com_phone, companies.Com_mail, Cabin.Cab_id, Cabin.Cab_name, CabinInfo.f15, CabinInfo.f30, CabinInfo.f50, CabinInfo.nemlendirici, CabinInfo.bronzlastirici, CabinInfo.su, CabinInfo.dezenfektan, CabinInfo.duskopugu, CabinInfo.kopekkrem, CabinInfo.kopeksampuan, CabinInfo.onoff, CabinInfo.sicaksu  FROM Users CROSS JOIN (companies, Cabin, CabinInfo) ON (Users.U_id=companies.U_id AND companies.Com_id=Cabin.Com_id AND Cabin.Cab_id=CabinInfo.Cab_id) where Users.U_id = ?",
     [id],
     async (err, result) => {
         if(err){
@@ -120,7 +120,7 @@ app.post('/api/CabinAdminInfo', (req,res) => {
 
     const id = req.body.id
 
-    db.query("SELECT Users.U_name, companies.Com_name, companies.Com_phone, companies.Com_mail, Cabin.Cab_id, Cabin.Cab_name, CabinInfo.f15, CabinInfo.f30, CabinInfo.f50, CabinInfo.nemlendirici, CabinInfo.bronzlastirici, CabinInfo.su, CabinInfo.dezenfektan, CabinInfo.duskopugu, CabinInfo.kopekkrem, CabinInfo.kopeksampuan, CabinInfo.onoff  FROM Users CROSS JOIN (companies, Cabin, CabinInfo) ON (Users.U_id=companies.U_id AND companies.Com_id=Cabin.Com_id AND Cabin.Cab_id=CabinInfo.Cab_id)",
+    db.query("SELECT Users.U_name, companies.Com_name, companies.Com_phone, companies.Com_mail, Cabin.Cab_id, Cabin.Cab_name, CabinInfo.f15, CabinInfo.f30, CabinInfo.f50, CabinInfo.nemlendirici, CabinInfo.bronzlastirici, CabinInfo.su, CabinInfo.dezenfektan, CabinInfo.duskopugu, CabinInfo.kopekkrem, CabinInfo.kopeksampuan, CabinInfo.onoff, CabinInfo.sicaksu  FROM Users CROSS JOIN (companies, Cabin, CabinInfo) ON (Users.U_id=companies.U_id AND companies.Com_id=Cabin.Com_id AND Cabin.Cab_id=CabinInfo.Cab_id)",
     async (err, result) => {
         if(err){
             res.send({err});

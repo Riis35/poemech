@@ -78,10 +78,13 @@ export default function TankContainer(props) {
     var sent = [];
     var isUnder = false;
     var isOn = true;
-    for (let index = 0; index < tankProps.length-1; index++) {
-      if(tankProps[index][1] <= 5){
-        isUnder = true;
+    for (let index = 0; index < tankProps.length; index++) {
+      if(index != tankProps.length -2){
+        if(tankProps[index][1] <= 5){
+          isUnder = true;
+        }
       }
+      
       
     }
     if(tankProps.length > 9){
