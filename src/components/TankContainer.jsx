@@ -17,6 +17,7 @@ import dezenfektan from "../image/disinfect.png";
 import duskopugu from "../image/foam.png";
 import kopekkrem from "../image/dogcream.png";
 import kopeksampuan from "../image/dogshampoo.png";
+import sicaksu from "../image/sicaksu.png";
 
 // Dynamically adds tanks inside Device
 
@@ -40,7 +41,8 @@ export default function TankContainer(props) {
             [spf50, `${response.data.result[props.index].f50}`,"1541231"], [moist, `${response.data.result[props.index].nemlendirici}`,"154kgiks1"],
             [bronz, `${response.data.result[props.index].bronzlastirici}`,"154s51q"], [su, `${response.data.result[props.index].su}`,"154s7q5s"],
             [dezenfektan, `${response.data.result[props.index].dezenfektan}`,"154q87eq9s"],[duskopugu, `${response.data.result[props.index].duskopugu}`,"1jkviaq1"],
-            [kopekkrem, `${response.data.result[props.index].kopekkrem}`,"15i1841a"],[kopeksampuan, `${response.data.result[props.index].kopeksampuan}`,"5618s8a"], [kopeksampuan, `${response.data.result[props.index].onoff}`,"44561897"]];
+            [kopekkrem, `${response.data.result[props.index].kopekkrem}`,"15i1841a"],[kopeksampuan, `${response.data.result[props.index].kopeksampuan}`,"5618s8a"], [kopeksampuan, `${response.data.result[props.index].onoff}`,"44561897"],
+            [sicaksu, `${response.data.result[props.index].sicaksu}`,"1354897"]];
             const newUser = {Cname: response.data.result[props.index].Com_name, Phone: response.data.result[props.index].Com_phone, Mail:response.data.result[props.index].Com_mail}
             setUser(newUser);
             setTankProps(data);
@@ -58,7 +60,8 @@ export default function TankContainer(props) {
             [spf50, `${response.data.result[props.index].f50}`,"1541231"], [moist, `${response.data.result[props.index].nemlendirici}`,"154kgiks1"],
             [bronz, `${response.data.result[props.index].bronzlastirici}`,"154s51q"], [su, `${response.data.result[props.index].su}`,"154s7q5s"],
             [dezenfektan, `${response.data.result[props.index].dezenfektan}`,"154q87eq9s"],[duskopugu, `${response.data.result[props.index].duskopugu}`,"1jkviaq1"],
-            [kopekkrem, `${response.data.result[props.index].kopekkrem}`,"15i1841a"],[kopeksampuan, `${response.data.result[props.index].kopeksampuan}`,"5618s8a"], , [kopeksampuan, `${response.data.result[props.index].onoff}`,"44561897"]];
+            [kopekkrem, `${response.data.result[props.index].kopekkrem}`,"15i1841a"],[kopeksampuan, `${response.data.result[props.index].kopeksampuan}`,"5618s8a"], , [kopeksampuan, `${response.data.result[props.index].onoff}`,"44561897"],
+            [sicaksu, `${response.data.result[props.index].sicaksu}`,"1354897"]];
             const newUser = {Cname: response.data.result[props.index].Com_name, Phone: response.data.result[props.index].Com_phone, Mail:response.data.result[props.index].Com_mail}
             setUser(newUser);
             setTankProps(data);
