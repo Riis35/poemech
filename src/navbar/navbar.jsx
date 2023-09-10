@@ -47,12 +47,13 @@ export default function Navbar() {
       icon: <FaIcons.FaUser />,
       cName: ["nav-text"]
     },
+    /*
     {
       title: "Sarf Tedariği",
       path: `/user`,
       icon: <FaIcons.FaShoppingCart />,
       cName: ["nav-text"]
-    },
+    },*/
     {
       title: "Çıkış",
       path: "/login",
