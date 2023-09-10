@@ -79,6 +79,7 @@ export default function CoolTank(props) {
       
     </div>
     </div>
+    <div className={CoolTankCss.percent}> %{percentage} </div>
     </div>
   );
 }

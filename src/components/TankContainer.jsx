@@ -121,14 +121,19 @@ const collapsableTank = (isCollapse, tankProps, handleClick, props) => {
      //<button onClick={handleClick} id={Math.random()}> click to unfold </button> 
      <div>
      <div className={TankContainerCss.touch}>  Detayları Görmek İçin Cihaz Adına Tıklayın</div>
+
+     
       </div>
      )}
   else{
     return(
-    tankProps.map((name, i) => (
+
+    
+      tankProps.map((name, i) => (
     <div key={Math.random()} className={TankContainerCss.scroll} >
       {name[2] != "44561897" && name[1] <= 105 ? <CoolTank tankName={name[0]} tankPercentage={name[1]} key={name[2]}  /> : <></>}
     </div> 
+
     )
   
     ) )}

@@ -64,8 +64,8 @@ export default function CircleTank(props) {
         <div class={CircleTankCss.gauge_fill}>  </div>
         <div class={CircleTankCss.gauge_cover} >
           
-            image here S  </div>
-
+          
+      </div>
       </div>
        
     </div>

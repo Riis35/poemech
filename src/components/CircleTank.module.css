@@ -9,7 +9,7 @@
     width : 100%;
     max-width: var(--gaugeWidth);
     height : calc(var(--gaugeWidth)/2);
-    padding-bottom:200px;
+    padding-bottom:250px;
     }
     
     .coolHeader{

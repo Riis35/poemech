@@ -178,10 +178,14 @@
 .icons{
     margin-top: 5px;
     margin-bottom: 5px;
-    width: 80px;
+    width: 100px;
     
 }
 
+.percent{
+    text-align: center;
+    font-size: large;
+}
 
 .iconsAlert{
     display: flex;

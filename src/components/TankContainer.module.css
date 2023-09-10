@@ -10,11 +10,13 @@
     overflow-y: hidden;
     
     
+    
 }
 
 .scroll{
     display: inline-block;
     animation: 400ms ease-in 0s 1 slideInFromLeft;
+    
 }
 
 .touch{
