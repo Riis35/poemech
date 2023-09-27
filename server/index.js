@@ -787,7 +787,7 @@ app.post('/api/mail/emergencyButton' , (req,res) => {
     const id = req.body.id
     const mail = req.body.mail
     
-    exec(`echo "${id} Seri Numaralı ABYSSOS Pro\'nuzun Acil Durum Butonu\'na basıldı.\n Sorun giderilene kadar makineniz kullanım dışı bırakılmıştır.Acilen müdahale etmeniz gerekmektedir." | mail -s "Acil Durum" -a "From: noreply@poemech.com.tr" ${mail}`, function (error, stdout, stderr) {
+    exec(`echo "${id} Seri Numaralı ABYSSOS Mod\'nuzun Acil Durum Butonu\'na basıldı.\n Sorun giderilene kadar makineniz kullanım dışı bırakılmıştır.Acilen müdahale etmeniz gerekmektedir. \n The Emergency Button of your ABYSSOS Mod with Serial Number ${id} has been pressed.\n Your machine has been taken out of use until the problem is resolved. You need to intervene urgently." | mail -s "Acil Durum / Emergency" -a "From: noreply@poemech.com.tr" ${mail}`, function (error, stdout, stderr) {
         if(error || stderr){
             res.json({done: false})
         }
@@ -800,6 +800,25 @@ app.post('/api/mail/emergencyButton' , (req,res) => {
     });
 })
 
+app.post('/api/mail/WrongTank' , (req,res) => {
+    var util = require('util')
+    var exec = require('child_process').exec;
+    const id = req.body.id
+    const mail = req.body.mail
+    const tank = req.body.tank
+    
+    exec(`echo "${id} Seri Numaralı ABYSSOS Pro\'nuzun ${tank} tank dolumu hatalı gerçekleşmiştir.\n Sorun giderilene kadar bu tank kullanım dışı bırakılmıştır. Müdahale etmeniz gerekmektedir. \n The ${tank} tank of your ABYSSOS Mod with Serial Number ${id} has been filled incorrectly.\n This tank has been taken out of use until the problem is fixed. You need to intervene." | mail -s "Acil Durum / Emergency" -a "From: noreply@poemech.com.tr" ${mail}`, function (error, stdout, stderr) {
+        if(error || stderr){
+            res.json({done: false})
+        }
+        else{
+            console.log(error)
+            console.log(stderr)
+            console.log(stdout)
+            res.json({done: true})
+        }
+    });
+})
 
 //FOR RPI
 app.post('/api/UpdateInformation', (req,res) => {
