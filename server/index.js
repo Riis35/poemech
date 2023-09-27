@@ -807,7 +807,7 @@ app.post('/api/mail/WrongTank' , (req,res) => {
     const mail = req.body.mail
     const tank = req.body.tank
     
-    exec(`echo "<b>${id}</b> Seri Numaralı ABYSSOS Mod\'nuzun <b>${tank}</b> tank dolumu hatalı gerçekleşmiştir.\nSorun giderilene kadar bu tank kullanım dışı bırakılmıştır. Müdahale etmeniz gerekmektedir. \n------------------------- \nThe <b>${tank}</b> tank of your ABYSSOS Mod with Serial Number <b>${id}</b> has been filled incorrectly.\nThis tank has been taken out of use until the problem is fixed. You need to intervene." | mail -s "Acil Durum / Emergency" -a "From: noreply@poemech.com.tr" ${mail}`, function (error, stdout, stderr) {
+    exec(`echo "${id} Seri Numaralı ABYSSOS Mod\'nuzun ${tank} tank dolumu hatalı gerçekleşmiştir.\nSorun giderilene kadar bu tank kullanım dışı bırakılmıştır. Müdahale etmeniz gerekmektedir. \n------------------------- \nThe ${tank} tank of your ABYSSOS Mod with Serial Number ${id} has been filled incorrectly.\nThis tank has been taken out of use until the problem is fixed. You need to intervene." | mail -s "Acil Durum / Emergency" -a "From: noreply@poemech.com.tr" ${mail}`, function (error, stdout, stderr) {
         if(error || stderr){
             res.json({done: false})
         }
