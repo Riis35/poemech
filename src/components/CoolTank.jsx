@@ -51,13 +51,14 @@ export default function CoolTank(props) {
   else{isAlert=false}
   var name = props.tankName;
 //  <p className={CoolTankCss.name}>{props.tankName}</p> 
-  
+console.log(isAlert);
   return (
 
     <div>  
     <div className={CoolTankCss.outline}>
 
-<div className={isAlert== true ? CoolTankCss.iconsAlert: CoolTankCss.iconsNoAlert} >
+<div className={isAlert == true ? CoolTankCss.iconsAlert : CoolTankCss.iconsNoAlert} >
+
 <img className={CoolTankCss.icons} src={props.tankName}></img>
 </div>
 
