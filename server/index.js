@@ -819,7 +819,49 @@ app.post('/api/mail/WrongTank' , (req,res) => {
         }
     });
 })
+ 
 
+app.post('/api/mail/LowTank' , (req,res) => {
+    var util = require('util')
+    var exec = require('child_process').exec;
+    const id = req.body.id
+    const mail = req.body.mail
+    const tank = req.body.tank
+    
+    exec(`echo "${id} Seri No'lu ABYSSOS Mod'nuzun ${tank} miktarı %25 seviyesinin altına düştü.\nYaklaşık 70 uygulama sonra ${tank} Seçeneği kullanım dışı bırakılacaktır. \nAcilen tankı doldurmanız gerekmektedir.\n ------------------------- \nThe amount of ${tank} Tank of your ABYSSOS Mod with serial number ${id} fell below 25% level. \nAfter about 70 applications, the ${tank} Option will be out of use.\n You need to fill the tank ASAP" | mail -s "Acil Durum / Emergency" -a "From: noreply@poemech.com.tr" ${mail}`, function (error, stdout, stderr) {
+        if(error || stderr){
+            res.json({done: false})
+        }
+        else{
+            console.log(error)
+            console.log(stderr)
+            console.log(stdout)
+            res.json({done: true})
+        }
+    });
+})
+
+
+
+app.post('/api/mail/DisabledTank' , (req,res) => {
+    var util = require('util')
+    var exec = require('child_process').exec;
+    const id = req.body.id
+    const mail = req.body.mail
+    const tank = req.body.tank
+    
+    exec(`echo "${id} Seri No'lu ABYSSOS Mod'nuzun ${tank} miktarı %5 kritik seviyesinin altına düştü.\nTank doldurulana kadar ${tank} Seçeneği kullanım dışı bırakılmıştır. \nAcilen tankı doldurmanız gerekmektedir.\n ------------------------- \nThe amount of ${tank} Tank of your ABYSSOS Mod with serial number ${id} fell below 5% critical level. \nThe ${tank} Option has been left out of use until the tank is filled.\n You need to fill the tank ASAP" | mail -s "Acil Durum / Emergency" -a "From: noreply@poemech.com.tr" ${mail}`, function (error, stdout, stderr) {
+        if(error || stderr){
+            res.json({done: false})
+        }
+        else{
+            console.log(error)
+            console.log(stderr)
+            console.log(stdout)
+            res.json({done: true})
+        }
+    });
+})
 //FOR RPI
 app.post('/api/UpdateInformation', (req,res) => {
 
