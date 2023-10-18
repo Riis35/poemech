@@ -19,7 +19,12 @@ export default function CoolTank(props) {
   //if(percentage < 5){props.parentCallback(true);}
 
   
-  if(percantage > 100){percantage = 100;}
+  if(percantage > 100){percantage = 100;}if (percantage <0 ) { percantage=0;
+    
+  } else {
+    
+  }
+  
 
   //change height by percantage
   var liquid = 250 * (percentage / 100);
