@@ -19,7 +19,7 @@ export default function CoolTank(props) {
   //if(percentage < 5){props.parentCallback(true);}
 
   
-  if(percantage > 100){percantage = 100;}if (percantage <0 ) { percantage=0;
+  if(percentage > 100){percentage = 100;}if (percentage <0 ) { percentage=0;
     
   } else {
     
